@@ -1,0 +1,29 @@
+name: Watchlist Oversold Scan
+
+on:
+  schedule:
+    # Her saat başı (UTC)
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  oversold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONIOENCODING: utf-8
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scan watchlist
+        run: python oversold_scanner.py

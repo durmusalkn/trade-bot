@@ -1,0 +1,40 @@
+name: Stoch RSI Scan
+
+on:
+  schedule:
+    # Her 15 dakikada bir (UTC)
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONIOENCODING: utf-8
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore alert state
+        uses: actions/cache@v4
+        with:
+          path: state/
+          key: stoch-rsi-alert-state
+          restore-keys: stoch-rsi-alert-state
+
+      - name: Run Stoch RSI scanner
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ALERT_STATE_FILE: state/alerts.json
+        run: python stoch_rsi_bot.py --once
