@@ -1,32 +1,38 @@
-name: Discover Stocks
+# =============================================================================
+# GEÇİCİ OLARAK DEVRE DIŞI — Daha sonra geliştirilecek
+# S&P 500 taraması uzun sürdüğü için şimdilik kapatıldı.
+# Aktifleştirmek için aşağıdaki yorumları kaldırın.
+# =============================================================================
 
-on:
-  schedule:
-    # Her gün 14:30 UTC (ABD piyasası açılışına yakın)
-    - cron: "30 14 * * 1-5"
-  workflow_dispatch:
-
-jobs:
-  discover:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      PYTHONIOENCODING: utf-8
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: pip
-          cache-dependency-path: requirements.txt
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Scan S&P 500 for oversold stocks
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python discover_stocks.py --notify
+# name: Discover Stocks
+#
+# on:
+#   schedule:
+#     # Her gün 14:30 UTC (ABD piyasası açılışına yakın)
+#     - cron: "30 14 * * 1-5"
+#   workflow_dispatch:
+#
+# jobs:
+#   discover:
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+#     env:
+#       PYTHONIOENCODING: utf-8
+#
+#     steps:
+#       - uses: actions/checkout@v4
+#
+#       - uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+#           cache: pip
+#           cache-dependency-path: requirements.txt
+#
+#       - name: Install dependencies
+#         run: pip install -r requirements.txt
+#
+#       - name: Scan S&P 500 for oversold stocks
+#         env:
+#           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+#           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+#         run: python discover_stocks.py --notify
