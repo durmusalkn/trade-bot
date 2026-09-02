@@ -1,10 +1,10 @@
-name: UT Bot Alerts Scan
+name: Stoch RSI Scan
 
-on:
+'on':
   schedule:
-    # Her 15 dakikada bir çalıştır (UTC)
+    # Her 15 dakikada bir (UTC)
     - cron: "*/15 * * * *"
-  workflow_dispatch: # Manuel tetikleme butonu
+  workflow_dispatch:
 
 jobs:
   scan:
@@ -27,27 +27,24 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # 1. Önceki çalıştırmanın bildirim geçmişini geri yükle
       - name: Restore alert state
         uses: actions/cache/restore@v4
         with:
           path: state/
-          key: ut-bot-alert-state-${{ github.run_id }}
+          key: stoch-rsi-alert-state-${{ github.run_id }}
           restore-keys: |
-            ut-bot-alert-state-
+            stoch-rsi-alert-state-
 
-      # 2. UT Bot tarayıcısını çalıştır
-      - name: Run UT Bot scanner
+      - name: Run scanner
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ALERT_STATE_FILE: state/alerts.json
-        run: python ut_bot_scanner.py --once
+        run: python stoch_rsi_bot.py --once
 
-      # 3. Güncellenen bildirim geçmişini bir sonraki 15 dakikalık koşu için kaydet
       - name: Save alert state
         uses: actions/cache/save@v4
         if: always()
         with:
           path: state/
-          key: ut-bot-alert-state-${{ github.run_id }}
+          key: stoch-rsi-alert-state-${{ github.run_id }}
