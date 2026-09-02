@@ -1,3 +1,4 @@
+import argparse
 import io
 import json
 import os
@@ -18,14 +19,14 @@ import yfinance as yf
 # ==========================================
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
-ALERT_STATE_FILE = os.environ.get("ALERT_STATE_FILE", "")
+ALERT_STATE_FILE = os.environ.get("ALERT_STATE_FILE", "alert_state.json")
 
-# Görseldeki hisseler ve varlıklar
+# Takip edilecek hisseler ve varlıklar
 WATCHLIST = [
     "NVDA",      # NVIDIA
     "NBIS",      # Nebius Group
     "HIMS",      # Hims & Hers
-    "BTC-USD",   # Bitcoin (yfinance formatı)
+    "BTC-USD",   # Bitcoin
     "TEM",       # Tempus AI
     "XAIR",      # Beyond Air
     "CIFR",      # Cipher Mining
@@ -34,26 +35,26 @@ WATCHLIST = [
 
 INTERVAL = "15m"      # 15 dakikalık periyot
 PERIOD = "5d"         # Veri aralığı
-PREPOST = True        # Seans öncesi/sonrası (after-hours) mumlarını dahil et
-RSI_PERIOD = 14
-STOCH_PERIOD = 14
-K_PERIOD = 3
-D_PERIOD = 3
-OVERSOLD_THRESHOLD = 20  # 20'nin altı aşırı satım bölgesi
+PREPOST = True        # Seans öncesi/sonrası verileri dahil et
+
+# UT BOT ALERTS PARAMETRELERİ (Pine Script ile birebir aynı)
+UT_KEY_VALUE = 1      # ut_a: Hassasiyet katsayısı
+UT_ATR_PERIOD = 10    # ut_c: ATR periyodu
+UT_USE_HA = True      # ut_h: Sinyaller Heikin Ashi mumlarından üretilir
 
 # Mükerrer bildirimleri engellemek için son tetiklenen mum zamanları
 last_alert_timestamps = {}
 
 
 def load_alert_state():
-    """Önceki bildirim zamanlarını dosyadan yükler (CI/cache için)."""
+    """Önceki bildirim zamanlarını dosyadan yükler (CI/GitHub Actions için)."""
     global last_alert_timestamps
     if not ALERT_STATE_FILE or not os.path.exists(ALERT_STATE_FILE):
         return
     try:
         with open(ALERT_STATE_FILE, encoding="utf-8") as f:
             data = json.load(f)
-        last_alert_timestamps = {k: pd.Timestamp(v) for k, v in data.items()}
+        last_alert_timestamps = {k: str(v) for k, v in data.items()}
     except (json.JSONDecodeError, OSError) as e:
         print(f"Uyarı: durum dosyası okunamadı: {e}")
 
@@ -64,9 +65,8 @@ def save_alert_state():
         return
     try:
         os.makedirs(os.path.dirname(ALERT_STATE_FILE) or ".", exist_ok=True)
-        data = {k: str(v) for k, v in last_alert_timestamps.items()}
         with open(ALERT_STATE_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+            json.dump(last_alert_timestamps, f, indent=2)
     except OSError as e:
         print(f"Uyarı: durum dosyası yazılamadı: {e}")
 
@@ -76,74 +76,158 @@ def _telegram_configured():
 
 
 # ==========================================
-# İNDİKATÖR HESAPLAMALARI
+# HEIKIN ASHI VE UT BOT HESAPLAMALARI
 # ==========================================
-def calculate_stoch_rsi(df, rsi_period=14, stoch_period=14, k_period=3, d_period=3):
+def calculate_heikin_ashi(df):
+    """Standart OHLC mumlarını Heikin Ashi mumlarına çevirir."""
+    ha_close = (df['Open'] + df['High'] + df['Low'] + df['Close']) / 4.0
+    ha_open = np.zeros(len(df))
+    
+    if len(df) > 0:
+        ha_open[0] = (df['Open'].iloc[0] + df['Close'].iloc[0]) / 2.0
+        for i in range(1, len(df)):
+            ha_open[i] = (ha_open[i - 1] + ha_close.iloc[i - 1]) / 2.0
+
+    ha_high = np.maximum.reduce([df['High'].values, ha_open, ha_close.values])
+    ha_low = np.minimum.reduce([df['Low'].values, ha_open, ha_close.values])
+
+    ha_df = pd.DataFrame(index=df.index)
+    ha_df['Open'] = ha_open
+    ha_df['High'] = ha_high
+    ha_df['Low'] = ha_low
+    ha_df['Close'] = ha_close
+    return ha_df
+
+
+def calculate_ut_bot(df, key_value=1, atr_period=10, use_ha=True):
     """
-    RSI ve ardından Stokastik RSI (K ve D) değerlerini hesaplar.
+    Pine Script UT Bot Alerts mantığıyla Trailing Stop ve Al/Sat sinyallerini hesaplar.
     """
+    # Kaynak seçimi: Heikin Ashi Close veya standart Close
+    if use_ha:
+        ha_df = calculate_heikin_ashi(df)
+        src = ha_df['Close']
+        df['HA_Close'] = ha_df['Close']
+    else:
+        src = df['Close']
+        df['HA_Close'] = df['Close']
+
+    # ATR hesaplama (Wilder's Smoothing / RMA)
+    high = df['High']
+    low = df['Low']
     close = df['Close']
-    delta = close.diff()
+    prev_close = close.shift(1)
 
-    gain = delta.clip(lower=0)
-    loss = -delta.clip(upper=0)
+    tr1 = high - low
+    tr2 = (high - prev_close).abs()
+    tr3 = (low - prev_close).abs()
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
 
-    # Wilder's Smoothing RSI
-    avg_gain = gain.ewm(alpha=1 / rsi_period, min_periods=rsi_period, adjust=False).mean()
-    avg_loss = loss.ewm(alpha=1 / rsi_period, min_periods=rsi_period, adjust=False).mean()
+    atr = tr.ewm(alpha=1.0 / atr_period, min_periods=atr_period, adjust=False).mean()
+    n_loss = key_value * atr
 
-    rs = avg_gain / (avg_loss + 1e-10)
-    rsi = 100 - (100 / (1 + rs))
+    n = len(df)
+    src_vals = src.values
+    loss_vals = n_loss.values
 
-    # Stochastic RSI
-    rsi_min = rsi.rolling(window=stoch_period).min()
-    rsi_max = rsi.rolling(window=stoch_period).max()
+    trailing_stop = np.zeros(n)
+    pos = np.zeros(n)
 
-    rsi_range = (rsi_max - rsi_min).replace(0, np.nan)
-    stoch_rsi = (rsi - rsi_min) / rsi_range * 100
+    # Pine Script'teki bar-by-bar durum makinesi
+    for i in range(1, n):
+        prev_stop = trailing_stop[i - 1]
+        cur_src = src_vals[i]
+        prev_src = src_vals[i - 1]
+        loss = loss_vals[i]
 
-    # %K ve %D (SMA)
-    k = stoch_rsi.rolling(window=k_period).mean()
-    d = k.rolling(window=d_period).mean()
+        if np.isnan(loss):
+            continue
 
-    df['RSI'] = rsi
-    df['Stoch_RSI'] = stoch_rsi
-    df['K'] = k
-    df['D'] = d
+        if cur_src > prev_stop and prev_src > prev_stop:
+            cur_stop = max(prev_stop, cur_src - loss)
+        elif cur_src < prev_stop and prev_src < prev_stop:
+            cur_stop = min(prev_stop, cur_src + loss)
+        elif cur_src > prev_stop:
+            cur_stop = cur_src - loss
+        else:
+            cur_stop = cur_src + loss
+
+        trailing_stop[i] = cur_stop
+
+        # Pozisyon durumu (1: Long, -1: Short)
+        if prev_src < prev_stop and cur_src > prev_stop:
+            pos[i] = 1
+        elif prev_src > prev_stop and cur_src < prev_stop:
+            pos[i] = -1
+        else:
+            pos[i] = pos[i - 1]
+
+    df['ATR'] = atr
+    df['UT_Src'] = src
+    df['UT_Stop'] = trailing_stop
+    df['UT_Pos'] = pos
+
+    # Kesişim sinyalleri:
+    # ut_buy  = ut_src > ut_xATRTrailingStop and ta.crossover(ut_src, ut_xATRTrailingStop)
+    # ut_sell = ut_src < ut_xATRTrailingStop and ta.crossover(ut_xATRTrailingStop, ut_src)
+    buy_signals = np.zeros(n, dtype=bool)
+    sell_signals = np.zeros(n, dtype=bool)
+
+    for i in range(1, n):
+        prev_src = src_vals[i - 1]
+        cur_src = src_vals[i]
+        prev_stop = trailing_stop[i - 1]
+        cur_stop = trailing_stop[i]
+
+        above = (prev_src <= prev_stop) and (cur_src > cur_stop)
+        below = (prev_stop <= prev_src) and (cur_stop > cur_src)
+
+        buy_signals[i] = (cur_src > cur_stop) and above
+        sell_signals[i] = (cur_src < cur_stop) and below
+
+    df['UT_Buy'] = buy_signals
+    df['UT_Sell'] = sell_signals
     return df
 
 
 # ==========================================
 # GRAFİK OLUŞTURMA
 # ==========================================
-def generate_chart_image(df, symbol):
+def generate_chart_image(df, symbol, signal_type):
     """
-    Fiyat grafiği ve alt panelde Stoch RSI indikatörünü çizip bellekten görsel döner.
+    Fiyat, Heikin Ashi kapanışı, UT Trailing Stop ve sinyalleri içeren grafik üretir.
     """
-    plot_df = df.tail(50)  # Son 50 mumu çiz
+    plot_df = df.tail(60)
 
     fig, (ax1, ax2) = plt.subplots(
-        2, 1, figsize=(10, 6), sharex=True, 
-        gridspec_kw={'height_ratios': [3, 1]}, 
+        2, 1, figsize=(10, 6), sharex=True,
+        gridspec_kw={'height_ratios':},
         facecolor='#131722'
     )
 
-    # Fiyat Paneli
+    # 1. Panel: Fiyat ve UT Trailing Stop
     ax1.set_facecolor('#1e222d')
-    ax1.plot(plot_df.index, plot_df['Close'], color='#2962ff', label='Fiyat (Kapanış)', lw=1.5)
-    ax1.set_title(f"{symbol} - 15 Dakikalık Grafik & Stoch RSI Kesişimi", color='white', fontsize=12, pad=10)
+    ax1.plot(plot_df.index, plot_df['Close'], color='#787b86', label='Spot Fiyat', lw=1, alpha=0.6)
+    ax1.plot(plot_df.index, plot_df['HA_Close'], color='#2962ff', label='Heikin Ashi Close', lw=1.5)
+    ax1.plot(plot_df.index, plot_df['UT_Stop'], color='#f23645', label='UT Trailing Stop', lw=1.5, linestyle='--')
+
+    # Al/Sat sinyal okları
+    buys = plot_df[plot_df['UT_Buy']]
+    sells = plot_df[plot_df['UT_Sell']]
+    if not buys.empty:
+        ax1.scatter(buys.index, buys['UT_Stop'], color='#089981', marker='^', s=90, label='UT Buy', zorder=5)
+    if not sells.empty:
+        ax1.scatter(sells.index, sells['UT_Stop'], color='#f23645', marker='v', s=90, label='UT Sell', zorder=5)
+
+    badge_color = '#089981' if signal_type == "BUY" else '#f23645'
+    ax1.set_title(f"{symbol} - 15M UT Bot Alerts ({signal_type})", color=badge_color, fontsize=12, pad=10, weight='bold')
     ax1.grid(True, color='#2a2e39', linestyle='--', alpha=0.5)
     ax1.tick_params(colors='#d1d4dc')
     ax1.legend(loc='upper left', facecolor='#1e222d', edgecolor='#2a2e39', labelcolor='white')
 
-    # Stoch RSI Paneli
+    # 2. Panel: ATR
     ax2.set_facecolor('#1e222d')
-    ax2.plot(plot_df.index, plot_df['K'], color='#2196f3', label='%K', lw=1.2)
-    ax2.plot(plot_df.index, plot_df['D'], color='#ff6d00', label='%D', lw=1.2)
-    ax2.axhline(80, color='#e91e63', linestyle=':', alpha=0.7)
-    ax2.axhline(20, color='#4caf50', linestyle=':', alpha=0.7)
-    ax2.fill_between(plot_df.index, 20, 80, color='#787b86', alpha=0.08)
-    ax2.set_ylim(-5, 105)
+    ax2.plot(plot_df.index, plot_df['ATR'], color='#ff9800', label=f'ATR ({UT_ATR_PERIOD})', lw=1.2)
     ax2.grid(True, color='#2a2e39', linestyle='--', alpha=0.5)
     ax2.tick_params(colors='#d1d4dc')
     ax2.legend(loc='upper left', facecolor='#1e222d', edgecolor='#2a2e39', labelcolor='white')
@@ -151,7 +235,6 @@ def generate_chart_image(df, symbol):
     plt.xticks(rotation=30, ha='right', color='#d1d4dc')
     plt.tight_layout()
 
-    # Görseli RAM'de (BytesIO) kaydet
     buf = io.BytesIO()
     plt.savefig(buf, format='png', dpi=150, facecolor=fig.get_facecolor(), edgecolor='none')
     plt.close(fig)
@@ -162,43 +245,28 @@ def generate_chart_image(df, symbol):
 # ==========================================
 # TELEGRAM BİLDİRİM FONKSİYONU
 # ==========================================
-def send_telegram_message(text, parse_mode="HTML"):
-    """Telegram'a düz metin/HTML mesaj gönderir."""
-    if not _telegram_configured():
-        print("Telegram yapılandırılmamış (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID).")
-        return False
-
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    data = {"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": parse_mode}
-
-    try:
-        response = requests.post(url, data=data, timeout=15)
-        if response.status_code == 200:
-            return True
-        print(f"Telegram Hatası: {response.text}")
-    except Exception as e:
-        print(f"Telegram bağlantı hatası: {e}")
-    return False
-
-
-def send_telegram_alert(symbol, last_price, prev_k, prev_d, curr_k, curr_d, candle_time, chart_buf):
+def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, candle_time, chart_buf):
     """
-    Telegram üzerinden hem grafik resmini hem de sinyal açıklamasını gönderir.
+    UT Long veya UT Short sinyali için hem görseli hem de sinyal metnini Telegram'a yollar.
     """
     if not _telegram_configured():
-        print(f"Telegram yapılandırılmamış, sinyal atlandı: {symbol}")
+        print(f"Telegram yapılandırılmamış, sinyal atlandı: {symbol} ({signal_type})")
         return
 
+    is_long = signal_type == "BUY"
+    header = "🟢 <b>UT BOT: LONG (AL) SİNYALİ</b> 🟢" if is_long else "🔴 <b>UT BOT: SHORT (SAT) SİNYALİ</b> 🔴"
+    direction_desc = "Fiyat Trailing Stop çizgisini YUKARI kırdı." if is_long else "Fiyat Trailing Stop çizgisini AŞAĞI kırdı."
+
     caption = (
-        f"🚨 <b>STOKASTİK RSI AL SİNYALİ</b> 🚨\n\n"
-        f"📌 <b>Sembol:</b> #{symbol}\n"
-        f"⏱ <b>Zaman Dilimi:</b> 15 Dakika\n"
-        f"💵 <b>Son Fiyat:</b> ${last_price:,.2f}\n"
+        f"{header}\n\n"
+        f"📌 <b>Hisse:</b> #{symbol}\n"
+        f"⏱ <b>Periyot:</b> 15 Dakika (Heikin Ashi)\n"
+        f"💵 <b>Piyasa Fiyatı:</b> ${last_price:,.2f}\n"
+        f"🕯 <b>HA Kapanış:</b> ${ha_price:,.2f}\n"
+        f"🛡 <b>Trailing Stop:</b> ${stop_price:,.2f}\n"
         f"🕒 <b>Mum Zamanı:</b> {candle_time.strftime('%Y-%m-%d %H:%M')}\n\n"
-        f"📊 <b>Stokastik RSI Değerleri (20 Altı Kesişim):</b>\n"
-        f"• Önceki Mum: K={prev_k:.2f} | D={prev_d:.2f}\n"
-        f"• Güncel Mum: <b>K={curr_k:.2f}</b> ↗️ <b>D={curr_d:.2f}</b>\n\n"
-        f"✅ <i>K değeri 20 seviyesi altındayken D değerini yukarı kesti.</i>"
+        f"⚙️ <b>Ayarlar:</b> Key={UT_KEY_VALUE} | ATR={UT_ATR_PERIOD}\n"
+        f"ℹ️ <i>{direction_desc}</i>"
     )
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
@@ -212,7 +280,7 @@ def send_telegram_alert(symbol, last_price, prev_k, prev_d, curr_k, curr_d, cand
     try:
         response = requests.post(url, data=data, files=files, timeout=15)
         if response.status_code == 200:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Sinyal başarıyla gönderildi: {symbol}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] {signal_type} Sinyali Gönderildi: {symbol}")
         else:
             print(f"Telegram Hatası ({symbol}): {response.text}")
     except Exception as e:
@@ -220,60 +288,49 @@ def send_telegram_alert(symbol, last_price, prev_k, prev_d, curr_k, curr_d, cand
 
 
 # ==========================================
-# TARAMA VE KONTROL MOTORU
+# TARAMA MOTORU
 # ==========================================
 def scan_symbols():
-    print(f"\n--- Tarama Başlatıldı ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---")
-    
+    print(f"\n--- UT Bot Taraması Başlatıldı ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---")
+
     for symbol in WATCHLIST:
         try:
             ticker = yf.Ticker(symbol)
             df = ticker.history(period=PERIOD, interval=INTERVAL, prepost=PREPOST)
 
-            if df.empty or len(df) < (RSI_PERIOD + STOCH_PERIOD + 5):
+            if df.empty or len(df) < (UT_ATR_PERIOD + 15):
                 continue
 
-            # İndikatörleri ekle
-            df = calculate_stoch_rsi(
-                df, 
-                rsi_period=RSI_PERIOD, 
-                stoch_period=STOCH_PERIOD, 
-                k_period=K_PERIOD, 
-                d_period=D_PERIOD
-            )
+            # UT Bot göstergesini hesapla
+            df = calculate_ut_bot(df, key_value=UT_KEY_VALUE, atr_period=UT_ATR_PERIOD, use_ha=UT_USE_HA)
 
-            # Son 2 mum verisi
             curr_row = df.iloc[-1]
-            prev_row = df.iloc[-2]
-
             curr_time = df.index[-1]
-            last_price = curr_row['Close']
 
-            prev_k, prev_d = prev_row['K'], prev_row['D']
-            curr_k, curr_d = curr_row['K'], curr_row['D']
+            is_buy = bool(curr_row['UT_Buy'])
+            is_sell = bool(curr_row['UT_Sell'])
 
-            # KESİŞİM ŞARTI:
-            # 1. Önceki mumda K <= D
-            # 2. Güncel mumda K > D (Yukarı kesişim)
-            # 3. Kesişimin 20'nin altında veya 20 bölgesinde gerçekleşmesi (curr_k <= 20 veya prev_k <= 20)
-            is_crossover = (prev_k <= prev_d) and (curr_k > curr_d)
-            is_in_oversold = (curr_k <= OVERSOLD_THRESHOLD) or (prev_k <= OVERSOLD_THRESHOLD)
+            if is_buy or is_sell:
+                signal_type = "BUY" if is_buy else "SELL"
+                alert_key = f"{symbol}_{signal_type}"
 
-            if is_crossover and is_in_oversold:
-                # Aynı 15 dakikalık mumda tekrar bildirim atmaması kontrolü
-                if str(last_alert_timestamps.get(symbol)) != str(curr_time):
-                    last_alert_timestamps[symbol] = curr_time
-                    
-                    # Grafik oluştur ve gönder
-                    chart_img = generate_chart_image(df, symbol)
+                # Aynı 15 dakikalık mum içinde aynı yönde mükerrer mesajı engelle
+                if last_alert_timestamps.get(alert_key) != str(curr_time):
+                    last_alert_timestamps[alert_key] = str(curr_time)
+
+                    chart_img = generate_chart_image(df, symbol, signal_type)
                     send_telegram_alert(
-                        symbol, last_price, 
-                        prev_k, prev_d, 
-                        curr_k, curr_d, 
-                        curr_time, chart_img
+                        symbol=symbol,
+                        signal_type=signal_type,
+                        last_price=curr_row['Close'],
+                        ha_price=curr_row['HA_Close'],
+                        stop_price=curr_row['UT_Stop'],
+                        candle_time=curr_time,
+                        chart_buf=chart_img
                     )
             else:
-                print(f"• {symbol:7s} -> K: {curr_k:5.2f}, D: {curr_d:5.2f} (Kesişim yok / >20)")
+                pos_str = "LONG" if curr_row['UT_Pos'] == 1 else ("SHORT" if curr_row['UT_Pos'] == -1 else "NÖTR")
+                print(f"• {symbol:7s} -> Pozisyon: {pos_str:5s} | Fiyat: {curr_row['Close']:7.2f} | Stop: {curr_row['UT_Stop']:7.2f}")
 
         except Exception as e:
             print(f"Hata [{symbol}]: {e}")
@@ -282,20 +339,18 @@ def scan_symbols():
 
 
 # ==========================================
-# ÇALIŞTIRMA DÖNGÜSÜ
+# BAŞLATMA
 # ==========================================
 if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="15M Stoch RSI Telegram Tarayıcısı")
+    parser = argparse.ArgumentParser(description="15M UT Bot Telegram Tarayıcısı")
     parser.add_argument(
         "--once",
         action="store_true",
-        help="Tek tarama yap ve çık (GitHub Actions için)",
+        help="Tek tarama yap ve çık (GitHub Actions için)"
     )
     args = parser.parse_args()
 
-    print("🤖 15M Stoch RSI Telegram Tarayıcısı Başlatıldı.")
+    print("🤖 UT Bot Alerts (15M Heikin Ashi) Tarayıcısı Başlatıldı.")
     print(f"Takip Edilen Varlıklar: {', '.join(WATCHLIST)}")
 
     load_alert_state()
@@ -304,6 +359,7 @@ if __name__ == "__main__":
     if args.once:
         print("Tek tarama tamamlandı.")
     else:
+        # 15 dakikalık mumları yakalamak için dakikada bir kontrol eder
         schedule.every(1).minutes.do(scan_symbols)
 
         while True:
