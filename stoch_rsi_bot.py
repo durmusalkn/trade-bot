@@ -201,7 +201,7 @@ def generate_chart_image(df, symbol, signal_type):
 
     fig, (ax1, ax2) = plt.subplots(
         2, 1, figsize=(10, 6), sharex=True,
-        gridspec_kw={'height_ratios':},
+        gridspec_kw={'height_ratios':},  # <-- eklendi
         facecolor='#131722'
     )
 
