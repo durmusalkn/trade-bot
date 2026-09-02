@@ -35,9 +35,9 @@ WATCHLIST = [
 
 INTERVAL = "15m"      # 15 dakikalık periyot
 PERIOD = "60d"        # İndikatör hesaplamasının TradingView ile tam oturması için 60 günlük geçmiş
-PREPOST = False       # TradingView normal seans (RTH) ile tam eşleşmesi için False
+PREPOST = True        # TradingView'de mavi alan (seans öncesi/sonrası) açık olduğu için True
 
-# UT BOT ALERTS PARAMETRELERİ (Inputs sekmenizle birebir aynı)
+# UT BOT ALERTS PARAMETRELERİ (TradingView Inputs sekmenizle birebir aynı)
 UT_KEY_VALUE = 1      # Key Value (Hassasiyet)
 UT_ATR_PERIOD = 10    # ATR Period
 UT_USE_HA = True      # Signals from Heikin Ashi Candles
@@ -246,6 +246,16 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
         print(f"Telegram yapılandırılmamış, sinyal gönderilemedi: {symbol} ({signal_type})")
         return
 
+    # Mum zamanını kesin olarak Türkiye Saati'ne (UTC+3) çevir
+    try:
+        if candle_time.tzinfo is not None:
+            local_time = candle_time.tz_convert("Europe/Istanbul")
+        else:
+            local_time = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
+        candle_str = local_time.strftime('%Y-%m-%d %H:%M TSİ')
+    except Exception:
+        candle_str = str(candle_time)
+
     is_long = signal_type == "BUY"
     header = "🟢 <b>UT BOT: LONG (AL) SİNYALİ</b> 🟢" if is_long else "🔴 <b>UT BOT: SHORT (SAT) SİNYALİ</b> 🔴"
     direction_desc = "Fiyat Trailing Stop çizgisini YUKARI kırdı." if is_long else "Fiyat Trailing Stop çizgisini AŞAĞI kırdı."
@@ -257,7 +267,7 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
         f"💵 <b>Piyasa Fiyatı:</b> ${last_price:,.2f}\n"
         f"🕯 <b>HA Kapanış:</b> ${ha_price:,.2f}\n"
         f"🛡 <b>Trailing Stop:</b> ${stop_price:,.2f}\n"
-        f"🕒 <b>Mum Zamanı:</b> {candle_time.strftime('%Y-%m-%d %H:%M')}\n\n"
+        f"🕒 <b>Mum Zamanı:</b> {candle_str}\n\n"
         f"⚙️ <b>Ayarlar:</b> Key={UT_KEY_VALUE} | ATR={UT_ATR_PERIOD}\n"
         f"ℹ️ <i>{direction_desc}</i>"
     )
@@ -297,9 +307,7 @@ def scan_symbols():
             # UT Bot değerlerini hesapla
             df = calculate_ut_bot(df, key_value=UT_KEY_VALUE, atr_period=UT_ATR_PERIOD, use_ha=UT_USE_HA)
 
-            # KRİTİK: GitHub Actions gecikmelerini kompanse etmek için
-            # Kapanmış son 4 mumu (son 1 saat) geriye dönük kontrol et
-            # iloc[-1] henüz kapanmamış canlı mum olduğu için hariç tutulur (-5'ten -1'e)
+            # Kapanmış son 4 mumu geriye dönük kontrol et (-5'ten -1'e)
             recent_closed_bars = df.iloc[-5:-1]
 
             has_signal = False
@@ -309,8 +317,17 @@ def scan_symbols():
 
                 if is_buy or is_sell:
                     signal_type = "BUY" if is_buy else "SELL"
-                    # Her mumu ve yönü tekil anahtarla sakla
-                    alert_key = f"{symbol}_{signal_type}_{candle_time.strftime('%Y%m%d_%H%M')}"
+                    # Mum zamanını yerel saate göre formatlayıp tekil anahtar yap
+                    try:
+                        if candle_time.tzinfo is not None:
+                            loc_t = candle_time.tz_convert("Europe/Istanbul")
+                        else:
+                            loc_t = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
+                        time_key = loc_t.strftime('%Y%m%d_%H%M')
+                    except Exception:
+                        time_key = str(candle_time)
+
+                    alert_key = f"{symbol}_{signal_type}_{time_key}"
 
                     if alert_key not in last_alert_timestamps:
                         last_alert_timestamps[alert_key] = str(candle_time)
