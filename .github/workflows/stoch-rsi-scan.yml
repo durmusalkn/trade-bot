@@ -1,18 +1,16 @@
-name: Stoch RSI Scan
-
+name: UT Bot 1H Scan
 'on':
   schedule:
-    # Her 15 dakikada bir (UTC)
-    - cron: "*/15 * * * *"
+    # Her saat başı, dakika 02'de (UTC)
+    - cron: "2 * * * *"
   workflow_dispatch:
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     env:
       PYTHONIOENCODING: utf-8
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,20 +29,20 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: state/
-          key: stoch-rsi-alert-state-${{ github.run_id }}
+          key: ut-bot-1h-alert-state-${{ github.run_id }}
           restore-keys: |
-            stoch-rsi-alert-state-
+            ut-bot-1h-alert-state-
 
       - name: Run scanner
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ALERT_STATE_FILE: state/alerts.json
-        run: python stoch_rsi_bot.py --once
+        run: python ut_bot_1h.py --once
 
       - name: Save alert state
         uses: actions/cache/save@v4
         if: always()
         with:
           path: state/
-          key: stoch-rsi-alert-state-${{ github.run_id }}
+          key: ut-bot-1h-alert-state-${{ github.run_id }}
