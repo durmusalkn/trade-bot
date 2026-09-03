@@ -33,9 +33,17 @@ WATCHLIST = [
     "MRVL"       # Marvell Technology
 ]
 
-INTERVAL = "15m"      # 15 dakikalık periyot
-PERIOD = "60d"        # İndikatör hesaplamasının TradingView ile tam oturması için 60 günlük geçmiş
+INTERVAL = "1h"       # 1 saatlik periyot
+PERIOD = "365d"       # 1h verisinde yfinance limiti 730 gün; 365 gün TradingView ile oturmak için fazlasıyla yeterli
 PREPOST = True        # TradingView'de mavi alan (seans öncesi/sonrası) açık olduğu için True
+TIMEFRAME_LABEL = "1 Saat"   # Telegram mesajındaki periyot etiketi
+TIMEFRAME_SHORT = "1H"       # Grafik başlığındaki etiket
+
+# Her taramada geriye dönük kontrol edilecek KAPANMIŞ mum sayısı.
+# GitHub Actions cron'u bazen 5-15 dk gecikebildiği veya bir çalıştırma
+# atlanabildiği için 3 mum güvenli bir tampon sağlar.
+LOOKBACK_BARS = 3
+CHART_BARS = 80       # Grafikte gösterilecek mum sayısı
 
 # UT BOT ALERTS PARAMETRELERİ (TradingView Inputs sekmenizle birebir aynı)
 UT_KEY_VALUE = 1      # Key Value (Hassasiyet)
@@ -81,8 +89,8 @@ def _telegram_configured():
 def calculate_heikin_ashi(df):
     """Standart OHLC verisini TradingView uyumlu Heikin Ashi mumlarına çevirir."""
     ha_close = (df['Open'] + df['High'] + df['Low'] + df['Close']) / 4.0
-    ha_open = np.zeros(len(df))
 
+    ha_open = np.zeros(len(df))
     if len(df) > 0:
         ha_open[0] = (df['Open'].iloc[0] + df['Close'].iloc[0]) / 2.0
         for i in range(1, len(df)):
@@ -182,6 +190,7 @@ def calculate_ut_bot(df, key_value=1, atr_period=10, use_ha=True):
 
     df['UT_Buy'] = buy_signals
     df['UT_Sell'] = sell_signals
+
     return df
 
 
@@ -192,7 +201,7 @@ def generate_chart_image(df, symbol, signal_type):
     """
     Fiyat, Heikin Ashi Kapanışı ve Trailing Stop çizgisini içeren görsel oluşturur.
     """
-    plot_df = df.tail(60)
+    plot_df = df.tail(CHART_BARS)
 
     fig, (ax1, ax2) = plt.subplots(
         2, 1, figsize=(10, 6), sharex=True,
@@ -209,13 +218,17 @@ def generate_chart_image(df, symbol, signal_type):
     # Al / Sat İşaretçileri
     buys = plot_df[plot_df['UT_Buy']]
     sells = plot_df[plot_df['UT_Sell']]
+
     if not buys.empty:
         ax1.scatter(buys.index, buys['UT_Stop'], color='#089981', marker='^', s=90, label='UT Buy', zorder=5)
     if not sells.empty:
         ax1.scatter(sells.index, sells['UT_Stop'], color='#f23645', marker='v', s=90, label='UT Sell', zorder=5)
 
     badge_color = '#089981' if signal_type == "BUY" else '#f23645'
-    ax1.set_title(f"{symbol} - 15M UT Bot Alerts ({signal_type})", color=badge_color, fontsize=12, pad=10, weight='bold')
+    ax1.set_title(
+        f"{symbol} - {TIMEFRAME_SHORT} UT Bot Alerts ({signal_type})",
+        color=badge_color, fontsize=12, pad=10, weight='bold'
+    )
     ax1.grid(True, color='#2a2e39', linestyle='--', alpha=0.5)
     ax1.tick_params(colors='#d1d4dc')
     ax1.legend(loc='upper left', facecolor='#1e222d', edgecolor='#2a2e39', labelcolor='white')
@@ -263,7 +276,7 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
     caption = (
         f"{header}\n\n"
         f"📌 <b>Hisse:</b> #{symbol}\n"
-        f"⏱ <b>Periyot:</b> 15 Dakika (Heikin Ashi)\n"
+        f"⏱ <b>Periyot:</b> {TIMEFRAME_LABEL} (Heikin Ashi)\n"
         f"💵 <b>Piyasa Fiyatı:</b> ${last_price:,.2f}\n"
         f"🕯 <b>HA Kapanış:</b> ${ha_price:,.2f}\n"
         f"🛡 <b>Trailing Stop:</b> ${stop_price:,.2f}\n"
@@ -307,16 +320,17 @@ def scan_symbols():
             # UT Bot değerlerini hesapla
             df = calculate_ut_bot(df, key_value=UT_KEY_VALUE, atr_period=UT_ATR_PERIOD, use_ha=UT_USE_HA)
 
-            # Kapanmış son 4 mumu geriye dönük kontrol et (-5'ten -1'e)
-            recent_closed_bars = df.iloc[-5:-1]
-
+            # Kapanmış son LOOKBACK_BARS mumu geriye dönük kontrol et (son mum halen açık olduğu için hariç)
+            recent_closed_bars = df.iloc[-(LOOKBACK_BARS + 1):-1]
             has_signal = False
+
             for candle_time, row in recent_closed_bars.iterrows():
                 is_buy = bool(row['UT_Buy'])
                 is_sell = bool(row['UT_Sell'])
 
                 if is_buy or is_sell:
                     signal_type = "BUY" if is_buy else "SELL"
+
                     # Mum zamanını yerel saate göre formatlayıp tekil anahtar yap
                     try:
                         if candle_time.tzinfo is not None:
@@ -327,13 +341,14 @@ def scan_symbols():
                     except Exception:
                         time_key = str(candle_time)
 
-                    alert_key = f"{symbol}_{signal_type}_{time_key}"
+                    alert_key = f"{symbol}_{INTERVAL}_{signal_type}_{time_key}"
 
                     if alert_key not in last_alert_timestamps:
                         last_alert_timestamps[alert_key] = str(candle_time)
                         has_signal = True
 
                         print(f"🚨 YENİ SİNYAL: {symbol} {signal_type} (Mum: {candle_time})")
+
                         chart_img = generate_chart_image(df, symbol, signal_type)
                         send_telegram_alert(
                             symbol=symbol,
@@ -360,7 +375,7 @@ def scan_symbols():
 # GİRİŞ NOKTASI
 # ==========================================
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="15M UT Bot Telegram Tarayıcısı")
+    parser = argparse.ArgumentParser(description=f"{TIMEFRAME_SHORT} UT Bot Telegram Tarayıcısı")
     parser.add_argument(
         "--once",
         action="store_true",
@@ -368,7 +383,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    print("🤖 UT Bot Alerts (15M Heikin Ashi) Tarayıcısı Başlatıldı.")
+    print(f"🤖 UT Bot Alerts ({TIMEFRAME_SHORT} Heikin Ashi) Tarayıcısı Başlatıldı.")
     print(f"Takip Edilen Varlıklar: {', '.join(WATCHLIST)}")
 
     load_alert_state()
@@ -377,7 +392,8 @@ if __name__ == "__main__":
     if args.once:
         print("Tek tarama tamamlandı.")
     else:
-        schedule.every(1).minutes.do(scan_symbols)
+        # Her saat başı :02'de tarama yap (mum kapanışını beklemek için 2 dk tampon)
+        schedule.every().hour.at(":02").do(scan_symbols)
         while True:
             schedule.run_pending()
-            time.sleep(1)
+            time.sleep(20)
