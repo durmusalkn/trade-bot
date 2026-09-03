@@ -33,17 +33,17 @@ WATCHLIST = [
     "MRVL"       # Marvell Technology
 ]
 
-INTERVAL = "1h"       # 1 saatlik periyot
-PERIOD = "365d"       # 1h verisinde yfinance limiti 730 gün; 365 gün TradingView ile oturmak için fazlasıyla yeterli
-PREPOST = True        # TradingView'de mavi alan (seans öncesi/sonrası) açık olduğu için True
-TIMEFRAME_LABEL = "1 Saat"   # Telegram mesajındaki periyot etiketi
-TIMEFRAME_SHORT = "1H"       # Grafik başlığındaki etiket
+INTERVAL = "1d"       # Günlük periyot
+PERIOD = "3y"         # Trailing stop'un TradingView ile oturması için 3 yıllık geçmiş
+PREPOST = False       # Günlük mumlarda seans öncesi/sonrası verisi kullanılmaz
+TIMEFRAME_LABEL = "Günlük"   # Telegram mesajındaki periyot etiketi
+TIMEFRAME_SHORT = "1D"       # Grafik başlığındaki etiket
+IS_DAILY = INTERVAL.endswith("d")
 
 # Her taramada geriye dönük kontrol edilecek KAPANMIŞ mum sayısı.
-# GitHub Actions cron'u bazen 5-15 dk gecikebildiği veya bir çalıştırma
-# atlanabildiği için 3 mum güvenli bir tampon sağlar.
-LOOKBACK_BARS = 3
-CHART_BARS = 80       # Grafikte gösterilecek mum sayısı
+# Bir çalıştırma başarısız olursa veya hafta sonuna denk gelirse sinyal kaçmasın diye 2.
+LOOKBACK_BARS = 2
+CHART_BARS = 120      # Grafikte gösterilecek mum sayısı
 
 # UT BOT ALERTS PARAMETRELERİ (TradingView Inputs sekmenizle birebir aynı)
 UT_KEY_VALUE = 1      # Key Value (Hassasiyet)
@@ -81,6 +81,54 @@ def save_alert_state():
 
 def _telegram_configured():
     return bool(TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID)
+
+
+# ==========================================
+# ZAMAN YARDIMCILARI
+# ==========================================
+def format_candle_time(candle_time):
+    """Mum zamanını okunabilir metne çevirir (günlükte sadece tarih)."""
+    try:
+        if IS_DAILY:
+            return candle_time.strftime('%d.%m.%Y')
+        if candle_time.tzinfo is not None:
+            local_time = candle_time.tz_convert("Europe/Istanbul")
+        else:
+            local_time = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
+        return local_time.strftime('%Y-%m-%d %H:%M TSİ')
+    except Exception:
+        return str(candle_time)
+
+
+def candle_key(candle_time):
+    """Mükerrer bildirim kontrolü için tekil zaman anahtarı üretir."""
+    try:
+        if IS_DAILY:
+            return candle_time.strftime('%Y%m%d')
+        if candle_time.tzinfo is not None:
+            loc_t = candle_time.tz_convert("Europe/Istanbul")
+        else:
+            loc_t = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
+        return loc_t.strftime('%Y%m%d_%H%M')
+    except Exception:
+        return str(candle_time)
+
+
+def get_closed_bars(df):
+    """
+    Sadece KAPANMIŞ mumları döndürür.
+
+    Günlükte tarama sabah yapıldığı için verideki son satır çoğu zaman zaten
+    kapanmış olan bir önceki işlem gününe aittir; bu yüzden körlemesine son satırı
+    atmak yerine tarihi bugüne eşit olan (halen açık) mumu ayıklarız.
+    BTC gibi 7/24 işlem gören varlıklarda bugünün mumu açık olduğu için elenir.
+    """
+    if not IS_DAILY:
+        return df.iloc[:-1]
+
+    today_utc = pd.Timestamp.now(tz="UTC").date()
+    mask = np.array([ts.date() != today_utc for ts in df.index])
+    return df[mask]
 
 
 # ==========================================
@@ -259,15 +307,7 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
         print(f"Telegram yapılandırılmamış, sinyal gönderilemedi: {symbol} ({signal_type})")
         return
 
-    # Mum zamanını kesin olarak Türkiye Saati'ne (UTC+3) çevir
-    try:
-        if candle_time.tzinfo is not None:
-            local_time = candle_time.tz_convert("Europe/Istanbul")
-        else:
-            local_time = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
-        candle_str = local_time.strftime('%Y-%m-%d %H:%M TSİ')
-    except Exception:
-        candle_str = str(candle_time)
+    candle_str = format_candle_time(candle_time)
 
     is_long = signal_type == "BUY"
     header = "🟢 <b>UT BOT: LONG (AL) SİNYALİ</b> 🟢" if is_long else "🔴 <b>UT BOT: SHORT (SAT) SİNYALİ</b> 🔴"
@@ -277,10 +317,10 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
         f"{header}\n\n"
         f"📌 <b>Hisse:</b> #{symbol}\n"
         f"⏱ <b>Periyot:</b> {TIMEFRAME_LABEL} (Heikin Ashi)\n"
-        f"💵 <b>Piyasa Fiyatı:</b> ${last_price:,.2f}\n"
+        f"💵 <b>Kapanış Fiyatı:</b> ${last_price:,.2f}\n"
         f"🕯 <b>HA Kapanış:</b> ${ha_price:,.2f}\n"
         f"🛡 <b>Trailing Stop:</b> ${stop_price:,.2f}\n"
-        f"🕒 <b>Mum Zamanı:</b> {candle_str}\n\n"
+        f"🕒 <b>Mum Tarihi:</b> {candle_str}\n\n"
         f"⚙️ <b>Ayarlar:</b> Key={UT_KEY_VALUE} | ATR={UT_ATR_PERIOD}\n"
         f"ℹ️ <i>{direction_desc}</i>"
     )
@@ -320,8 +360,12 @@ def scan_symbols():
             # UT Bot değerlerini hesapla
             df = calculate_ut_bot(df, key_value=UT_KEY_VALUE, atr_period=UT_ATR_PERIOD, use_ha=UT_USE_HA)
 
-            # Kapanmış son LOOKBACK_BARS mumu geriye dönük kontrol et (son mum halen açık olduğu için hariç)
-            recent_closed_bars = df.iloc[-(LOOKBACK_BARS + 1):-1]
+            closed_df = get_closed_bars(df)
+            if closed_df.empty:
+                continue
+
+            # Son LOOKBACK_BARS kapanmış mumu geriye dönük kontrol et
+            recent_closed_bars = closed_df.tail(LOOKBACK_BARS)
             has_signal = False
 
             for candle_time, row in recent_closed_bars.iterrows():
@@ -330,24 +374,13 @@ def scan_symbols():
 
                 if is_buy or is_sell:
                     signal_type = "BUY" if is_buy else "SELL"
-
-                    # Mum zamanını yerel saate göre formatlayıp tekil anahtar yap
-                    try:
-                        if candle_time.tzinfo is not None:
-                            loc_t = candle_time.tz_convert("Europe/Istanbul")
-                        else:
-                            loc_t = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
-                        time_key = loc_t.strftime('%Y%m%d_%H%M')
-                    except Exception:
-                        time_key = str(candle_time)
-
-                    alert_key = f"{symbol}_{INTERVAL}_{signal_type}_{time_key}"
+                    alert_key = f"{symbol}_{INTERVAL}_{signal_type}_{candle_key(candle_time)}"
 
                     if alert_key not in last_alert_timestamps:
                         last_alert_timestamps[alert_key] = str(candle_time)
                         has_signal = True
 
-                        print(f"🚨 YENİ SİNYAL: {symbol} {signal_type} (Mum: {candle_time})")
+                        print(f"🚨 YENİ SİNYAL: {symbol} {signal_type} (Mum: {format_candle_time(candle_time)})")
 
                         chart_img = generate_chart_image(df, symbol, signal_type)
                         send_telegram_alert(
@@ -361,9 +394,9 @@ def scan_symbols():
                         )
 
             if not has_signal:
-                last_closed = df.iloc[-2]
+                last_closed = closed_df.iloc[-1]
                 pos_str = "LONG" if last_closed['UT_Pos'] == 1 else ("SHORT" if last_closed['UT_Pos'] == -1 else "NÖTR")
-                print(f"• {symbol:7s} -> Son Durum: {pos_str:5s} | Fiyat: {last_closed['Close']:7.2f} | Stop: {last_closed['UT_Stop']:7.2f}")
+                print(f"• {symbol:7s} -> Son Durum: {pos_str:5s} | Fiyat: {last_closed['Close']:8.2f} | Stop: {last_closed['UT_Stop']:8.2f}")
 
         except Exception as e:
             print(f"Hata [{symbol}]: {e}")
@@ -392,8 +425,8 @@ if __name__ == "__main__":
     if args.once:
         print("Tek tarama tamamlandı.")
     else:
-        # Her saat başı :02'de tarama yap (mum kapanışını beklemek için 2 dk tampon)
-        schedule.every().hour.at(":02").do(scan_symbols)
+        # Her gün saat 11:00'de tarama yap (sunucunun yerel saatine göre)
+        schedule.every().day.at("11:00").do(scan_symbols)
         while True:
             schedule.run_pending()
-            time.sleep(20)
+            time.sleep(30)
