@@ -38,7 +38,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ALERT_STATE_FILE: state/alerts.json
-        run: python ut_bot_1h.py --once
+        run: python stoch_rsi_bot.py --once
 
       - name: Save alert state
         uses: actions/cache/save@v4
