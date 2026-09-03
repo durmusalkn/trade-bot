@@ -1,8 +1,8 @@
-name: UT Bot 1H Scan
+name: UT Bot Daily Scan
 'on':
   schedule:
-    # Her saat başı, dakika 02'de (UTC)
-    - cron: "2 * * * *"
+    # Her gün 08:00 UTC = 11:00 TSİ (Türkiye tüm yıl UTC+3)
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 jobs:
@@ -29,9 +29,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: state/
-          key: ut-bot-1h-alert-state-${{ github.run_id }}
+          key: ut-bot-daily-alert-state-${{ github.run_id }}
           restore-keys: |
-            ut-bot-1h-alert-state-
+            ut-bot-daily-alert-state-
 
       - name: Run scanner
         env:
@@ -45,4 +45,4 @@ jobs:
         if: always()
         with:
           path: state/
-          key: ut-bot-1h-alert-state-${{ github.run_id }}
+          key: ut-bot-daily-alert-state-${{ github.run_id }}
