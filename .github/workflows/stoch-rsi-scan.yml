@@ -1,9 +1,16 @@
-name: UT Bot Daily Scan
+name: UT Bot Hourly Scan
 'on':
   schedule:
-    # Her gün 08:00 UTC = 11:00 TSİ (Türkiye tüm yıl UTC+3)
-    - cron: "0 8 * * *"
+    # Her saat başından 5 dk sonra: mumun kapanıp veriye yansıması için pay.
+    # Sadece ABD seansı (14:30-21:00 UTC) taransın istersen: "5 14-21 * * 1-5"
+    # (BTC 7/24 olduğu için tam saatlik tarama önerilir.)
+    - cron: "5 * * * *"
   workflow_dispatch:
+
+# Uzun süren bir tarama bir sonraki saatin çalışmasıyla çakışmasın
+concurrency:
+  group: ut-bot-hourly
+  cancel-in-progress: false
 
 jobs:
   scan:
@@ -29,9 +36,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: state/
-          key: ut-bot-daily-alert-state-${{ github.run_id }}
+          key: ut-bot-1h-alert-state-${{ github.run_id }}
           restore-keys: |
-            ut-bot-daily-alert-state-
+            ut-bot-1h-alert-state-
 
       - name: Run scanner
         env:
@@ -45,4 +52,4 @@ jobs:
         if: always()
         with:
           path: state/
-          key: ut-bot-daily-alert-state-${{ github.run_id }}
+          key: ut-bot-1h-alert-state-${{ github.run_id }}
