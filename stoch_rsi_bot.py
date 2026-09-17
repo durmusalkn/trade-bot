@@ -8,6 +8,7 @@ from datetime import datetime
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import numpy as np
 import pandas as pd
 import requests
@@ -33,16 +34,16 @@ WATCHLIST = [
     "MRVL"       # Marvell Technology
 ]
 
-INTERVAL = "1d"       # Günlük periyot
-PERIOD = "3y"         # Trailing stop'un TradingView ile oturması için 3 yıllık geçmiş
-PREPOST = False       # Günlük mumlarda seans öncesi/sonrası verisi kullanılmaz
-TIMEFRAME_LABEL = "Günlük"   # Telegram mesajındaki periyot etiketi
-TIMEFRAME_SHORT = "1D"       # Grafik başlığındaki etiket
+INTERVAL = "1h"       # Saatlik periyot
+PERIOD = "730d"       # yfinance saatlik veride en fazla 730 güne izin verir
+PREPOST = False       # TradingView varsayılanı gibi sadece normal seans mumları
+TIMEFRAME_LABEL = "1 Saatlik"   # Telegram mesajındaki periyot etiketi
+TIMEFRAME_SHORT = "1H"          # Grafik başlığındaki etiket
 IS_DAILY = INTERVAL.endswith("d")
 
 # Her taramada geriye dönük kontrol edilecek KAPANMIŞ mum sayısı.
-# Bir çalıştırma başarısız olursa veya hafta sonuna denk gelirse sinyal kaçmasın diye 2.
-LOOKBACK_BARS = 2
+# Saatlik çalışmada bir cron gecikirse/atlanırsa sinyal kaçmasın diye 3.
+LOOKBACK_BARS = 3
 CHART_BARS = 120      # Grafikte gösterilecek mum sayısı
 
 # UT BOT ALERTS PARAMETRELERİ (TradingView Inputs sekmenizle birebir aynı)
@@ -50,8 +51,29 @@ UT_KEY_VALUE = 1      # Key Value (Hassasiyet)
 UT_ATR_PERIOD = 10    # ATR Period
 UT_USE_HA = True      # Signals from Heikin Ashi Candles
 
+# Durum dosyasının sonsuz büyümemesi için saklanacak en fazla kayıt sayısı
+MAX_STATE_ENTRIES = 500
+
 # Mükerrer bildirimleri engellemek için kaydedilen sinyal listesi
 last_alert_timestamps = {}
+
+
+def get_bar_duration():
+    """INTERVAL değerini bir zaman aralığına (Timedelta) çevirir."""
+    unit = INTERVAL[-1]
+    amount = int(INTERVAL[:-1])
+    if unit == "m":
+        return pd.Timedelta(minutes=amount)
+    if unit == "h":
+        return pd.Timedelta(hours=amount)
+    if unit == "d":
+        return pd.Timedelta(days=amount)
+    if unit == "k":  # 1wk
+        return pd.Timedelta(weeks=amount)
+    return pd.Timedelta(hours=1)
+
+
+BAR_DURATION = get_bar_duration()
 
 
 def load_alert_state():
@@ -68,10 +90,15 @@ def load_alert_state():
 
 
 def save_alert_state():
-    """Bildirim geçmişini dosyaya kaydeder."""
+    """Bildirim geçmişini dosyaya kaydeder (en yeni MAX_STATE_ENTRIES kayıt)."""
     if not ALERT_STATE_FILE:
         return
     try:
+        global last_alert_timestamps
+        if len(last_alert_timestamps) > MAX_STATE_ENTRIES:
+            items = list(last_alert_timestamps.items())[-MAX_STATE_ENTRIES:]
+            last_alert_timestamps = dict(items)
+
         os.makedirs(os.path.dirname(ALERT_STATE_FILE) or ".", exist_ok=True)
         with open(ALERT_STATE_FILE, "w", encoding="utf-8") as f:
             json.dump(last_alert_timestamps, f, indent=2)
@@ -86,16 +113,19 @@ def _telegram_configured():
 # ==========================================
 # ZAMAN YARDIMCILARI
 # ==========================================
+def to_istanbul(candle_time):
+    """Mum zamanını İstanbul saatine çevirir."""
+    if candle_time.tzinfo is not None:
+        return candle_time.tz_convert("Europe/Istanbul")
+    return candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
+
+
 def format_candle_time(candle_time):
     """Mum zamanını okunabilir metne çevirir (günlükte sadece tarih)."""
     try:
         if IS_DAILY:
             return candle_time.strftime('%d.%m.%Y')
-        if candle_time.tzinfo is not None:
-            local_time = candle_time.tz_convert("Europe/Istanbul")
-        else:
-            local_time = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
-        return local_time.strftime('%Y-%m-%d %H:%M TSİ')
+        return to_istanbul(candle_time).strftime('%d.%m.%Y %H:%M TSİ')
     except Exception:
         return str(candle_time)
 
@@ -105,11 +135,7 @@ def candle_key(candle_time):
     try:
         if IS_DAILY:
             return candle_time.strftime('%Y%m%d')
-        if candle_time.tzinfo is not None:
-            loc_t = candle_time.tz_convert("Europe/Istanbul")
-        else:
-            loc_t = candle_time.tz_localize("UTC").tz_convert("Europe/Istanbul")
-        return loc_t.strftime('%Y%m%d_%H%M')
+        return to_istanbul(candle_time).strftime('%Y%m%d_%H%M')
     except Exception:
         return str(candle_time)
 
@@ -118,17 +144,27 @@ def get_closed_bars(df):
     """
     Sadece KAPANMIŞ mumları döndürür.
 
-    Günlükte tarama sabah yapıldığı için verideki son satır çoğu zaman zaten
-    kapanmış olan bir önceki işlem gününe aittir; bu yüzden körlemesine son satırı
-    atmak yerine tarihi bugüne eşit olan (halen açık) mumu ayıklarız.
-    BTC gibi 7/24 işlem gören varlıklarda bugünün mumu açık olduğu için elenir.
+    Günlükte: tarihi bugüne eşit olan (halen açık) mum elenir.
+    Saatlikte: son mumun bitiş zamanı (başlangıç + 1 saat) henüz gelmediyse o mum
+    halen oluşuyor demektir ve elenir. Seans kapalıyken son mum zaten kapanmış
+    olduğu için körlemesine atılmaz.
     """
-    if not IS_DAILY:
-        return df.iloc[:-1]
+    if df.empty:
+        return df
 
-    today_utc = pd.Timestamp.now(tz="UTC").date()
-    mask = np.array([ts.date() != today_utc for ts in df.index])
-    return df[mask]
+    if IS_DAILY:
+        today_utc = pd.Timestamp.now(tz="UTC").date()
+        mask = np.array([ts.date() != today_utc for ts in df.index])
+        return df[mask]
+
+    last_ts = df.index[-1]
+    if last_ts.tzinfo is None:
+        last_ts = last_ts.tz_localize("UTC")
+
+    now_utc = pd.Timestamp.now(tz="UTC")
+    if now_utc < last_ts.tz_convert("UTC") + BAR_DURATION:
+        return df.iloc[:-1]
+    return df
 
 
 # ==========================================
@@ -288,6 +324,11 @@ def generate_chart_image(df, symbol, signal_type):
     ax2.tick_params(colors='#d1d4dc')
     ax2.legend(loc='upper left', facecolor='#1e222d', edgecolor='#2a2e39', labelcolor='white')
 
+    # Saatlik veride eksen etiketine saat bilgisi de eklenir
+    if not IS_DAILY:
+        ax2.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m %H:%M'))
+        ax2.xaxis.set_major_locator(mdates.AutoDateLocator(maxticks=10))
+
     plt.xticks(rotation=30, ha='right', color='#d1d4dc')
     plt.tight_layout()
 
@@ -320,7 +361,7 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
         f"💵 <b>Kapanış Fiyatı:</b> ${last_price:,.2f}\n"
         f"🕯 <b>HA Kapanış:</b> ${ha_price:,.2f}\n"
         f"🛡 <b>Trailing Stop:</b> ${stop_price:,.2f}\n"
-        f"🕒 <b>Mum Tarihi:</b> {candle_str}\n\n"
+        f"🕒 <b>Mum Saati:</b> {candle_str}\n\n"
         f"⚙️ <b>Ayarlar:</b> Key={UT_KEY_VALUE} | ATR={UT_ATR_PERIOD}\n"
         f"ℹ️ <i>{direction_desc}</i>"
     )
@@ -347,7 +388,7 @@ def send_telegram_alert(symbol, signal_type, last_price, ha_price, stop_price, c
 # TARAMA MOTORU
 # ==========================================
 def scan_symbols():
-    print(f"\n--- UT Bot Taraması Başlatıldı ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---")
+    print(f"\n--- UT Bot {TIMEFRAME_SHORT} Taraması Başlatıldı ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---")
 
     for symbol in WATCHLIST:
         try:
@@ -425,8 +466,9 @@ if __name__ == "__main__":
     if args.once:
         print("Tek tarama tamamlandı.")
     else:
-        # Her gün saat 11:00'de tarama yap (sunucunun yerel saatine göre)
-        schedule.every().day.at("11:00").do(scan_symbols)
+        # Her saat başından 5 dakika sonra tara (mumun kapanması ve verinin
+        # yfinance'e yansıması için pay bırakılır)
+        schedule.every().hour.at(":05").do(scan_symbols)
         while True:
             schedule.run_pending()
             time.sleep(30)
