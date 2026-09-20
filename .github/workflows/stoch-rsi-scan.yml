@@ -1,10 +1,10 @@
 name: UT Bot Hourly Scan
 'on':
   schedule:
-    # Her saat başından 5 dk sonra: mumun kapanıp veriye yansıması için pay.
-    # Sadece ABD seansı (14:30-21:00 UTC) taransın istersen: "5 14-21 * * 1-5"
-    # (BTC 7/24 olduğu için tam saatlik tarama önerilir.)
-    - cron: "5 * * * *"
+    # GitHub ücretsiz schedule sık sık saat atlıyor; tek saatlik cron 2-5 saatte
+    # bir çalışıyordu. 15 dk'da bir tetikleyerek mum kapanışına yakın koşu yakalanır.
+    # Dakikalar saat başı yoğunluğundan biraz kaydırıldı.
+    - cron: "8,23,38,53 * * * *"
   workflow_dispatch:
 
 # Uzun süren bir tarama bir sonraki saatin çalışmasıyla çakışmasın
