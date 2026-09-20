@@ -27,16 +27,13 @@ WATCHLIST = [
     "NVDA",      # NVIDIA
     "NBIS",      # Nebius Group
     "HIMS",      # Hims & Hers
-    "BTC-USD",   # Bitcoin
     "TEM",       # Tempus AI
-    "XAIR",      # Beyond Air
-    "CIFR",      # Cipher Mining
     "MRVL"       # Marvell Technology
 ]
 
 INTERVAL = "1h"       # Saatlik periyot
 PERIOD = "730d"       # yfinance saatlik veride en fazla 730 güne izin verir
-PREPOST = False       # TradingView varsayılanı gibi sadece normal seans mumları
+PREPOST = True        # Pre-market ve after-hours 1H mumları da dahil
 TIMEFRAME_LABEL = "1 Saatlik"   # Telegram mesajındaki periyot etiketi
 TIMEFRAME_SHORT = "1H"          # Grafik başlığındaki etiket
 IS_DAILY = INTERVAL.endswith("d")
@@ -476,6 +473,33 @@ def scan_symbols():
 # ==========================================
 # GİRİŞ NOKTASI
 # ==========================================
+def run(once=False):
+    """Tarayıcıyı başlatır. daily_ut_bot.py ayarları değiştirdikten sonra da bunu çağırır."""
+    print(f"🤖 UT Bot Alerts ({TIMEFRAME_SHORT} Heikin Ashi) Tarayıcısı Başlatıldı.")
+    print(f"Takip: {', '.join(WATCHLIST)} | INTERVAL={INTERVAL} | PREPOST={PREPOST}")
+
+    load_alert_state()
+    scan_symbols()
+
+    if once:
+        print("Tek tarama tamamlandı.")
+        return
+
+    if IS_DAILY:
+        # TSİ 05:00 = after-hours bitişinden sonra. Cuma mumu için Cumartesi de çalışır.
+        for day_name in ("tuesday", "wednesday", "thursday", "friday", "saturday"):
+            getattr(schedule.every(), day_name).at("05:00").do(scan_symbols)
+        print("Yerel zamanlayıcı: Salı–Cumartesi 05:00")
+    else:
+        # GitHub Actions saat atlayabildiği için yerel çalışmada da çeyrek saatte bir tara.
+        for minute in (":08", ":23", ":38", ":53"):
+            schedule.every().hour.at(minute).do(scan_symbols)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(30)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=f"{TIMEFRAME_SHORT} UT Bot Telegram Tarayıcısı")
     parser.add_argument(
@@ -484,19 +508,4 @@ if __name__ == "__main__":
         help="Tek tarama yap ve çık (GitHub Actions için)"
     )
     args = parser.parse_args()
-
-    print(f"🤖 UT Bot Alerts ({TIMEFRAME_SHORT} Heikin Ashi) Tarayıcısı Başlatıldı.")
-    print(f"Takip Edilen Varlıklar: {', '.join(WATCHLIST)}")
-
-    load_alert_state()
-    scan_symbols()
-
-    if args.once:
-        print("Tek tarama tamamlandı.")
-    else:
-        # GitHub Actions saat atlayabildiği için yerel çalışmada da çeyrek saatte bir tara.
-        for minute in (":08", ":23", ":38", ":53"):
-            schedule.every().hour.at(minute).do(scan_symbols)
-        while True:
-            schedule.run_pending()
-            time.sleep(30)
+    run(once=args.once)

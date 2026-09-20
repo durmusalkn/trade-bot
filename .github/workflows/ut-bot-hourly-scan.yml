@@ -1,9 +1,7 @@
 name: UT Bot Hourly Scan
 'on':
   schedule:
-    # GitHub ücretsiz schedule sık sık saat atlıyor; tek saatlik cron 2-5 saatte
-    # bir çalışıyordu. 15 dk'da bir tetikleyerek mum kapanışına yakın koşu yakalanır.
-    # Dakikalar saat başı yoğunluğundan biraz kaydırıldı.
+    # Pre/post dahil 1H tarama. GitHub saat atlayabildiği için 15 dk'da bir.
     - cron: "8,23,38,53 * * * *"
   workflow_dispatch:
 
@@ -45,7 +43,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ALERT_STATE_FILE: state/alerts.json
-        run: python stoch_rsi_bot.py --once
+        run: python hourly_ut_bot.py --once
 
       - name: Save alert state
         uses: actions/cache/save@v4
