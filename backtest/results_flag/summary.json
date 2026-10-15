@@ -1,0 +1,3547 @@
+{
+  "assumptions": {
+    "initial_capital": 500.0,
+    "commission_per_order": 1.5,
+    "note_commission": "Kademeli kâr almada her kısmi satış ayrı emir: bir işlem 2-4 emir ($3-$6)",
+    "slippage_per_side_pct": 0.1,
+    "rules": "Videodaki swing stratejisi: EMA 8/21/50 + bayrak formasyonunda düşen trend çizgisi kırılımı.\n\nVideodaki kuralların günlük mumlarla test edilebilir karşılığı:\n\n  Piyasa filtresi  QQQ kapanışı 21 ve 50 günlük EMA'nın üstünde (sadece alım).\n  Tarayıcı         Fiyat >= $3, ADR(20) >= %2, 10 günlük ort. hacim >= 500 bin adet,\n                   kapanış 21 ve 50 günlük EMA'nın üstünde. (Piyasa değeri >= $300M geçmiş veride\n                   yok; uygulanmadı.)\n  Formasyon        Son 20 günün zirvesi 3-20 gün önce; o zirveden %3-25 geri çekilme;\n                   son 3 günün ort. hacmi 50 günlük ortalamanın altında (hacim kuruyor).\n  Trend çizgisi    Zirveden başlayıp sonraki tepelerin hepsinin üstünde kalan en dik olmayan düşen çizgi.\n  Giriş            'gun_ici': ertesi gün fiyat çizgiyi geçerse çizgi seviyesinden alım (bekleyen stop emri).\n                   'kapanis': kapanış çizginin üstünde + hacim önceki günden yüksek + gün pozitif ->\n                   ertesi açılışta alım.\n  Stop             Girişten önceki günün en düşüğü (%0.5-%15 arası değilse işlem yok).\n  Kâr al           %25 formasyon zirvesinde (zirve girişin %2'sinden yakınsa giriş +%5), stop başa başa çekilir;\n                   %25 ilk hedefin %6.5 üstünde; kalan %50, kapanış EMA8 (ya da EMA21) altına inince\n                   ertesi açılışta. En fazla 40 işlem günü.",
+    "position": "1 pozisyon x %100 sermaye; gün içi girişte 20'ye kadar bekleyen emir, ilk dolan alınır",
+    "survivorship": "Evrenler bugün işlem gören hisselerden oluşur; batan şirketler yok (iyimser)",
+    "universe_sizes": {
+      "video_hisseleri": 8,
+      "secilmis": 143,
+      "nasdaq_tech": 480,
+      "nasdaq_tumu": 2939
+    },
+    "signal_cost_pct": 0.6
+  },
+  "universes": {
+    "video_hisseleri": {
+      "sinyal_gunu_2015+": {
+        "gun_ici": 1588,
+        "kapanis": 260
+      },
+      "periods": {
+        "2015": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 941.92,
+              "total_return_pct": 88.4,
+              "cagr_pct": 5.5,
+              "max_drawdown_pct": -54.0,
+              "avg_month_pct": 0.81,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 23.9,
+              "months_negative": 43.0,
+              "best_month_pct": 56.6,
+              "worst_month_pct": -17.0,
+              "trades": 180,
+              "win_rate_pct": 36.7,
+              "avg_win_usd": 48.24,
+              "avg_loss_usd": -24.05,
+              "avg_win_pct": 8.1,
+              "avg_loss_pct": -3.62,
+              "profit_factor": 1.16,
+              "avg_r": 0.06,
+              "avg_days_held": 5.8,
+              "trades_per_month": 1.3,
+              "total_commissions": 709.5,
+              "exit_reasons": {
+                "stop": 79,
+                "trend_bitti": 76,
+                "breakeven_stop": 24,
+                "time_stop": 1
+              },
+              "year_end_equity": {
+                "2015": 502.14,
+                "2016": 400.03,
+                "2017": 415.24,
+                "2018": 447.26,
+                "2019": 416.77,
+                "2020": 611.97,
+                "2021": 489.83,
+                "2022": 438.85,
+                "2023": 489.69,
+                "2024": 1321.97,
+                "2025": 1220.19,
+                "2026": 941.92
+              },
+              "en_iyi_5_islem_haric_carpan": 0.43,
+              "en_iyi_5_islem": [
+                [
+                  "TSLA",
+                  "2019-12-11",
+                  "64.36"
+                ],
+                [
+                  "APP",
+                  "2024-11-06",
+                  "62.1"
+                ],
+                [
+                  "MU",
+                  "2025-09-04",
+                  "19.23"
+                ],
+                [
+                  "MU",
+                  "2020-11-05",
+                  "18.85"
+                ],
+                [
+                  "MU",
+                  "2018-02-15",
+                  "16.94"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 336,
+              "ort_net_getiri_%": 0.1,
+              "medyan_net_getiri_%": -2.42,
+              "kazanan_%": 33.0,
+              "ilk_hedefe_ulasan_%": 36.0,
+              "ilk_gun_stop_%": 20.5,
+              "stopla_kapanan_%": 45.8,
+              "ort_stop_mesafesi_%": 4.24,
+              "ort_gun": 5.2,
+              "en_iyi_%5_haric_ort_%": -1.33,
+              "cikis_nedenleri": {
+                "stop": 154,
+                "trend_bitti": 133,
+                "breakeven_stop": 47,
+                "time_stop": 2
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.49,
+                "2016": -1.55,
+                "2017": 0.76,
+                "2018": 1.16,
+                "2019": 2.48,
+                "2020": 0.85,
+                "2021": -2.28,
+                "2022": -1.78,
+                "2023": -0.36,
+                "2024": 2.01,
+                "2025": -0.22,
+                "2026": -0.48
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 1920.55,
+              "total_return_pct": 284.1,
+              "cagr_pct": 12.1,
+              "max_drawdown_pct": -41.6,
+              "avg_month_pct": 1.36,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 22.5,
+              "months_negative": 43.0,
+              "best_month_pct": 61.6,
+              "worst_month_pct": -21.9,
+              "trades": 146,
+              "win_rate_pct": 38.4,
+              "avg_win_usd": 89.15,
+              "avg_loss_usd": -39.69,
+              "avg_win_pct": 9.63,
+              "avg_loss_pct": -3.72,
+              "profit_factor": 1.4,
+              "avg_r": 0.23,
+              "avg_days_held": 8.4,
+              "trades_per_month": 1.0,
+              "total_commissions": 586.5,
+              "exit_reasons": {
+                "stop": 77,
+                "breakeven_stop": 32,
+                "trend_bitti": 29,
+                "time_stop": 8
+              },
+              "year_end_equity": {
+                "2015": 504.51,
+                "2016": 461.24,
+                "2017": 545.05,
+                "2018": 580.81,
+                "2019": 484.92,
+                "2020": 1022.69,
+                "2021": 798.65,
+                "2022": 704.69,
+                "2023": 977.86,
+                "2024": 2238.34,
+                "2025": 2523.88,
+                "2026": 1920.55
+              },
+              "en_iyi_5_islem_haric_carpan": 0.55,
+              "en_iyi_5_islem": [
+                [
+                  "TSLA",
+                  "2019-12-11",
+                  "64.63"
+                ],
+                [
+                  "APP",
+                  "2024-11-06",
+                  "54.84"
+                ],
+                [
+                  "MU",
+                  "2025-09-04",
+                  "47.23"
+                ],
+                [
+                  "TSLA",
+                  "2020-05-29",
+                  "39.42"
+                ],
+                [
+                  "APP",
+                  "2023-06-27",
+                  "32.74"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 296,
+              "ort_net_getiri_%": 0.59,
+              "medyan_net_getiri_%": -2.65,
+              "kazanan_%": 33.8,
+              "ilk_hedefe_ulasan_%": 39.5,
+              "ilk_gun_stop_%": 20.9,
+              "stopla_kapanan_%": 54.7,
+              "ort_stop_mesafesi_%": 4.22,
+              "ort_gun": 7.4,
+              "en_iyi_%5_haric_ort_%": -1.44,
+              "cikis_nedenleri": {
+                "stop": 162,
+                "breakeven_stop": 62,
+                "trend_bitti": 58,
+                "time_stop": 14
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.4,
+                "2016": -0.39,
+                "2017": 1.3,
+                "2018": 0.79,
+                "2019": 1.7,
+                "2020": 2.32,
+                "2021": -1.15,
+                "2022": -2.25,
+                "2023": 0.19,
+                "2024": 3.13,
+                "2025": 0.45,
+                "2026": -1.39
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 163.8,
+              "total_return_pct": -67.2,
+              "cagr_pct": -9.0,
+              "max_drawdown_pct": -71.1,
+              "avg_month_pct": -0.59,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 11.3,
+              "months_negative": 39.4,
+              "best_month_pct": 30.0,
+              "worst_month_pct": -20.2,
+              "trades": 124,
+              "win_rate_pct": 31.5,
+              "avg_win_usd": 24.08,
+              "avg_loss_usd": -15.0,
+              "avg_win_pct": 6.42,
+              "avg_loss_pct": -3.98,
+              "profit_factor": 0.74,
+              "avg_r": -0.19,
+              "avg_days_held": 5.3,
+              "trades_per_month": 0.9,
+              "total_commissions": 480.0,
+              "exit_reasons": {
+                "trend_bitti": 53,
+                "stop": 50,
+                "breakeven_stop": 21
+              },
+              "year_end_equity": {
+                "2015": 525.95,
+                "2016": 466.59,
+                "2017": 438.86,
+                "2018": 506.57,
+                "2019": 449.67,
+                "2020": 503.82,
+                "2021": 400.73,
+                "2022": 389.63,
+                "2023": 362.06,
+                "2024": 370.73,
+                "2025": 240.2,
+                "2026": 163.8
+              },
+              "en_iyi_5_islem_haric_carpan": 0.15,
+              "en_iyi_5_islem": [
+                [
+                  "HIMS",
+                  "2020-12-15",
+                  "21.35"
+                ],
+                [
+                  "MU",
+                  "2018-02-15",
+                  "17.01"
+                ],
+                [
+                  "GRAB",
+                  "2021-11-09",
+                  "15.36"
+                ],
+                [
+                  "TSLA",
+                  "2020-08-13",
+                  "14.84"
+                ],
+                [
+                  "MU",
+                  "2025-09-05",
+                  "14.35"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 192,
+              "ort_net_getiri_%": 0.07,
+              "medyan_net_getiri_%": -1.96,
+              "kazanan_%": 36.5,
+              "ilk_hedefe_ulasan_%": 40.1,
+              "ilk_gun_stop_%": 15.6,
+              "stopla_kapanan_%": 39.1,
+              "ort_stop_mesafesi_%": 4.42,
+              "ort_gun": 5.2,
+              "en_iyi_%5_haric_ort_%": -0.97,
+              "cikis_nedenleri": {
+                "trend_bitti": 82,
+                "stop": 75,
+                "breakeven_stop": 35
+              },
+              "yillik_ort_net_%": {
+                "2015": 0.64,
+                "2016": -3.56,
+                "2017": -0.24,
+                "2018": 2.39,
+                "2019": -0.86,
+                "2020": 2.97,
+                "2021": -0.38,
+                "2022": -1.13,
+                "2023": -0.11,
+                "2024": 1.72,
+                "2025": -0.85,
+                "2026": -1.47
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 244.87,
+              "total_return_pct": -51.0,
+              "cagr_pct": -5.9,
+              "max_drawdown_pct": -58.2,
+              "avg_month_pct": -0.26,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 13.4,
+              "months_negative": 40.8,
+              "best_month_pct": 30.1,
+              "worst_month_pct": -20.6,
+              "trades": 108,
+              "win_rate_pct": 36.1,
+              "avg_win_usd": 23.98,
+              "avg_loss_usd": -17.25,
+              "avg_win_pct": 6.15,
+              "avg_loss_pct": -4.12,
+              "profit_factor": 0.79,
+              "avg_r": -0.21,
+              "avg_days_held": 7.3,
+              "trades_per_month": 0.8,
+              "total_commissions": 435.0,
+              "exit_reasons": {
+                "stop": 49,
+                "breakeven_stop": 29,
+                "trend_bitti": 28,
+                "time_stop": 2
+              },
+              "year_end_equity": {
+                "2015": 564.58,
+                "2016": 470.02,
+                "2017": 485.09,
+                "2018": 548.62,
+                "2019": 466.57,
+                "2020": 511.39,
+                "2021": 439.14,
+                "2022": 387.18,
+                "2023": 435.17,
+                "2024": 392.9,
+                "2025": 359.79,
+                "2026": 244.87
+              },
+              "en_iyi_5_islem_haric_carpan": 0.18,
+              "en_iyi_5_islem": [
+                [
+                  "MU",
+                  "2025-09-05",
+                  "41.31"
+                ],
+                [
+                  "HIMS",
+                  "2023-01-13",
+                  "20.6"
+                ],
+                [
+                  "HIMS",
+                  "2020-12-15",
+                  "18.66"
+                ],
+                [
+                  "MU",
+                  "2018-02-15",
+                  "15.53"
+                ],
+                [
+                  "TSLA",
+                  "2015-04-22",
+                  "14.43"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 182,
+              "ort_net_getiri_%": 0.16,
+              "medyan_net_getiri_%": -1.91,
+              "kazanan_%": 39.6,
+              "ilk_hedefe_ulasan_%": 43.4,
+              "ilk_gun_stop_%": 16.5,
+              "stopla_kapanan_%": 47.3,
+              "ort_stop_mesafesi_%": 4.44,
+              "ort_gun": 7.4,
+              "en_iyi_%5_haric_ort_%": -1.23,
+              "cikis_nedenleri": {
+                "stop": 86,
+                "trend_bitti": 46,
+                "breakeven_stop": 46,
+                "time_stop": 4
+              },
+              "yillik_ort_net_%": {
+                "2015": 0.37,
+                "2016": -2.89,
+                "2017": -0.12,
+                "2018": 1.99,
+                "2019": -1.87,
+                "2020": 2.55,
+                "2021": -0.19,
+                "2022": -1.94,
+                "2023": -0.23,
+                "2024": 2.99,
+                "2025": -0.11,
+                "2026": -2.41
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 45.32,
+            "son_deger_medyan": 288.12,
+            "son_deger_p90": 588.85,
+            "en_iyi": 1054.05,
+            "500_altinda_bitiren_%": 83.3,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 3528.53
+          }
+        },
+        "2020": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 576.63,
+              "total_return_pct": 15.3,
+              "cagr_pct": 2.1,
+              "max_drawdown_pct": -57.6,
+              "avg_month_pct": 0.68,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 24.4,
+              "months_negative": 41.5,
+              "best_month_pct": 56.1,
+              "worst_month_pct": -17.2,
+              "trades": 126,
+              "win_rate_pct": 38.9,
+              "avg_win_usd": 34.16,
+              "avg_loss_usd": -20.74,
+              "avg_win_pct": 7.12,
+              "avg_loss_pct": -3.88,
+              "profit_factor": 1.05,
+              "avg_r": -0.0,
+              "avg_days_held": 5.5,
+              "trades_per_month": 1.5,
+              "total_commissions": 501.0,
+              "exit_reasons": {
+                "trend_bitti": 55,
+                "stop": 53,
+                "breakeven_stop": 18
+              },
+              "year_end_equity": {
+                "2020": 491.23,
+                "2021": 376.43,
+                "2022": 331.61,
+                "2023": 347.1,
+                "2024": 879.87,
+                "2025": 770.94,
+                "2026": 576.63
+              },
+              "en_iyi_5_islem_haric_carpan": 0.38,
+              "en_iyi_5_islem": [
+                [
+                  "APP",
+                  "2024-11-06",
+                  "61.7"
+                ],
+                [
+                  "MU",
+                  "2025-09-04",
+                  "18.9"
+                ],
+                [
+                  "MU",
+                  "2020-11-05",
+                  "18.54"
+                ],
+                [
+                  "GRAB",
+                  "2021-11-08",
+                  "15.56"
+                ],
+                [
+                  "TSLA",
+                  "2024-06-24",
+                  "15.23"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 265,
+              "ort_net_getiri_%": -0.03,
+              "medyan_net_getiri_%": -2.45,
+              "kazanan_%": 34.7,
+              "ilk_hedefe_ulasan_%": 37.0,
+              "ilk_gun_stop_%": 20.4,
+              "stopla_kapanan_%": 44.5,
+              "ort_stop_mesafesi_%": 4.52,
+              "ort_gun": 5.0,
+              "en_iyi_%5_haric_ort_%": -1.46,
+              "cikis_nedenleri": {
+                "stop": 118,
+                "trend_bitti": 106,
+                "breakeven_stop": 40,
+                "time_stop": 1
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.97,
+                "2021": -2.28,
+                "2022": -1.78,
+                "2023": -0.36,
+                "2024": 2.01,
+                "2025": -0.22,
+                "2026": -0.48
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 1069.96,
+              "total_return_pct": 114.0,
+              "cagr_pct": 11.9,
+              "max_drawdown_pct": -44.4,
+              "avg_month_pct": 1.51,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 23.2,
+              "months_negative": 45.1,
+              "best_month_pct": 61.2,
+              "worst_month_pct": -22.1,
+              "trades": 101,
+              "win_rate_pct": 39.6,
+              "avg_win_usd": 61.01,
+              "avg_loss_usd": -30.66,
+              "avg_win_pct": 8.81,
+              "avg_loss_pct": -3.79,
+              "profit_factor": 1.3,
+              "avg_r": 0.16,
+              "avg_days_held": 7.8,
+              "trades_per_month": 1.2,
+              "total_commissions": 406.5,
+              "exit_reasons": {
+                "stop": 51,
+                "breakeven_stop": 26,
+                "trend_bitti": 20,
+                "time_stop": 4
+              },
+              "year_end_equity": {
+                "2020": 688.62,
+                "2021": 514.79,
+                "2022": 445.69,
+                "2023": 592.67,
+                "2024": 1309.38,
+                "2025": 1430.96,
+                "2026": 1069.96
+              },
+              "en_iyi_5_islem_haric_carpan": 0.41,
+              "en_iyi_5_islem": [
+                [
+                  "APP",
+                  "2024-11-06",
+                  "54.51"
+                ],
+                [
+                  "MU",
+                  "2025-09-04",
+                  "46.93"
+                ],
+                [
+                  "TSLA",
+                  "2020-05-29",
+                  "38.9"
+                ],
+                [
+                  "APP",
+                  "2023-06-27",
+                  "32.18"
+                ],
+                [
+                  "MU",
+                  "2020-11-05",
+                  "25.04"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 234,
+              "ort_net_getiri_%": 0.54,
+              "medyan_net_getiri_%": -2.78,
+              "kazanan_%": 35.0,
+              "ilk_hedefe_ulasan_%": 40.2,
+              "ilk_gun_stop_%": 20.5,
+              "stopla_kapanan_%": 53.4,
+              "ort_stop_mesafesi_%": 4.49,
+              "ort_gun": 7.1,
+              "en_iyi_%5_haric_ort_%": -1.52,
+              "cikis_nedenleri": {
+                "stop": 125,
+                "breakeven_stop": 53,
+                "trend_bitti": 46,
+                "time_stop": 10
+              },
+              "yillik_ort_net_%": {
+                "2020": 2.22,
+                "2021": -1.15,
+                "2022": -2.25,
+                "2023": 0.19,
+                "2024": 3.13,
+                "2025": 0.45,
+                "2026": -1.39
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 218.23,
+              "total_return_pct": -56.4,
+              "cagr_pct": -11.5,
+              "max_drawdown_pct": -65.6,
+              "avg_month_pct": -0.72,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 14.6,
+              "months_negative": 43.9,
+              "best_month_pct": 30.2,
+              "worst_month_pct": -19.9,
+              "trades": 90,
+              "win_rate_pct": 32.2,
+              "avg_win_usd": 27.29,
+              "avg_loss_usd": -17.59,
+              "avg_win_pct": 6.76,
+              "avg_loss_pct": -4.25,
+              "profit_factor": 0.74,
+              "avg_r": -0.15,
+              "avg_days_held": 5.0,
+              "trades_per_month": 1.1,
+              "total_commissions": 349.5,
+              "exit_reasons": {
+                "trend_bitti": 37,
+                "stop": 36,
+                "breakeven_stop": 17
+              },
+              "year_end_equity": {
+                "2020": 564.47,
+                "2021": 455.69,
+                "2022": 444.94,
+                "2023": 423.05,
+                "2024": 447.17,
+                "2025": 303.72,
+                "2026": 218.23
+              },
+              "en_iyi_5_islem_haric_carpan": 0.21,
+              "en_iyi_5_islem": [
+                [
+                  "HIMS",
+                  "2020-12-15",
+                  "21.5"
+                ],
+                [
+                  "GRAB",
+                  "2021-11-09",
+                  "15.56"
+                ],
+                [
+                  "TSLA",
+                  "2020-08-13",
+                  "15.01"
+                ],
+                [
+                  "MU",
+                  "2025-09-05",
+                  "14.85"
+                ],
+                [
+                  "HOOD",
+                  "2023-06-28",
+                  "14.57"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 150,
+              "ort_net_getiri_%": 0.15,
+              "medyan_net_getiri_%": -2.13,
+              "kazanan_%": 38.0,
+              "ilk_hedefe_ulasan_%": 41.3,
+              "ilk_gun_stop_%": 14.0,
+              "stopla_kapanan_%": 36.7,
+              "ort_stop_mesafesi_%": 4.83,
+              "ort_gun": 5.1,
+              "en_iyi_%5_haric_ort_%": -0.94,
+              "cikis_nedenleri": {
+                "trend_bitti": 65,
+                "stop": 55,
+                "breakeven_stop": 30
+              },
+              "yillik_ort_net_%": {
+                "2020": 2.97,
+                "2021": -0.38,
+                "2022": -1.13,
+                "2023": -0.11,
+                "2024": 1.72,
+                "2025": -0.85,
+                "2026": -1.47
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 284.5,
+              "total_return_pct": -43.1,
+              "cagr_pct": -8.0,
+              "max_drawdown_pct": -54.9,
+              "avg_month_pct": -0.3,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 17.1,
+              "months_negative": 42.7,
+              "best_month_pct": 30.2,
+              "worst_month_pct": -20.2,
+              "trades": 77,
+              "win_rate_pct": 36.4,
+              "avg_win_usd": 26.66,
+              "avg_loss_usd": -19.63,
+              "avg_win_pct": 6.69,
+              "avg_loss_pct": -4.51,
+              "profit_factor": 0.78,
+              "avg_r": -0.21,
+              "avg_days_held": 6.8,
+              "trades_per_month": 0.9,
+              "total_commissions": 310.5,
+              "exit_reasons": {
+                "stop": 34,
+                "trend_bitti": 23,
+                "breakeven_stop": 19,
+                "time_stop": 1
+              },
+              "year_end_equity": {
+                "2020": 550.41,
+                "2021": 476.74,
+                "2022": 421.49,
+                "2023": 478.46,
+                "2024": 439.05,
+                "2025": 409.79,
+                "2026": 284.5
+              },
+              "en_iyi_5_islem_haric_carpan": 0.22,
+              "en_iyi_5_islem": [
+                [
+                  "MU",
+                  "2025-09-05",
+                  "41.62"
+                ],
+                [
+                  "HIMS",
+                  "2023-01-13",
+                  "20.73"
+                ],
+                [
+                  "HIMS",
+                  "2020-12-15",
+                  "18.75"
+                ],
+                [
+                  "GRAB",
+                  "2021-11-09",
+                  "12.58"
+                ],
+                [
+                  "HOOD",
+                  "2023-06-28",
+                  "10.96"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 141,
+              "ort_net_getiri_%": 0.35,
+              "medyan_net_getiri_%": -1.89,
+              "kazanan_%": 41.1,
+              "ilk_hedefe_ulasan_%": 44.7,
+              "ilk_gun_stop_%": 14.9,
+              "stopla_kapanan_%": 44.7,
+              "ort_stop_mesafesi_%": 4.87,
+              "ort_gun": 7.5,
+              "en_iyi_%5_haric_ort_%": -1.18,
+              "cikis_nedenleri": {
+                "stop": 63,
+                "trend_bitti": 41,
+                "breakeven_stop": 34,
+                "time_stop": 3
+              },
+              "yillik_ort_net_%": {
+                "2020": 2.55,
+                "2021": -0.19,
+                "2022": -1.94,
+                "2023": -0.23,
+                "2024": 2.99,
+                "2025": -0.11,
+                "2026": -2.41
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 3.57,
+            "son_deger_medyan": 153.59,
+            "son_deger_p90": 314.59,
+            "en_iyi": 759.93,
+            "500_altinda_bitiren_%": 93.3,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 1679.58
+          }
+        }
+      }
+    },
+    "secilmis": {
+      "sinyal_gunu_2015+": {
+        "gun_ici": 33036,
+        "kapanis": 5095
+      },
+      "periods": {
+        "2015": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 1.61,
+              "total_return_pct": -99.7,
+              "cagr_pct": -38.6,
+              "max_drawdown_pct": -99.7,
+              "avg_month_pct": -2.89,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 2.8,
+              "months_negative": 20.4,
+              "best_month_pct": 14.1,
+              "worst_month_pct": -77.4,
+              "trades": 119,
+              "win_rate_pct": 10.9,
+              "avg_win_usd": 16.17,
+              "avg_loss_usd": -6.68,
+              "avg_win_pct": 6.68,
+              "avg_loss_pct": -5.27,
+              "profit_factor": 0.3,
+              "avg_r": -1.74,
+              "avg_days_held": 4.6,
+              "trades_per_month": 0.8,
+              "total_commissions": 435.0,
+              "exit_reasons": {
+                "stop": 61,
+                "trend_bitti": 42,
+                "breakeven_stop": 16
+              },
+              "year_end_equity": {
+                "2015": 363.63,
+                "2016": 168.81,
+                "2017": 55.14,
+                "2018": 1.61,
+                "2019": 1.61,
+                "2020": 1.61,
+                "2021": 1.61,
+                "2022": 1.61,
+                "2023": 1.61,
+                "2024": 1.61,
+                "2025": 1.61,
+                "2026": 1.61
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "SHOP",
+                  "2016-07-07",
+                  "16.56"
+                ],
+                [
+                  "MTSI",
+                  "2017-05-15",
+                  "13.87"
+                ],
+                [
+                  "NTES",
+                  "2016-05-11",
+                  "10.53"
+                ],
+                [
+                  "FTNT",
+                  "2015-07-14",
+                  "9.34"
+                ],
+                [
+                  "SHOP",
+                  "2017-03-07",
+                  "7.65"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 7311,
+              "ort_net_getiri_%": -0.48,
+              "medyan_net_getiri_%": -2.19,
+              "kazanan_%": 31.8,
+              "ilk_hedefe_ulasan_%": 33.6,
+              "ilk_gun_stop_%": 20.3,
+              "stopla_kapanan_%": 46.1,
+              "ort_stop_mesafesi_%": 3.68,
+              "ort_gun": 4.9,
+              "en_iyi_%5_haric_ort_%": -1.53,
+              "cikis_nedenleri": {
+                "stop": 3369,
+                "trend_bitti": 2941,
+                "breakeven_stop": 977,
+                "end_of_test": 16,
+                "time_stop": 8
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.4,
+                "2016": -0.98,
+                "2017": -0.55,
+                "2018": -0.92,
+                "2019": 0.07,
+                "2020": 0.47,
+                "2021": -0.62,
+                "2022": -2.04,
+                "2023": -0.83,
+                "2024": -0.48,
+                "2025": -0.46,
+                "2026": -0.16
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 4.02,
+              "total_return_pct": -99.2,
+              "cagr_pct": -33.6,
+              "max_drawdown_pct": -99.2,
+              "avg_month_pct": -2.43,
+              "median_month_pct": -0.54,
+              "months_ge_5pct": 16.9,
+              "months_negative": 53.5,
+              "best_month_pct": 24.7,
+              "worst_month_pct": -76.1,
+              "trades": 213,
+              "win_rate_pct": 23.9,
+              "avg_win_usd": 18.82,
+              "avg_loss_usd": -8.99,
+              "avg_win_pct": 6.94,
+              "avg_loss_pct": -4.67,
+              "profit_factor": 0.66,
+              "avg_r": -0.6,
+              "avg_days_held": 8.8,
+              "trades_per_month": 1.5,
+              "total_commissions": 846.0,
+              "exit_reasons": {
+                "stop": 107,
+                "trend_bitti": 52,
+                "breakeven_stop": 47,
+                "time_stop": 7
+              },
+              "year_end_equity": {
+                "2015": 370.06,
+                "2016": 305.39,
+                "2017": 262.34,
+                "2018": 283.64,
+                "2019": 336.3,
+                "2020": 373.98,
+                "2021": 271.54,
+                "2022": 261.86,
+                "2023": 233.09,
+                "2024": 140.11,
+                "2025": 42.21,
+                "2026": 4.02
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "MELI",
+                  "2020-05-04",
+                  "34.57"
+                ],
+                [
+                  "ROKU",
+                  "2019-01-24",
+                  "24.6"
+                ],
+                [
+                  "ENPH",
+                  "2020-12-11",
+                  "22.54"
+                ],
+                [
+                  "MU",
+                  "2017-08-23",
+                  "18.63"
+                ],
+                [
+                  "SHOP",
+                  "2016-07-07",
+                  "17.67"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 6349,
+              "ort_net_getiri_%": -0.32,
+              "medyan_net_getiri_%": -2.39,
+              "kazanan_%": 33.2,
+              "ilk_hedefe_ulasan_%": 38.0,
+              "ilk_gun_stop_%": 20.3,
+              "stopla_kapanan_%": 54.3,
+              "ort_stop_mesafesi_%": 3.71,
+              "ort_gun": 7.5,
+              "en_iyi_%5_haric_ort_%": -1.63,
+              "cikis_nedenleri": {
+                "stop": 3445,
+                "trend_bitti": 1357,
+                "breakeven_stop": 1354,
+                "time_stop": 174,
+                "end_of_test": 19
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.41,
+                "2016": -0.81,
+                "2017": -0.23,
+                "2018": -1.0,
+                "2019": 0.53,
+                "2020": 1.43,
+                "2021": -0.75,
+                "2022": -2.3,
+                "2023": -0.91,
+                "2024": -0.08,
+                "2025": -0.39,
+                "2026": -0.34
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 3.11,
+              "total_return_pct": -99.4,
+              "cagr_pct": -35.0,
+              "max_drawdown_pct": -99.4,
+              "avg_month_pct": -2.62,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 2.8,
+              "months_negative": 23.2,
+              "best_month_pct": 30.3,
+              "worst_month_pct": -82.4,
+              "trades": 110,
+              "win_rate_pct": 12.7,
+              "avg_win_usd": 18.18,
+              "avg_loss_usd": -7.83,
+              "avg_win_pct": 5.91,
+              "avg_loss_pct": -5.48,
+              "profit_factor": 0.34,
+              "avg_r": -1.94,
+              "avg_days_held": 4.7,
+              "trades_per_month": 0.8,
+              "total_commissions": 388.5,
+              "exit_reasons": {
+                "stop": 53,
+                "trend_bitti": 45,
+                "breakeven_stop": 12
+              },
+              "year_end_equity": {
+                "2015": 345.18,
+                "2016": 220.19,
+                "2017": 91.7,
+                "2018": 3.11,
+                "2019": 3.11,
+                "2020": 3.11,
+                "2021": 3.11,
+                "2022": 3.11,
+                "2023": 3.11,
+                "2024": 3.11,
+                "2025": 3.11,
+                "2026": 3.11
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "TTD",
+                  "2017-04-28",
+                  "25.72"
+                ],
+                [
+                  "NFLX",
+                  "2015-04-09",
+                  "15.65"
+                ],
+                [
+                  "PANW",
+                  "2015-05-15",
+                  "9.75"
+                ],
+                [
+                  "MTSI",
+                  "2016-03-02",
+                  "6.94"
+                ],
+                [
+                  "NFLX",
+                  "2015-07-31",
+                  "6.91"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 3517,
+              "ort_net_getiri_%": -0.2,
+              "medyan_net_getiri_%": -1.97,
+              "kazanan_%": 32.6,
+              "ilk_hedefe_ulasan_%": 33.8,
+              "ilk_gun_stop_%": 19.0,
+              "stopla_kapanan_%": 43.9,
+              "ort_stop_mesafesi_%": 3.78,
+              "ort_gun": 5.0,
+              "en_iyi_%5_haric_ort_%": -1.39,
+              "cikis_nedenleri": {
+                "stop": 1543,
+                "trend_bitti": 1497,
+                "breakeven_stop": 465,
+                "end_of_test": 10,
+                "time_stop": 2
+              },
+              "yillik_ort_net_%": {
+                "2015": -0.95,
+                "2016": -0.28,
+                "2017": -0.54,
+                "2018": -0.26,
+                "2019": -0.42,
+                "2020": 0.88,
+                "2021": -0.49,
+                "2022": -1.78,
+                "2023": -0.61,
+                "2024": 0.75,
+                "2025": -0.15,
+                "2026": -0.78
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 2.2,
+              "total_return_pct": -99.6,
+              "cagr_pct": -36.9,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -2.92,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 7.0,
+              "months_negative": 35.2,
+              "best_month_pct": 31.0,
+              "worst_month_pct": -70.6,
+              "trades": 130,
+              "win_rate_pct": 14.6,
+              "avg_win_usd": 17.52,
+              "avg_loss_usd": -7.48,
+              "avg_win_pct": 7.64,
+              "avg_loss_pct": -5.44,
+              "profit_factor": 0.4,
+              "avg_r": -1.77,
+              "avg_days_held": 7.7,
+              "trades_per_month": 0.9,
+              "total_commissions": 492.0,
+              "exit_reasons": {
+                "stop": 68,
+                "trend_bitti": 29,
+                "breakeven_stop": 29,
+                "time_stop": 4
+              },
+              "year_end_equity": {
+                "2015": 357.38,
+                "2016": 296.78,
+                "2017": 208.98,
+                "2018": 150.6,
+                "2019": 79.33,
+                "2020": 46.25,
+                "2021": 2.2,
+                "2022": 2.2,
+                "2023": 2.2,
+                "2024": 2.2,
+                "2025": 2.2,
+                "2026": 2.2
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "DOCU",
+                  "2020-04-13",
+                  "26.18"
+                ],
+                [
+                  "NFLX",
+                  "2015-04-09",
+                  "21.97"
+                ],
+                [
+                  "TTD",
+                  "2017-04-28",
+                  "21.77"
+                ],
+                [
+                  "WDC",
+                  "2016-11-10",
+                  "15.33"
+                ],
+                [
+                  "STX",
+                  "2017-12-11",
+                  "12.79"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 3300,
+              "ort_net_getiri_%": -0.07,
+              "medyan_net_getiri_%": -2.12,
+              "kazanan_%": 34.6,
+              "ilk_hedefe_ulasan_%": 38.5,
+              "ilk_gun_stop_%": 18.7,
+              "stopla_kapanan_%": 51.3,
+              "ort_stop_mesafesi_%": 3.8,
+              "ort_gun": 7.6,
+              "en_iyi_%5_haric_ort_%": -1.48,
+              "cikis_nedenleri": {
+                "stop": 1692,
+                "trend_bitti": 822,
+                "breakeven_stop": 694,
+                "time_stop": 82,
+                "end_of_test": 10
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.0,
+                "2016": 0.01,
+                "2017": -0.29,
+                "2018": -0.56,
+                "2019": -0.07,
+                "2020": 2.09,
+                "2021": -0.71,
+                "2022": -1.92,
+                "2023": -0.62,
+                "2024": 1.03,
+                "2025": -0.11,
+                "2026": -1.33
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 1.3,
+            "son_deger_medyan": 3.11,
+            "son_deger_p90": 4.13,
+            "en_iyi": 4.49,
+            "500_altinda_bitiren_%": 100.0,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 3528.53
+          }
+        },
+        "2020": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 1.53,
+              "total_return_pct": -99.7,
+              "cagr_pct": -57.4,
+              "max_drawdown_pct": -99.8,
+              "avg_month_pct": -4.91,
+              "median_month_pct": -0.59,
+              "months_ge_5pct": 15.9,
+              "months_negative": 54.9,
+              "best_month_pct": 21.4,
+              "worst_month_pct": -67.6,
+              "trades": 183,
+              "win_rate_pct": 28.4,
+              "avg_win_usd": 23.49,
+              "avg_loss_usd": -13.13,
+              "avg_win_pct": 5.08,
+              "avg_loss_pct": -5.65,
+              "profit_factor": 0.71,
+              "avg_r": -0.82,
+              "avg_days_held": 5.0,
+              "trades_per_month": 2.2,
+              "total_commissions": 703.5,
+              "exit_reasons": {
+                "stop": 83,
+                "trend_bitti": 74,
+                "breakeven_stop": 26
+              },
+              "year_end_equity": {
+                "2020": 645.44,
+                "2021": 542.99,
+                "2022": 505.77,
+                "2023": 350.51,
+                "2024": 212.45,
+                "2025": 38.8,
+                "2026": 1.53
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "MELI",
+                  "2020-05-04",
+                  "26.56"
+                ],
+                [
+                  "ENPH",
+                  "2020-12-11",
+                  "20.32"
+                ],
+                [
+                  "BILI",
+                  "2020-06-12",
+                  "15.26"
+                ],
+                [
+                  "TSLA",
+                  "2024-06-24",
+                  "14.57"
+                ],
+                [
+                  "PLUG",
+                  "2020-01-03",
+                  "13.73"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 5209,
+              "ort_net_getiri_%": -0.43,
+              "medyan_net_getiri_%": -2.29,
+              "kazanan_%": 33.1,
+              "ilk_hedefe_ulasan_%": 35.1,
+              "ilk_gun_stop_%": 20.4,
+              "stopla_kapanan_%": 45.2,
+              "ort_stop_mesafesi_%": 4.0,
+              "ort_gun": 4.8,
+              "en_iyi_%5_haric_ort_%": -1.56,
+              "cikis_nedenleri": {
+                "stop": 2357,
+                "trend_bitti": 2082,
+                "breakeven_stop": 749,
+                "end_of_test": 16,
+                "time_stop": 5
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.46,
+                "2021": -0.62,
+                "2022": -2.04,
+                "2023": -0.83,
+                "2024": -0.48,
+                "2025": -0.46,
+                "2026": -0.16
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 363.87,
+              "total_return_pct": -27.2,
+              "cagr_pct": -4.6,
+              "max_drawdown_pct": -61.5,
+              "avg_month_pct": -0.08,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 23.2,
+              "months_negative": 47.6,
+              "best_month_pct": 21.5,
+              "worst_month_pct": -26.7,
+              "trades": 125,
+              "win_rate_pct": 40.8,
+              "avg_win_usd": 26.31,
+              "avg_loss_usd": -19.97,
+              "avg_win_pct": 5.61,
+              "avg_loss_pct": -3.94,
+              "profit_factor": 0.91,
+              "avg_r": -0.03,
+              "avg_days_held": 8.8,
+              "trades_per_month": 1.5,
+              "total_commissions": 513.0,
+              "exit_reasons": {
+                "stop": 59,
+                "breakeven_stop": 32,
+                "trend_bitti": 30,
+                "time_stop": 3,
+                "end_of_test": 1
+              },
+              "year_end_equity": {
+                "2020": 671.97,
+                "2021": 555.91,
+                "2022": 571.88,
+                "2023": 595.95,
+                "2024": 503.94,
+                "2025": 477.86,
+                "2026": 363.87
+              },
+              "en_iyi_5_islem_haric_carpan": 0.28,
+              "en_iyi_5_islem": [
+                [
+                  "MELI",
+                  "2020-05-04",
+                  "35.46"
+                ],
+                [
+                  "ENPH",
+                  "2020-12-11",
+                  "23.45"
+                ],
+                [
+                  "AVGO",
+                  "2025-05-01",
+                  "21.57"
+                ],
+                [
+                  "PLUG",
+                  "2020-01-03",
+                  "13.58"
+                ],
+                [
+                  "OKTA",
+                  "2026-09-09",
+                  "13.57"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 4514,
+              "ort_net_getiri_%": -0.27,
+              "medyan_net_getiri_%": -2.5,
+              "kazanan_%": 34.0,
+              "ilk_hedefe_ulasan_%": 39.2,
+              "ilk_gun_stop_%": 20.3,
+              "stopla_kapanan_%": 53.3,
+              "ort_stop_mesafesi_%": 4.05,
+              "ort_gun": 7.2,
+              "en_iyi_%5_haric_ort_%": -1.72,
+              "cikis_nedenleri": {
+                "stop": 2407,
+                "breakeven_stop": 1034,
+                "trend_bitti": 937,
+                "time_stop": 117,
+                "end_of_test": 19
+              },
+              "yillik_ort_net_%": {
+                "2020": 1.4,
+                "2021": -0.75,
+                "2022": -2.3,
+                "2023": -0.91,
+                "2024": -0.08,
+                "2025": -0.39,
+                "2026": -0.34
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 2.81,
+              "total_return_pct": -99.4,
+              "cagr_pct": -53.4,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -4.91,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 12.2,
+              "months_negative": 46.3,
+              "best_month_pct": 17.0,
+              "worst_month_pct": -62.5,
+              "trades": 129,
+              "win_rate_pct": 20.2,
+              "avg_win_usd": 30.38,
+              "avg_loss_usd": -12.5,
+              "avg_win_pct": 7.16,
+              "avg_loss_pct": -6.12,
+              "profit_factor": 0.61,
+              "avg_r": -1.01,
+              "avg_days_held": 5.1,
+              "trades_per_month": 1.6,
+              "total_commissions": 481.5,
+              "exit_reasons": {
+                "stop": 60,
+                "trend_bitti": 52,
+                "breakeven_stop": 17
+              },
+              "year_end_equity": {
+                "2020": 524.13,
+                "2021": 444.19,
+                "2022": 334.7,
+                "2023": 128.71,
+                "2024": 2.81,
+                "2025": 2.81,
+                "2026": 2.81
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "DOCU",
+                  "2020-04-13",
+                  "23.08"
+                ],
+                [
+                  "MDB",
+                  "2021-08-23",
+                  "22.33"
+                ],
+                [
+                  "BILI",
+                  "2020-06-15",
+                  "19.31"
+                ],
+                [
+                  "ENPH",
+                  "2020-12-14",
+                  "12.23"
+                ],
+                [
+                  "WDAY",
+                  "2023-11-08",
+                  "10.91"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 2507,
+              "ort_net_getiri_%": -0.1,
+              "medyan_net_getiri_%": -2.05,
+              "kazanan_%": 33.2,
+              "ilk_hedefe_ulasan_%": 34.8,
+              "ilk_gun_stop_%": 19.6,
+              "stopla_kapanan_%": 43.4,
+              "ort_stop_mesafesi_%": 4.09,
+              "ort_gun": 4.8,
+              "en_iyi_%5_haric_ort_%": -1.42,
+              "cikis_nedenleri": {
+                "stop": 1087,
+                "trend_bitti": 1047,
+                "breakeven_stop": 362,
+                "end_of_test": 10,
+                "time_stop": 1
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.88,
+                "2021": -0.49,
+                "2022": -1.78,
+                "2023": -0.61,
+                "2024": 0.75,
+                "2025": -0.15,
+                "2026": -0.78
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 319.31,
+              "total_return_pct": -36.1,
+              "cagr_pct": -6.4,
+              "max_drawdown_pct": -70.0,
+              "avg_month_pct": -0.09,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 25.6,
+              "months_negative": 43.9,
+              "best_month_pct": 29.4,
+              "worst_month_pct": -23.8,
+              "trades": 136,
+              "win_rate_pct": 36.0,
+              "avg_win_usd": 28.6,
+              "avg_loss_usd": -18.19,
+              "avg_win_pct": 6.27,
+              "avg_loss_pct": -3.71,
+              "profit_factor": 0.89,
+              "avg_r": -0.12,
+              "avg_days_held": 7.7,
+              "trades_per_month": 1.7,
+              "total_commissions": 535.5,
+              "exit_reasons": {
+                "stop": 70,
+                "breakeven_stop": 32,
+                "trend_bitti": 29,
+                "time_stop": 4,
+                "end_of_test": 1
+              },
+              "year_end_equity": {
+                "2020": 714.95,
+                "2021": 567.17,
+                "2022": 571.09,
+                "2023": 471.28,
+                "2024": 328.43,
+                "2025": 311.44,
+                "2026": 319.31
+              },
+              "en_iyi_5_islem_haric_carpan": 0.23,
+              "en_iyi_5_islem": [
+                [
+                  "DOCU",
+                  "2020-04-13",
+                  "33.59"
+                ],
+                [
+                  "SEDG",
+                  "2026-05-14",
+                  "22.9"
+                ],
+                [
+                  "ROKU",
+                  "2024-08-16",
+                  "20.76"
+                ],
+                [
+                  "MDB",
+                  "2021-08-23",
+                  "19.51"
+                ],
+                [
+                  "CRWD",
+                  "2020-08-21",
+                  "17.9"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 2346,
+              "ort_net_getiri_%": 0.05,
+              "medyan_net_getiri_%": -2.17,
+              "kazanan_%": 35.2,
+              "ilk_hedefe_ulasan_%": 39.3,
+              "ilk_gun_stop_%": 19.5,
+              "stopla_kapanan_%": 50.9,
+              "ort_stop_mesafesi_%": 4.12,
+              "ort_gun": 7.3,
+              "en_iyi_%5_haric_ort_%": -1.55,
+              "cikis_nedenleri": {
+                "stop": 1194,
+                "trend_bitti": 561,
+                "breakeven_stop": 522,
+                "time_stop": 59,
+                "end_of_test": 10
+              },
+              "yillik_ort_net_%": {
+                "2020": 2.12,
+                "2021": -0.71,
+                "2022": -1.92,
+                "2023": -0.62,
+                "2024": 1.03,
+                "2025": -0.11,
+                "2026": -1.33
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 1.83,
+            "son_deger_medyan": 3.18,
+            "son_deger_p90": 4.3,
+            "en_iyi": 207.26,
+            "500_altinda_bitiren_%": 100.0,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 1679.58
+          }
+        }
+      }
+    },
+    "nasdaq_tech": {
+      "sinyal_gunu_2015+": {
+        "gun_ici": 43200,
+        "kapanis": 6513
+      },
+      "periods": {
+        "2015": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 2.94,
+              "total_return_pct": -99.4,
+              "cagr_pct": -35.3,
+              "max_drawdown_pct": -99.4,
+              "avg_month_pct": -2.74,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 0.7,
+              "months_negative": 16.2,
+              "best_month_pct": 5.4,
+              "worst_month_pct": -76.5,
+              "trades": 82,
+              "win_rate_pct": 9.8,
+              "avg_win_usd": 7.09,
+              "avg_loss_usd": -7.48,
+              "avg_win_pct": 3.44,
+              "avg_loss_pct": -6.64,
+              "profit_factor": 0.1,
+              "avg_r": -2.83,
+              "avg_days_held": 3.6,
+              "trades_per_month": 0.6,
+              "total_commissions": 274.5,
+              "exit_reasons": {
+                "stop": 52,
+                "trend_bitti": 24,
+                "breakeven_stop": 6
+              },
+              "year_end_equity": {
+                "2015": 195.99,
+                "2016": 40.5,
+                "2017": 2.94,
+                "2018": 2.94,
+                "2019": 2.94,
+                "2020": 2.94,
+                "2021": 2.94,
+                "2022": 2.94,
+                "2023": 2.94,
+                "2024": 2.94,
+                "2025": 2.94,
+                "2026": 2.94
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "AVGO",
+                  "2015-11-25",
+                  "8.02"
+                ],
+                [
+                  "FTNT",
+                  "2015-07-22",
+                  "6.43"
+                ],
+                [
+                  "FIVN",
+                  "2016-06-01",
+                  "5.39"
+                ],
+                [
+                  "AMBA",
+                  "2016-07-07",
+                  "3.77"
+                ],
+                [
+                  "OLED",
+                  "2015-05-15",
+                  "2.97"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 9521,
+              "ort_net_getiri_%": -0.77,
+              "medyan_net_getiri_%": -2.28,
+              "kazanan_%": 30.1,
+              "ilk_hedefe_ulasan_%": 31.5,
+              "ilk_gun_stop_%": 21.2,
+              "stopla_kapanan_%": 48.3,
+              "ort_stop_mesafesi_%": 3.6,
+              "ort_gun": 4.7,
+              "en_iyi_%5_haric_ort_%": -1.71,
+              "cikis_nedenleri": {
+                "stop": 4603,
+                "trend_bitti": 3655,
+                "breakeven_stop": 1222,
+                "end_of_test": 32,
+                "time_stop": 9
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.34,
+                "2016": -1.1,
+                "2017": -0.77,
+                "2018": -0.87,
+                "2019": -0.34,
+                "2020": 0.04,
+                "2021": -0.83,
+                "2022": -2.13,
+                "2023": -0.93,
+                "2024": -1.1,
+                "2025": -0.94,
+                "2026": -0.29
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 2.04,
+              "total_return_pct": -99.6,
+              "cagr_pct": -37.3,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -3.0,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 0.7,
+              "months_negative": 21.1,
+              "best_month_pct": 12.6,
+              "worst_month_pct": -79.2,
+              "trades": 81,
+              "win_rate_pct": 7.4,
+              "avg_win_usd": 8.39,
+              "avg_loss_usd": -7.31,
+              "avg_win_pct": 5.02,
+              "avg_loss_pct": -6.82,
+              "profit_factor": 0.09,
+              "avg_r": -2.97,
+              "avg_days_held": 6.5,
+              "trades_per_month": 0.6,
+              "total_commissions": 285.0,
+              "exit_reasons": {
+                "stop": 54,
+                "trend_bitti": 15,
+                "breakeven_stop": 10,
+                "time_stop": 2
+              },
+              "year_end_equity": {
+                "2015": 182.97,
+                "2016": 96.89,
+                "2017": 9.43,
+                "2018": 2.04,
+                "2019": 2.04,
+                "2020": 2.04,
+                "2021": 2.04,
+                "2022": 2.04,
+                "2023": 2.04,
+                "2024": 2.04,
+                "2025": 2.04,
+                "2026": 2.04
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "AMBA",
+                  "2016-07-07",
+                  "19.6"
+                ],
+                [
+                  "FIVN",
+                  "2016-06-01",
+                  "4.38"
+                ],
+                [
+                  "FTNT",
+                  "2015-07-22",
+                  "3.32"
+                ],
+                [
+                  "OLED",
+                  "2015-05-15",
+                  "2.41"
+                ],
+                [
+                  "ACIW",
+                  "2015-02-04",
+                  "0.19"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 8396,
+              "ort_net_getiri_%": -0.68,
+              "medyan_net_getiri_%": -2.48,
+              "kazanan_%": 31.0,
+              "ilk_hedefe_ulasan_%": 35.6,
+              "ilk_gun_stop_%": 21.0,
+              "stopla_kapanan_%": 56.8,
+              "ort_stop_mesafesi_%": 3.63,
+              "ort_gun": 7.0,
+              "en_iyi_%5_haric_ort_%": -1.86,
+              "cikis_nedenleri": {
+                "stop": 4766,
+                "trend_bitti": 1710,
+                "breakeven_stop": 1692,
+                "time_stop": 193,
+                "end_of_test": 35
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.3,
+                "2016": -1.09,
+                "2017": -0.57,
+                "2018": -0.98,
+                "2019": 0.01,
+                "2020": 0.77,
+                "2021": -1.15,
+                "2022": -2.38,
+                "2023": -1.05,
+                "2024": -1.14,
+                "2025": -0.78,
+                "2026": -0.16
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 3.87,
+              "total_return_pct": -99.2,
+              "cagr_pct": -33.8,
+              "max_drawdown_pct": -99.3,
+              "avg_month_pct": -2.74,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 2.8,
+              "months_negative": 22.5,
+              "best_month_pct": 8.6,
+              "worst_month_pct": -71.0,
+              "trades": 103,
+              "win_rate_pct": 12.6,
+              "avg_win_usd": 9.61,
+              "avg_loss_usd": -6.9,
+              "avg_win_pct": 3.6,
+              "avg_loss_pct": -5.44,
+              "profit_factor": 0.2,
+              "avg_r": -1.89,
+              "avg_days_held": 4.2,
+              "trades_per_month": 0.7,
+              "total_commissions": 361.5,
+              "exit_reasons": {
+                "stop": 49,
+                "trend_bitti": 44,
+                "breakeven_stop": 10
+              },
+              "year_end_equity": {
+                "2015": 247.79,
+                "2016": 165.63,
+                "2017": 19.42,
+                "2018": 3.87,
+                "2019": 3.87,
+                "2020": 3.87,
+                "2021": 3.87,
+                "2022": 3.87,
+                "2023": 3.87,
+                "2024": 3.87,
+                "2025": 3.87,
+                "2026": 3.87
+              },
+              "en_iyi_5_islem_haric_carpan": 0.01,
+              "en_iyi_5_islem": [
+                [
+                  "CRUS",
+                  "2015-01-09",
+                  "14.96"
+                ],
+                [
+                  "NTNX",
+                  "2017-06-20",
+                  "7.92"
+                ],
+                [
+                  "STX",
+                  "2016-08-29",
+                  "5.32"
+                ],
+                [
+                  "VIAV",
+                  "2017-02-02",
+                  "4.19"
+                ],
+                [
+                  "SHOP",
+                  "2017-05-01",
+                  "3.45"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 4462,
+              "ort_net_getiri_%": -0.6,
+              "medyan_net_getiri_%": -2.08,
+              "kazanan_%": 30.8,
+              "ilk_hedefe_ulasan_%": 32.0,
+              "ilk_gun_stop_%": 19.9,
+              "stopla_kapanan_%": 46.0,
+              "ort_stop_mesafesi_%": 3.71,
+              "ort_gun": 4.8,
+              "en_iyi_%5_haric_ort_%": -1.62,
+              "cikis_nedenleri": {
+                "stop": 2052,
+                "trend_bitti": 1827,
+                "breakeven_stop": 562,
+                "end_of_test": 19,
+                "time_stop": 2
+              },
+              "yillik_ort_net_%": {
+                "2015": -0.77,
+                "2016": -0.53,
+                "2017": -0.65,
+                "2018": -0.42,
+                "2019": -0.44,
+                "2020": 0.29,
+                "2021": -0.95,
+                "2022": -2.12,
+                "2023": -0.62,
+                "2024": -0.59,
+                "2025": -0.45,
+                "2026": -1.04
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 2.17,
+              "total_return_pct": -99.6,
+              "cagr_pct": -37.0,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -2.98,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 4.9,
+              "months_negative": 27.5,
+              "best_month_pct": 12.5,
+              "worst_month_pct": -74.0,
+              "trades": 109,
+              "win_rate_pct": 12.8,
+              "avg_win_usd": 17.99,
+              "avg_loss_usd": -7.89,
+              "avg_win_pct": 6.68,
+              "avg_loss_pct": -5.97,
+              "profit_factor": 0.34,
+              "avg_r": -2.72,
+              "avg_days_held": 6.7,
+              "trades_per_month": 0.8,
+              "total_commissions": 394.5,
+              "exit_reasons": {
+                "stop": 64,
+                "trend_bitti": 22,
+                "breakeven_stop": 20,
+                "time_stop": 3
+              },
+              "year_end_equity": {
+                "2015": 300.22,
+                "2016": 262.16,
+                "2017": 167.89,
+                "2018": 56.38,
+                "2019": 2.17,
+                "2020": 2.17,
+                "2021": 2.17,
+                "2022": 2.17,
+                "2023": 2.17,
+                "2024": 2.17,
+                "2025": 2.17,
+                "2026": 2.17
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "CRUS",
+                  "2015-01-09",
+                  "21.14"
+                ],
+                [
+                  "WDC",
+                  "2016-11-10",
+                  "15.02"
+                ],
+                [
+                  "PPLI",
+                  "2017-08-30",
+                  "12.06"
+                ],
+                [
+                  "AAOI",
+                  "2018-05-17",
+                  "10.6"
+                ],
+                [
+                  "SHOP",
+                  "2017-05-01",
+                  "10.59"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 4230,
+              "ort_net_getiri_%": -0.56,
+              "medyan_net_getiri_%": -2.26,
+              "kazanan_%": 31.8,
+              "ilk_hedefe_ulasan_%": 36.0,
+              "ilk_gun_stop_%": 19.4,
+              "stopla_kapanan_%": 53.3,
+              "ort_stop_mesafesi_%": 3.74,
+              "ort_gun": 7.1,
+              "en_iyi_%5_haric_ort_%": -1.76,
+              "cikis_nedenleri": {
+                "stop": 2255,
+                "trend_bitti": 1010,
+                "breakeven_stop": 853,
+                "time_stop": 93,
+                "end_of_test": 19
+              },
+              "yillik_ort_net_%": {
+                "2015": -0.99,
+                "2016": -0.49,
+                "2017": -0.29,
+                "2018": -0.74,
+                "2019": -0.24,
+                "2020": 0.96,
+                "2021": -1.27,
+                "2022": -2.31,
+                "2023": -0.58,
+                "2024": -0.58,
+                "2025": -0.25,
+                "2026": -1.41
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 1.5,
+            "son_deger_medyan": 3.31,
+            "son_deger_p90": 4.3,
+            "en_iyi": 4.49,
+            "500_altinda_bitiren_%": 100.0,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 3528.53
+          }
+        },
+        "2020": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 3.39,
+              "total_return_pct": -99.3,
+              "cagr_pct": -52.1,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -4.72,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 13.4,
+              "months_negative": 40.2,
+              "best_month_pct": 29.3,
+              "worst_month_pct": -59.5,
+              "trades": 156,
+              "win_rate_pct": 25.0,
+              "avg_win_usd": 29.49,
+              "avg_loss_usd": -14.07,
+              "avg_win_pct": 5.53,
+              "avg_loss_pct": -5.57,
+              "profit_factor": 0.7,
+              "avg_r": -1.08,
+              "avg_days_held": 4.5,
+              "trades_per_month": 1.9,
+              "total_commissions": 570.0,
+              "exit_reasons": {
+                "trend_bitti": 72,
+                "stop": 70,
+                "breakeven_stop": 14
+              },
+              "year_end_equity": {
+                "2020": 882.05,
+                "2021": 385.55,
+                "2022": 284.45,
+                "2023": 199.42,
+                "2024": 3.39,
+                "2025": 3.39,
+                "2026": 3.39
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "ENPH",
+                  "2020-12-11",
+                  "20.55"
+                ],
+                [
+                  "DOCU",
+                  "2023-11-29",
+                  "17.38"
+                ],
+                [
+                  "CSIQ",
+                  "2020-06-25",
+                  "15.5"
+                ],
+                [
+                  "CSIQ",
+                  "2022-07-25",
+                  "14.5"
+                ],
+                [
+                  "BIDU",
+                  "2021-02-05",
+                  "11.68"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 6888,
+              "ort_net_getiri_%": -0.75,
+              "medyan_net_getiri_%": -2.39,
+              "kazanan_%": 31.1,
+              "ilk_hedefe_ulasan_%": 32.6,
+              "ilk_gun_stop_%": 21.1,
+              "stopla_kapanan_%": 47.7,
+              "ort_stop_mesafesi_%": 3.88,
+              "ort_gun": 4.5,
+              "en_iyi_%5_haric_ort_%": -1.77,
+              "cikis_nedenleri": {
+                "stop": 3283,
+                "trend_bitti": 2618,
+                "breakeven_stop": 949,
+                "end_of_test": 32,
+                "time_stop": 6
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.05,
+                "2021": -0.83,
+                "2022": -2.13,
+                "2023": -0.93,
+                "2024": -1.1,
+                "2025": -0.94,
+                "2026": -0.29
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 235.1,
+              "total_return_pct": -53.0,
+              "cagr_pct": -10.5,
+              "max_drawdown_pct": -79.3,
+              "avg_month_pct": -0.37,
+              "median_month_pct": -1.18,
+              "months_ge_5pct": 23.2,
+              "months_negative": 54.9,
+              "best_month_pct": 26.3,
+              "worst_month_pct": -27.8,
+              "trades": 131,
+              "win_rate_pct": 34.4,
+              "avg_win_usd": 39.2,
+              "avg_loss_usd": -23.59,
+              "avg_win_pct": 7.39,
+              "avg_loss_pct": -4.34,
+              "profit_factor": 0.87,
+              "avg_r": -0.14,
+              "avg_days_held": 8.4,
+              "trades_per_month": 1.6,
+              "total_commissions": 508.5,
+              "exit_reasons": {
+                "stop": 67,
+                "trend_bitti": 39,
+                "breakeven_stop": 19,
+                "time_stop": 5,
+                "end_of_test": 1
+              },
+              "year_end_equity": {
+                "2020": 853.38,
+                "2021": 666.62,
+                "2022": 483.18,
+                "2023": 515.17,
+                "2024": 547.41,
+                "2025": 530.41,
+                "2026": 235.1
+              },
+              "en_iyi_5_islem_haric_carpan": 0.15,
+              "en_iyi_5_islem": [
+                [
+                  "TTMI",
+                  "2026-04-09",
+                  "35.08"
+                ],
+                [
+                  "GLBE",
+                  "2024-11-06",
+                  "25.86"
+                ],
+                [
+                  "STX",
+                  "2025-08-18",
+                  "23.23"
+                ],
+                [
+                  "TRIP",
+                  "2024-01-19",
+                  "22.74"
+                ],
+                [
+                  "TTWO",
+                  "2020-06-15",
+                  "18.06"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 6069,
+              "ort_net_getiri_%": -0.68,
+              "medyan_net_getiri_%": -2.61,
+              "kazanan_%": 31.8,
+              "ilk_hedefe_ulasan_%": 36.5,
+              "ilk_gun_stop_%": 20.7,
+              "stopla_kapanan_%": 56.1,
+              "ort_stop_mesafesi_%": 3.93,
+              "ort_gun": 6.7,
+              "en_iyi_%5_haric_ort_%": -1.97,
+              "cikis_nedenleri": {
+                "stop": 3403,
+                "breakeven_stop": 1302,
+                "trend_bitti": 1199,
+                "time_stop": 130,
+                "end_of_test": 35
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.78,
+                "2021": -1.15,
+                "2022": -2.38,
+                "2023": -1.05,
+                "2024": -1.14,
+                "2025": -0.78,
+                "2026": -0.16
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 1.87,
+              "total_return_pct": -99.6,
+              "cagr_pct": -56.1,
+              "max_drawdown_pct": -99.7,
+              "avg_month_pct": -4.31,
+              "median_month_pct": -0.52,
+              "months_ge_5pct": 15.9,
+              "months_negative": 50.0,
+              "best_month_pct": 42.6,
+              "worst_month_pct": -78.4,
+              "trades": 167,
+              "win_rate_pct": 25.1,
+              "avg_win_usd": 28.38,
+              "avg_loss_usd": -13.52,
+              "avg_win_pct": 6.81,
+              "avg_loss_pct": -5.74,
+              "profit_factor": 0.71,
+              "avg_r": -0.98,
+              "avg_days_held": 5.2,
+              "trades_per_month": 2.1,
+              "total_commissions": 621.0,
+              "exit_reasons": {
+                "stop": 78,
+                "trend_bitti": 69,
+                "breakeven_stop": 19,
+                "time_stop": 1
+              },
+              "year_end_equity": {
+                "2020": 637.58,
+                "2021": 453.69,
+                "2022": 510.61,
+                "2023": 501.42,
+                "2024": 70.26,
+                "2025": 1.87,
+                "2026": 1.87
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "FSLR",
+                  "2022-07-20",
+                  "51.01"
+                ],
+                [
+                  "MGNI",
+                  "2020-11-19",
+                  "34.22"
+                ],
+                [
+                  "DOCU",
+                  "2020-04-13",
+                  "23.28"
+                ],
+                [
+                  "TTMI",
+                  "2025-05-28",
+                  "13.58"
+                ],
+                [
+                  "ENPH",
+                  "2020-12-14",
+                  "12.48"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 3238,
+              "ort_net_getiri_%": -0.62,
+              "medyan_net_getiri_%": -2.17,
+              "kazanan_%": 31.2,
+              "ilk_hedefe_ulasan_%": 32.7,
+              "ilk_gun_stop_%": 20.4,
+              "stopla_kapanan_%": 45.9,
+              "ort_stop_mesafesi_%": 3.98,
+              "ort_gun": 4.6,
+              "en_iyi_%5_haric_ort_%": -1.72,
+              "cikis_nedenleri": {
+                "stop": 1485,
+                "trend_bitti": 1289,
+                "breakeven_stop": 444,
+                "end_of_test": 19,
+                "time_stop": 1
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.29,
+                "2021": -0.95,
+                "2022": -2.12,
+                "2023": -0.62,
+                "2024": -0.59,
+                "2025": -0.45,
+                "2026": -1.04
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 174.18,
+              "total_return_pct": -65.2,
+              "cagr_pct": -14.4,
+              "max_drawdown_pct": -79.0,
+              "avg_month_pct": -0.68,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 23.2,
+              "months_negative": 47.6,
+              "best_month_pct": 27.2,
+              "worst_month_pct": -32.1,
+              "trades": 139,
+              "win_rate_pct": 27.3,
+              "avg_win_usd": 34.05,
+              "avg_loss_usd": -16.04,
+              "avg_win_pct": 7.88,
+              "avg_loss_pct": -3.62,
+              "profit_factor": 0.8,
+              "avg_r": -0.26,
+              "avg_days_held": 7.7,
+              "trades_per_month": 1.7,
+              "total_commissions": 528.0,
+              "exit_reasons": {
+                "stop": 69,
+                "trend_bitti": 34,
+                "breakeven_stop": 29,
+                "time_stop": 6,
+                "end_of_test": 1
+              },
+              "year_end_equity": {
+                "2020": 671.82,
+                "2021": 493.41,
+                "2022": 675.49,
+                "2023": 571.86,
+                "2024": 254.32,
+                "2025": 325.77,
+                "2026": 174.18
+              },
+              "en_iyi_5_islem_haric_carpan": 0.09,
+              "en_iyi_5_islem": [
+                [
+                  "FSLR",
+                  "2022-07-20",
+                  "51.29"
+                ],
+                [
+                  "DOCU",
+                  "2020-04-13",
+                  "33.59"
+                ],
+                [
+                  "VECO",
+                  "2026-05-01",
+                  "31.02"
+                ],
+                [
+                  "WDC",
+                  "2025-07-14",
+                  "22.2"
+                ],
+                [
+                  "HUCK",
+                  "2020-08-13",
+                  "17.42"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 3065,
+              "ort_net_getiri_%": -0.57,
+              "medyan_net_getiri_%": -2.33,
+              "kazanan_%": 32.3,
+              "ilk_hedefe_ulasan_%": 36.7,
+              "ilk_gun_stop_%": 19.9,
+              "stopla_kapanan_%": 52.9,
+              "ort_stop_mesafesi_%": 4.02,
+              "ort_gun": 6.8,
+              "en_iyi_%5_haric_ort_%": -1.9,
+              "cikis_nedenleri": {
+                "stop": 1620,
+                "trend_bitti": 704,
+                "breakeven_stop": 658,
+                "time_stop": 64,
+                "end_of_test": 19
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.99,
+                "2021": -1.27,
+                "2022": -2.31,
+                "2023": -0.58,
+                "2024": -0.58,
+                "2025": -0.25,
+                "2026": -1.41
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 0.35,
+            "son_deger_medyan": 2.25,
+            "son_deger_p90": 3.61,
+            "en_iyi": 4.47,
+            "500_altinda_bitiren_%": 100.0,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 1679.58
+          }
+        }
+      }
+    },
+    "nasdaq_tumu": {
+      "sinyal_gunu_2015+": {
+        "gun_ici": 161092,
+        "kapanis": 23490
+      },
+      "periods": {
+        "2015": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 2.02,
+              "total_return_pct": -99.6,
+              "cagr_pct": -37.4,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -2.87,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 2.8,
+              "months_negative": 21.8,
+              "best_month_pct": 15.3,
+              "worst_month_pct": -83.3,
+              "trades": 109,
+              "win_rate_pct": 11.9,
+              "avg_win_usd": 13.46,
+              "avg_loss_usd": -7.01,
+              "avg_win_pct": 4.58,
+              "avg_loss_pct": -5.46,
+              "profit_factor": 0.26,
+              "avg_r": -2.15,
+              "avg_days_held": 5.2,
+              "trades_per_month": 0.8,
+              "total_commissions": 390.0,
+              "exit_reasons": {
+                "trend_bitti": 52,
+                "stop": 47,
+                "breakeven_stop": 10
+              },
+              "year_end_equity": {
+                "2015": 274.82,
+                "2016": 169.9,
+                "2017": 29.74,
+                "2018": 2.02,
+                "2019": 2.02,
+                "2020": 2.02,
+                "2021": 2.02,
+                "2022": 2.02,
+                "2023": 2.02,
+                "2024": 2.02,
+                "2025": 2.02,
+                "2026": 2.02
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "SSRM",
+                  "2016-06-24",
+                  "9.93"
+                ],
+                [
+                  "CERS",
+                  "2016-07-19",
+                  "8.12"
+                ],
+                [
+                  "JACK",
+                  "2016-05-25",
+                  "6.68"
+                ],
+                [
+                  "FWONK",
+                  "2015-02-04",
+                  "6.49"
+                ],
+                [
+                  "ADBE",
+                  "2016-03-16",
+                  "6.41"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 24823,
+              "ort_net_getiri_%": -0.84,
+              "medyan_net_getiri_%": -2.31,
+              "kazanan_%": 28.7,
+              "ilk_hedefe_ulasan_%": 29.9,
+              "ilk_gun_stop_%": 22.5,
+              "stopla_kapanan_%": 48.7,
+              "ort_stop_mesafesi_%": 3.66,
+              "ort_gun": 4.5,
+              "en_iyi_%5_haric_ort_%": -1.82,
+              "cikis_nedenleri": {
+                "stop": 12090,
+                "trend_bitti": 9665,
+                "breakeven_stop": 2989,
+                "end_of_test": 61,
+                "time_stop": 18
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.43,
+                "2016": -1.22,
+                "2017": -0.81,
+                "2018": -0.88,
+                "2019": -0.61,
+                "2020": 0.18,
+                "2021": -0.84,
+                "2022": -1.86,
+                "2023": -1.07,
+                "2024": -0.88,
+                "2025": -0.81,
+                "2026": -0.97
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 3.99,
+              "total_return_pct": -99.2,
+              "cagr_pct": -33.6,
+              "max_drawdown_pct": -99.2,
+              "avg_month_pct": -2.82,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 4.2,
+              "months_negative": 29.6,
+              "best_month_pct": 10.3,
+              "worst_month_pct": -56.9,
+              "trades": 105,
+              "win_rate_pct": 16.2,
+              "avg_win_usd": 11.21,
+              "avg_loss_usd": -7.8,
+              "avg_win_pct": 5.14,
+              "avg_loss_pct": -5.93,
+              "profit_factor": 0.28,
+              "avg_r": -1.78,
+              "avg_days_held": 8.0,
+              "trades_per_month": 0.7,
+              "total_commissions": 390.0,
+              "exit_reasons": {
+                "stop": 62,
+                "trend_bitti": 22,
+                "breakeven_stop": 18,
+                "time_stop": 3
+              },
+              "year_end_equity": {
+                "2015": 314.66,
+                "2016": 245.69,
+                "2017": 131.53,
+                "2018": 89.96,
+                "2019": 3.99,
+                "2020": 3.99,
+                "2021": 3.99,
+                "2022": 3.99,
+                "2023": 3.99,
+                "2024": 3.99,
+                "2025": 3.99,
+                "2026": 3.99
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "PPC",
+                  "2019-03-07",
+                  "12.76"
+                ],
+                [
+                  "MU",
+                  "2018-02-15",
+                  "11.64"
+                ],
+                [
+                  "SFM",
+                  "2017-11-21",
+                  "11.22"
+                ],
+                [
+                  "JACK",
+                  "2016-05-25",
+                  "10.8"
+                ],
+                [
+                  "FWONK",
+                  "2015-02-04",
+                  "6.76"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 19889,
+              "ort_net_getiri_%": -0.74,
+              "medyan_net_getiri_%": -2.48,
+              "kazanan_%": 30.3,
+              "ilk_hedefe_ulasan_%": 34.5,
+              "ilk_gun_stop_%": 22.0,
+              "stopla_kapanan_%": 57.0,
+              "ort_stop_mesafesi_%": 3.67,
+              "ort_gun": 6.9,
+              "en_iyi_%5_haric_ort_%": -1.92,
+              "cikis_nedenleri": {
+                "stop": 11334,
+                "trend_bitti": 4197,
+                "breakeven_stop": 3835,
+                "time_stop": 457,
+                "end_of_test": 66
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.48,
+                "2016": -1.2,
+                "2017": -0.6,
+                "2018": -0.95,
+                "2019": -0.4,
+                "2020": 0.61,
+                "2021": -0.97,
+                "2022": -1.99,
+                "2023": -1.03,
+                "2024": -0.6,
+                "2025": -0.52,
+                "2026": -0.89
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 0.2,
+              "total_return_pct": -100.0,
+              "cagr_pct": -48.6,
+              "max_drawdown_pct": -100.0,
+              "avg_month_pct": -3.5,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 0.7,
+              "months_negative": 18.3,
+              "best_month_pct": 5.3,
+              "worst_month_pct": -93.5,
+              "trades": 82,
+              "win_rate_pct": 8.5,
+              "avg_win_usd": 9.17,
+              "avg_loss_usd": -7.52,
+              "avg_win_pct": 3.6,
+              "avg_loss_pct": -7.33,
+              "profit_factor": 0.11,
+              "avg_r": -3.01,
+              "avg_days_held": 4.4,
+              "trades_per_month": 0.6,
+              "total_commissions": 288.0,
+              "exit_reasons": {
+                "stop": 38,
+                "trend_bitti": 34,
+                "breakeven_stop": 10
+              },
+              "year_end_equity": {
+                "2015": 214.6,
+                "2016": 39.51,
+                "2017": 0.2,
+                "2018": 0.2,
+                "2019": 0.2,
+                "2020": 0.2,
+                "2021": 0.2,
+                "2022": 0.2,
+                "2023": 0.2,
+                "2024": 0.2,
+                "2025": 0.2,
+                "2026": 0.2
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "APA",
+                  "2016-03-03",
+                  "8.27"
+                ],
+                [
+                  "NFLX",
+                  "2015-07-31",
+                  "5.75"
+                ],
+                [
+                  "ACAD",
+                  "2015-05-11",
+                  "4.9"
+                ],
+                [
+                  "MEOH",
+                  "2015-02-25",
+                  "2.08"
+                ],
+                [
+                  "WEN",
+                  "2015-11-19",
+                  "1.66"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 15393,
+              "ort_net_getiri_%": -0.6,
+              "medyan_net_getiri_%": -2.1,
+              "kazanan_%": 30.9,
+              "ilk_hedefe_ulasan_%": 31.6,
+              "ilk_gun_stop_%": 20.0,
+              "stopla_kapanan_%": 45.0,
+              "ort_stop_mesafesi_%": 3.93,
+              "ort_gun": 4.7,
+              "en_iyi_%5_haric_ort_%": -1.66,
+              "cikis_nedenleri": {
+                "stop": 6926,
+                "trend_bitti": 6458,
+                "breakeven_stop": 1952,
+                "end_of_test": 51,
+                "time_stop": 6
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.06,
+                "2016": -0.72,
+                "2017": -0.74,
+                "2018": -0.62,
+                "2019": -0.57,
+                "2020": 0.18,
+                "2021": -0.44,
+                "2022": -1.83,
+                "2023": -0.86,
+                "2024": -0.64,
+                "2025": -0.3,
+                "2026": -0.93
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2015-01-02",
+              "end": "2026-10-14",
+              "years": 11.78,
+              "initial": 500.0,
+              "final": 1.94,
+              "total_return_pct": -99.6,
+              "cagr_pct": -37.6,
+              "max_drawdown_pct": -99.6,
+              "avg_month_pct": -2.77,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 1.4,
+              "months_negative": 19.7,
+              "best_month_pct": 61.3,
+              "worst_month_pct": -82.1,
+              "trades": 82,
+              "win_rate_pct": 7.3,
+              "avg_win_usd": 9.11,
+              "avg_loss_usd": -7.27,
+              "avg_win_pct": 11.42,
+              "avg_loss_pct": -6.87,
+              "profit_factor": 0.1,
+              "avg_r": -2.26,
+              "avg_days_held": 5.8,
+              "trades_per_month": 0.6,
+              "total_commissions": 294.0,
+              "exit_reasons": {
+                "stop": 54,
+                "breakeven_stop": 16,
+                "trend_bitti": 12
+              },
+              "year_end_equity": {
+                "2015": 207.15,
+                "2016": 70.44,
+                "2017": 1.94,
+                "2018": 1.94,
+                "2019": 1.94,
+                "2020": 1.94,
+                "2021": 1.94,
+                "2022": 1.94,
+                "2023": 1.94,
+                "2024": 1.94,
+                "2025": 1.94,
+                "2026": 1.94
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "AUPH",
+                  "2017-02-27",
+                  "55.13"
+                ],
+                [
+                  "APA",
+                  "2016-03-03",
+                  "7.43"
+                ],
+                [
+                  "ACAD",
+                  "2015-05-11",
+                  "3.35"
+                ],
+                [
+                  "NFLX",
+                  "2015-07-31",
+                  "1.83"
+                ],
+                [
+                  "CTAS",
+                  "2015-10-09",
+                  "0.7"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 14161,
+              "ort_net_getiri_%": -0.58,
+              "medyan_net_getiri_%": -2.26,
+              "kazanan_%": 31.8,
+              "ilk_hedefe_ulasan_%": 35.4,
+              "ilk_gun_stop_%": 19.8,
+              "stopla_kapanan_%": 52.2,
+              "ort_stop_mesafesi_%": 3.93,
+              "ort_gun": 7.0,
+              "en_iyi_%5_haric_ort_%": -1.8,
+              "cikis_nedenleri": {
+                "stop": 7392,
+                "trend_bitti": 3621,
+                "breakeven_stop": 2770,
+                "time_stop": 324,
+                "end_of_test": 54
+              },
+              "yillik_ort_net_%": {
+                "2015": -1.1,
+                "2016": -0.75,
+                "2017": -0.35,
+                "2018": -0.83,
+                "2019": -0.5,
+                "2020": 0.66,
+                "2021": -0.61,
+                "2022": -2.12,
+                "2023": -0.73,
+                "2024": -0.71,
+                "2025": -0.25,
+                "2026": -1.12
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 1.17,
+            "son_deger_medyan": 2.85,
+            "son_deger_p90": 4.12,
+            "en_iyi": 4.47,
+            "500_altinda_bitiren_%": 100.0,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 3528.53
+          }
+        },
+        "2020": {
+          "giriş=gun_ici | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 3.52,
+              "total_return_pct": -99.3,
+              "cagr_pct": -51.8,
+              "max_drawdown_pct": -99.4,
+              "avg_month_pct": -4.62,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 2.4,
+              "months_negative": 29.3,
+              "best_month_pct": 8.8,
+              "worst_month_pct": -74.9,
+              "trades": 96,
+              "win_rate_pct": 17.7,
+              "avg_win_usd": 12.9,
+              "avg_loss_usd": -9.06,
+              "avg_win_pct": 4.35,
+              "avg_loss_pct": -6.6,
+              "profit_factor": 0.31,
+              "avg_r": -2.08,
+              "avg_days_held": 4.2,
+              "trades_per_month": 1.2,
+              "total_commissions": 348.0,
+              "exit_reasons": {
+                "stop": 44,
+                "trend_bitti": 40,
+                "breakeven_stop": 12
+              },
+              "year_end_equity": {
+                "2020": 275.55,
+                "2021": 47.61,
+                "2022": 3.52,
+                "2023": 3.52,
+                "2024": 3.52,
+                "2025": 3.52,
+                "2026": 3.52
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "WDAY",
+                  "2020-08-18",
+                  "11.0"
+                ],
+                [
+                  "BCRX",
+                  "2021-05-27",
+                  "8.96"
+                ],
+                [
+                  "TNDM",
+                  "2020-01-29",
+                  "8.4"
+                ],
+                [
+                  "CGNX",
+                  "2020-11-23",
+                  "7.4"
+                ],
+                [
+                  "MXL",
+                  "2020-04-22",
+                  "6.55"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 16157,
+              "ort_net_getiri_%": -0.78,
+              "medyan_net_getiri_%": -2.43,
+              "kazanan_%": 30.2,
+              "ilk_hedefe_ulasan_%": 31.8,
+              "ilk_gun_stop_%": 22.4,
+              "stopla_kapanan_%": 47.8,
+              "ort_stop_mesafesi_%": 4.03,
+              "ort_gun": 4.5,
+              "en_iyi_%5_haric_ort_%": -1.86,
+              "cikis_nedenleri": {
+                "stop": 7720,
+                "trend_bitti": 6215,
+                "breakeven_stop": 2151,
+                "end_of_test": 61,
+                "time_stop": 10
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.2,
+                "2021": -0.84,
+                "2022": -1.86,
+                "2023": -1.07,
+                "2024": -0.88,
+                "2025": -0.81,
+                "2026": -0.97
+              }
+            }
+          },
+          "giriş=gun_ici | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 3.92,
+              "total_return_pct": -99.2,
+              "cagr_pct": -51.1,
+              "max_drawdown_pct": -99.2,
+              "avg_month_pct": -4.59,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 12.2,
+              "months_negative": 43.9,
+              "best_month_pct": 21.8,
+              "worst_month_pct": -71.4,
+              "trades": 118,
+              "win_rate_pct": 18.6,
+              "avg_win_usd": 15.77,
+              "avg_loss_usd": -8.78,
+              "avg_win_pct": 5.79,
+              "avg_loss_pct": -5.82,
+              "profit_factor": 0.41,
+              "avg_r": -1.29,
+              "avg_days_held": 6.7,
+              "trades_per_month": 1.4,
+              "total_commissions": 451.5,
+              "exit_reasons": {
+                "stop": 65,
+                "breakeven_stop": 26,
+                "trend_bitti": 25,
+                "time_stop": 2
+              },
+              "year_end_equity": {
+                "2020": 364.83,
+                "2021": 251.34,
+                "2022": 205.15,
+                "2023": 124.41,
+                "2024": 3.92,
+                "2025": 3.92,
+                "2026": 3.92
+              },
+              "en_iyi_5_islem_haric_carpan": 0.0,
+              "en_iyi_5_islem": [
+                [
+                  "APP",
+                  "2023-05-08",
+                  "21.09"
+                ],
+                [
+                  "TTWO",
+                  "2020-06-16",
+                  "14.32"
+                ],
+                [
+                  "NTNX",
+                  "2023-11-03",
+                  "10.6"
+                ],
+                [
+                  "WDAY",
+                  "2020-08-18",
+                  "8.79"
+                ],
+                [
+                  "TNDM",
+                  "2020-01-29",
+                  "8.28"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 12548,
+              "ort_net_getiri_%": -0.66,
+              "medyan_net_getiri_%": -2.6,
+              "kazanan_%": 32.0,
+              "ilk_hedefe_ulasan_%": 36.3,
+              "ilk_gun_stop_%": 21.7,
+              "stopla_kapanan_%": 55.5,
+              "ort_stop_mesafesi_%": 4.06,
+              "ort_gun": 6.8,
+              "en_iyi_%5_haric_ort_%": -1.98,
+              "cikis_nedenleri": {
+                "stop": 6962,
+                "breakeven_stop": 2632,
+                "trend_bitti": 2623,
+                "time_stop": 265,
+                "end_of_test": 66
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.63,
+                "2021": -0.97,
+                "2022": -1.99,
+                "2023": -1.03,
+                "2024": -0.6,
+                "2025": -0.52,
+                "2026": -0.89
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema8": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 497.97,
+              "total_return_pct": -0.4,
+              "cagr_pct": -0.1,
+              "max_drawdown_pct": -69.6,
+              "avg_month_pct": 0.53,
+              "median_month_pct": -0.04,
+              "months_ge_5pct": 25.6,
+              "months_negative": 50.0,
+              "best_month_pct": 42.1,
+              "worst_month_pct": -22.8,
+              "trades": 222,
+              "win_rate_pct": 34.2,
+              "avg_win_usd": 53.47,
+              "avg_loss_usd": -27.85,
+              "avg_win_pct": 6.64,
+              "avg_loss_pct": -3.13,
+              "profit_factor": 1.0,
+              "avg_r": -0.07,
+              "avg_days_held": 4.7,
+              "trades_per_month": 2.7,
+              "total_commissions": 843.0,
+              "exit_reasons": {
+                "stop": 103,
+                "trend_bitti": 84,
+                "breakeven_stop": 35
+              },
+              "year_end_equity": {
+                "2020": 692.8,
+                "2021": 978.74,
+                "2022": 1015.42,
+                "2023": 782.4,
+                "2024": 1336.94,
+                "2025": 782.38,
+                "2026": 497.97
+              },
+              "en_iyi_5_islem_haric_carpan": 0.25,
+              "en_iyi_5_islem": [
+                [
+                  "NAGE",
+                  "2021-02-17",
+                  "42.67"
+                ],
+                [
+                  "MRNA",
+                  "2021-07-09",
+                  "41.39"
+                ],
+                [
+                  "ZM",
+                  "2020-01-31",
+                  "29.78"
+                ],
+                [
+                  "HRTX",
+                  "2022-08-08",
+                  "24.25"
+                ],
+                [
+                  "FSLR",
+                  "2024-05-20",
+                  "21.99"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 11297,
+              "ort_net_getiri_%": -0.56,
+              "medyan_net_getiri_%": -2.17,
+              "kazanan_%": 31.6,
+              "ilk_hedefe_ulasan_%": 32.5,
+              "ilk_gun_stop_%": 20.6,
+              "stopla_kapanan_%": 45.0,
+              "ort_stop_mesafesi_%": 4.18,
+              "ort_gun": 4.6,
+              "en_iyi_%5_haric_ort_%": -1.72,
+              "cikis_nedenleri": {
+                "stop": 5085,
+                "trend_bitti": 4620,
+                "breakeven_stop": 1538,
+                "end_of_test": 51,
+                "time_stop": 3
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.19,
+                "2021": -0.44,
+                "2022": -1.83,
+                "2023": -0.86,
+                "2024": -0.64,
+                "2025": -0.3,
+                "2026": -0.93
+              }
+            }
+          },
+          "giriş=kapanis | çıkış=ema21": {
+            "500_dolar_1_pozisyon": {
+              "start": "2020-01-02",
+              "end": "2026-10-14",
+              "years": 6.78,
+              "initial": 500.0,
+              "final": 624.44,
+              "total_return_pct": 24.9,
+              "cagr_pct": 3.3,
+              "max_drawdown_pct": -52.8,
+              "avg_month_pct": 0.67,
+              "median_month_pct": 0.0,
+              "months_ge_5pct": 30.5,
+              "months_negative": 46.3,
+              "best_month_pct": 31.2,
+              "worst_month_pct": -24.5,
+              "trades": 139,
+              "win_rate_pct": 39.6,
+              "avg_win_usd": 35.09,
+              "avg_loss_usd": -21.49,
+              "avg_win_pct": 6.21,
+              "avg_loss_pct": -3.45,
+              "profit_factor": 1.07,
+              "avg_r": -0.06,
+              "avg_days_held": 8.1,
+              "trades_per_month": 1.7,
+              "total_commissions": 550.5,
+              "exit_reasons": {
+                "stop": 73,
+                "trend_bitti": 32,
+                "breakeven_stop": 29,
+                "time_stop": 4,
+                "end_of_test": 1
+              },
+              "year_end_equity": {
+                "2020": 569.05,
+                "2021": 518.83,
+                "2022": 481.01,
+                "2023": 595.54,
+                "2024": 679.38,
+                "2025": 670.8,
+                "2026": 624.44
+              },
+              "en_iyi_5_islem_haric_carpan": 0.42,
+              "en_iyi_5_islem": [
+                [
+                  "NAGE",
+                  "2021-02-17",
+                  "32.18"
+                ],
+                [
+                  "TMC",
+                  "2025-06-13",
+                  "27.98"
+                ],
+                [
+                  "MGNI",
+                  "2024-05-23",
+                  "22.47"
+                ],
+                [
+                  "MMSI",
+                  "2020-01-03",
+                  "21.71"
+                ],
+                [
+                  "FROG",
+                  "2024-02-02",
+                  "16.98"
+                ]
+              ]
+            },
+            "tum_sinyaller": {
+              "islem_sayisi": 10240,
+              "ort_net_getiri_%": -0.55,
+              "medyan_net_getiri_%": -2.33,
+              "kazanan_%": 32.4,
+              "ilk_hedefe_ulasan_%": 36.1,
+              "ilk_gun_stop_%": 20.5,
+              "stopla_kapanan_%": 52.0,
+              "ort_stop_mesafesi_%": 4.18,
+              "ort_gun": 6.7,
+              "en_iyi_%5_haric_ort_%": -1.89,
+              "cikis_nedenleri": {
+                "stop": 5327,
+                "trend_bitti": 2530,
+                "breakeven_stop": 2111,
+                "time_stop": 218,
+                "end_of_test": 54
+              },
+              "yillik_ort_net_%": {
+                "2020": 0.68,
+                "2021": -0.61,
+                "2022": -2.12,
+                "2023": -0.73,
+                "2024": -0.71,
+                "2025": -0.25,
+                "2026": -1.12
+              }
+            }
+          },
+          "sans_analizi_gun_ici_ema8": {
+            "tekrar": 30,
+            "son_deger_p10": 1.42,
+            "son_deger_medyan": 2.37,
+            "son_deger_p90": 3.88,
+            "en_iyi": 4.25,
+            "500_altinda_bitiren_%": 100.0,
+            "qqq_yu_gecen_%": 0.0,
+            "qqq_son_deger": 1679.58
+          }
+        }
+      }
+    }
+  },
+  "benchmarks": {
+    "2015": {
+      "start": "2015-01-02",
+      "end": "2026-10-14",
+      "years": 11.78,
+      "initial": 500.0,
+      "final": 3528.53,
+      "total_return_pct": 605.7,
+      "cagr_pct": 18.0,
+      "max_drawdown_pct": -35.6,
+      "avg_month_pct": 1.53,
+      "median_month_pct": 1.82,
+      "months_ge_5pct": 26.1,
+      "months_negative": 36.6,
+      "best_month_pct": 15.7,
+      "worst_month_pct": -13.6,
+      "trades": 0,
+      "year_end_equity": {
+        "2015": 541.7,
+        "2016": 573.75,
+        "2017": 754.29,
+        "2018": 747.02,
+        "2019": 1029.59,
+        "2020": 1519.33,
+        "2021": 1926.64,
+        "2022": 1289.49,
+        "2023": 1983.15,
+        "2024": 2475.7,
+        "2025": 2974.87,
+        "2026": 3528.53
+      }
+    },
+    "2020": {
+      "start": "2020-01-02",
+      "end": "2026-10-14",
+      "years": 6.78,
+      "initial": 500.0,
+      "final": 1679.58,
+      "total_return_pct": 235.9,
+      "cagr_pct": 19.6,
+      "max_drawdown_pct": -35.6,
+      "avg_month_pct": 1.67,
+      "median_month_pct": 1.49,
+      "months_ge_5pct": 31.7,
+      "months_negative": 37.8,
+      "best_month_pct": 15.7,
+      "worst_month_pct": -13.6,
+      "trades": 0,
+      "year_end_equity": {
+        "2020": 723.54,
+        "2021": 917.51,
+        "2022": 614.08,
+        "2023": 944.42,
+        "2024": 1178.98,
+        "2025": 1416.7,
+        "2026": 1679.58
+      }
+    }
+  }
+}
