@@ -48,15 +48,15 @@ jobs:
 
       - name: Run backtest
         run: |
-          # M3 sağlamlık testi: geniş Nasdaq evreni, toplam $3 komisyon (alım $1.5 + satım $1.5)
-          rm -rf backtest/results_m3_robustness
-          python -m backtest.run_m3_robustness --capital 500 --commission 1.5 --mc-runs 50
+          # ICT / SMC testi: geniş Nasdaq evreni, toplam $3 komisyon (alım $1.5 + satım $1.5)
+          rm -rf backtest/results_ict
+          python -m backtest.run_ict --capital 500 --commission 1.5 --mc-runs 30
 
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add -f backtest/results_m3_robustness
+          git add -f backtest/results_ict
           git diff --cached --quiet && exit 0
           git commit -m "Update swing backtest results"
           git pull --rebase origin "${GITHUB_REF_NAME}"

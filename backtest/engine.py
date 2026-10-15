@@ -72,6 +72,10 @@ class Backtester:
 
     # Hedefe ulaşınca tamamını sat (False: yarısını sat, stopu girişe çek)
     target_full_exit = False
+    # Limitli girişte gün içi sıra bilinmez: giriş günü kâr al sayılmasın
+    no_same_day_target = False
+    # Boş pozisyon başına verilebilecek bekleyen emir sayısı (limit emirlerde >1: ilk dolan alınır)
+    order_slots_factor = 1
 
     # ---------- emir yardımcıları ----------
     def _buy_price(self, price):
@@ -141,12 +145,12 @@ class Backtester:
             # 2) Açılış: yeni girişler
             for symbol, setup, si in pending_entries:
                 j = self.col[symbol]
-                open_px = self.O[i, j]
-                if np.isnan(open_px):
+                fill_px = self._entry_fill(setup, si, i, j)
+                if fill_px is None or np.isnan(fill_px):
                     continue
                 if len(self.positions) >= cfg.max_positions:
                     break
-                entry = self._buy_price(open_px)
+                entry = self._buy_price(fill_px)
                 stop = self._initial_stop(setup, si, j, entry)
                 if stop is None or not stop < entry:
                     continue
@@ -182,7 +186,8 @@ class Backtester:
                     fill = pos.stop if pos.entry_date == date else min(o, pos.stop)
                     self._close(pos, fill, date, "stop")
                     continue
-                if pos.target is not None and not pos.partial_done and h >= pos.target:
+                if pos.target is not None and not pos.partial_done and h >= pos.target \
+                        and not (self.no_same_day_target and pos.entry_date == date):
                     fill = pos.target if pos.entry_date == date else max(o, pos.target)
                     if self.target_full_exit:
                         self._close(pos, fill, date, "take_profit")
@@ -230,7 +235,7 @@ class Backtester:
                 pending_entries.append((symbol, setup, i))
                 chosen.add(symbol)
                 sector_count[sec] = sector_count.get(sec, 0) + 1
-                if len(chosen) >= free:
+                if len(chosen) >= free * self.order_slots_factor:
                     break
 
         # Dönem sonunda açık pozisyonları son kapanıştan kapat
@@ -244,6 +249,10 @@ class Backtester:
         eq = pd.Series(dict(equity_curve), name="equity")
         trades = pd.DataFrame(self.trades)
         return eq, trades, {"skipped_small": skipped_small}
+
+    def _entry_fill(self, setup, si, i, j):
+        """Giriş fiyatı (kayma öncesi) ya da dolmadıysa None. Varsayılan: açılıştan piyasa emri."""
+        return self.O[i, j]
 
     def _initial_stop(self, setup, si, j, entry):
         atr = self.atr[si, j]
