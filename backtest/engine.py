@@ -70,6 +70,9 @@ class Backtester:
         self.regime = regime.reindex(self.dates).fillna(0).to_numpy()
         self.sectors = sectors
 
+    # Hedefe ulaşınca tamamını sat (False: yarısını sat, stopu girişe çek)
+    target_full_exit = False
+
     # ---------- emir yardımcıları ----------
     def _buy_price(self, price):
         return price * (1 + self.cfg.slippage)
@@ -181,6 +184,9 @@ class Backtester:
                     continue
                 if pos.target is not None and not pos.partial_done and h >= pos.target:
                     fill = pos.target if pos.entry_date == date else max(o, pos.target)
+                    if self.target_full_exit:
+                        self._close(pos, fill, date, "take_profit")
+                        continue
                     self._sell(pos, pos.shares / 2, fill, date, "target_2R")
                     pos.partial_done = True
                     pos.stop = max(pos.stop, pos.entry_price)

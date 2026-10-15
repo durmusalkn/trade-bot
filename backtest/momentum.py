@@ -73,12 +73,15 @@ class MomentumBacktester(Backtester):
     'trend' = 10 günlük EMA altında kapanış (max 15 gün). İkisinde de en az 2 gün tutulur
     (stop hariç), kısmi satış yok (fazladan komisyon olmasın)."""
 
-    def __init__(self, px, ind, signals, stops, rank, regime, sectors, cfg, exit_mode="trend", stop_pct=None):
+    def __init__(self, px, ind, signals, stops, rank, regime, sectors, cfg, exit_mode="trend", stop_pct=None,
+                 take_profit=None):
         super().__init__(px, ind, signals, regime, sectors, cfg)
         self.stop_level = {k: stops[k].to_numpy() for k in cfg.setups}
         self.rank_key = rank.to_numpy()
         self.exit_mode = exit_mode
         self.stop_pct = stop_pct
+        self.take_profit = take_profit
+        self.target_full_exit = take_profit is not None
 
     def _initial_stop(self, setup, si, j, entry):
         if self.stop_pct:
@@ -90,9 +93,13 @@ class MomentumBacktester(Backtester):
         return stop
 
     def _target(self, setup, entry, rps):
-        return None
+        # Kâr al: giriş fiyatının take_profit üstüne bekleyen satış emri, tamamı satılır
+        return entry * (1 + self.take_profit) if self.take_profit else None
 
     def _exit_signal(self, pos, i, j, c):
+        if self.exit_mode == "bracket":
+            # Sadece stop / kâr al; ikisi de olmazsa 15 işlem günü (3 hafta) sonunda çık
+            return "time_stop" if pos.days_held >= 15 else None
         if pos.days_held < 2:
             return None
         if self.exit_mode == "fast":

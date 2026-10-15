@@ -39,8 +39,12 @@ def main():
     parser.add_argument("--commission", type=float, default=3.0)
     parser.add_argument("--stop-pct", type=float, default=None,
                         help="Sabit yüzde stop (örn. 0.03). Verilmezse sinyal mumunun dibi kullanılır.")
+    parser.add_argument("--take-profit", type=float, default=None,
+                        help="Sabit yüzde kâr al (örn. 0.06). Verilirse çıkış sadece stop/kâr al/15 gün olur.")
     args = parser.parse_args()
-    results_dir = RESULTS_DIR + (f"_stop{100 * args.stop_pct:g}" if args.stop_pct else "")
+    results_dir = (RESULTS_DIR + (f"_stop{100 * args.stop_pct:g}" if args.stop_pct else "")
+                   + (f"_tp{100 * args.take_profit:g}" if args.take_profit else ""))
+    exit_modes = ("bracket",) if args.take_profit else ("trend", "fast")
 
     if args.synthetic:
         px, sectors, _ = synthetic_data()
@@ -61,7 +65,7 @@ def main():
     regime_all = pd.Series(1.0, index=qqq_close.index)
 
     variants = []
-    for exit_mode in ("trend", "fast"):
+    for exit_mode in exit_modes:
         for setups in [("M1",), ("M2",), ("M3",), ("M1", "M2", "M3")]:
             name = "+".join(setups)
             base = dict(setups=setups, slippage=SLIPPAGE, max_per_sector=99)
@@ -72,8 +76,8 @@ def main():
                              exit_mode, regime_on, dict(base, commission=args.commission)))
             variants.append((f"{name} | çıkış={exit_mode} | 2 pozisyon x %50 | komisyonsuz (referans)",
                              exit_mode, regime_on, dict(base, commission=0.0)))
-    variants.append((f"M1+M2+M3 | çıkış=trend | 1 pozisyon x %100 | ${args.commission:g} komisyon | QQQ filtresi yok",
-                     "trend", regime_all, dict(setups=("M1", "M2", "M3"), slippage=SLIPPAGE, max_per_sector=99,
+    variants.append((f"M1+M2+M3 | çıkış={exit_modes[0]} | 1 pozisyon x %100 | ${args.commission:g} komisyon | QQQ filtresi yok",
+                     exit_modes[0], regime_all, dict(setups=("M1", "M2", "M3"), slippage=SLIPPAGE, max_per_sector=99,
                                                commission=args.commission, max_positions=1,
                                                position_fraction=1.0)))
 
@@ -90,6 +94,8 @@ def main():
             "regime": "Yeni giriş için QQQ > 50 günlük ortalama",
             "stop": (f"Sabit %{100 * args.stop_pct:g} (giriş fiyatının altı)" if args.stop_pct
                      else "Sinyal mumunun dibi (M3: geri çekilmenin dibi), en fazla %20"),
+            "exit": (f"Kâr al %{100 * args.take_profit:g} (tamamı), stop, ya da 15 işlem günü sonunda"
+                     if args.take_profit else "trend: EMA10 altı kapanış / fast: önceki gün dibi altı kapanış"),
             "signal_counts_since_2015": {k: int(v.loc["2015":].to_numpy().sum()) for k, v in signals.items()},
             "data_source": "synthetic" if args.synthetic else "Yahoo Finance (yfinance)",
         },
@@ -104,7 +110,7 @@ def main():
         for label, exit_mode, regime, overrides in variants:
             cfg = Config(start=start, **{"initial_capital": args.capital, **overrides})
             bt = mo.MomentumBacktester(stocks, ind, signals, stops, rvol, regime, sectors, cfg, exit_mode,
-                                       stop_pct=args.stop_pct)
+                                       stop_pct=args.stop_pct, take_profit=args.take_profit)
             eq, trades, extra = bt.run()
             key = f"{period} | {label}"
             m = metrics(eq, trades, cfg.initial_capital)
@@ -139,6 +145,8 @@ def main():
         ax.axhline(args.capital, color="grey", lw=0.8, ls="--")
         ax.set_yscale("log")
         stop_label = f", %{100 * args.stop_pct:g} stop" if args.stop_pct else ""
+        if args.take_profit:
+            stop_label += f", %{100 * args.take_profit:g} kâr al"
         ax.set_title(f"Nasdaq tech momentum: \\${args.capital:g} başlangıç, 1 pozisyon, "
                      f"\\${args.commission:g}/emir{stop_label} ({period} başlangıçlı)")
         ax.set_ylabel("Özsermaye ($, log)")
