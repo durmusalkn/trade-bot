@@ -54,7 +54,7 @@ def load_universe():
     return sectors
 
 
-def load_prices(symbols, batch_size=100, cache_name="prices.parquet", benchmarks=(BENCHMARK,)):
+def load_prices(symbols, batch_size=100, cache_name="prices.parquet", benchmarks=(BENCHMARK,), start=DATA_START):
     """Günlük OHLCV -> {'Open': df, 'High': df, ...}; satır=tarih, sütun=sembol.
 
     auto_adjust=False: fiyatlar split'e göre düzeltilmiş, temettüye göre düzeltilmemiş
@@ -70,7 +70,7 @@ def load_prices(symbols, batch_size=100, cache_name="prices.parquet", benchmarks
             batch = symbols[i:i + batch_size]
             for attempt in range(3):
                 try:
-                    df = yf.download(batch, start=DATA_START, auto_adjust=False, progress=False,
+                    df = yf.download(batch, start=start, auto_adjust=False, progress=False,
                                      threads=True, group_by="column")
                     break
                 except Exception as exc:
@@ -78,8 +78,10 @@ def load_prices(symbols, batch_size=100, cache_name="prices.parquet", benchmarks
                     time.sleep(5)
             else:
                 continue
-            frames.append(df[["Open", "High", "Low", "Close", "Volume"]])
+            df = df[["Open", "High", "Low", "Close", "Volume"]]
+            frames.append(df.loc[:, df.notna().any()])
             print(f"Fiyat indirildi: {min(i + batch_size, len(symbols))}/{len(symbols)}")
+            time.sleep(1)
         wide = pd.concat(frames, axis=1)
         wide.index = pd.to_datetime(wide.index).tz_localize(None)
         os.makedirs(CACHE_DIR, exist_ok=True)
@@ -91,6 +93,33 @@ def load_prices(symbols, batch_size=100, cache_name="prices.parquet", benchmarks
     # Hiç verisi olmayan sembolleri at
     valid = fields["Close"].columns[fields["Close"].notna().sum() > 260]
     return {k: v[valid] for k, v in fields.items()}
+
+
+NASDAQ_JSON = ("https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/nasdaq/"
+               "nasdaq_full_tickers.json")
+_NON_COMMON = ("warrant", "right", " unit", "units", "preferred", "depositary share", "notes due")
+
+
+def load_nasdaq_universe():
+    """Bugün Nasdaq'ta işlem gören tüm hisseler -> {sembol: sektör}.
+
+    Varant, hak, unit, tercihli hisse ve tahvil gibi adi hisse olmayanlar elenir.
+    Liste bugünkü üyelerdir: batmış/listeden çıkmış şirketler yoktur.
+    """
+    path = os.path.join(CACHE_DIR, "nasdaq_universe.csv")
+    if os.path.exists(path):
+        df = pd.read_csv(path, keep_default_na=False)
+        return dict(zip(df["symbol"], df["sector"]))
+    rows = requests.get(NASDAQ_JSON, timeout=60).json()
+    out = {}
+    for r in rows:
+        sym, name = r.get("symbol", ""), r.get("name", "").lower()
+        if not sym.isalpha() or any(k in name for k in _NON_COMMON):
+            continue
+        out[sym] = r.get("sector") or "Unknown"
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    pd.DataFrame({"symbol": list(out), "sector": list(out.values())}).to_csv(path, index=False)
+    return out
 
 
 def _fetch_earnings(symbol):
