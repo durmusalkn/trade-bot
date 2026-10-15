@@ -54,18 +54,18 @@ def load_universe():
     return sectors
 
 
-def load_prices(symbols, batch_size=100):
+def load_prices(symbols, batch_size=100, cache_name="prices.parquet", benchmarks=(BENCHMARK,)):
     """Günlük OHLCV -> {'Open': df, 'High': df, ...}; satır=tarih, sütun=sembol.
 
     auto_adjust=False: fiyatlar split'e göre düzeltilmiş, temettüye göre düzeltilmemiş
     (botun gördüğü fiyatlarla aynı).
     """
-    path = os.path.join(CACHE_DIR, "prices.parquet")
+    path = os.path.join(CACHE_DIR, cache_name)
     if os.path.exists(path):
         wide = pd.read_parquet(path)
     else:
         frames = []
-        symbols = sorted(set(symbols) | {BENCHMARK})
+        symbols = sorted(set(symbols) | set(benchmarks))
         for i in range(0, len(symbols), batch_size):
             batch = symbols[i:i + batch_size]
             for attempt in range(3):

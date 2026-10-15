@@ -48,14 +48,14 @@ jobs:
 
       - name: Run backtest
         run: |
-          rm -rf backtest/results
-          python -m backtest.run_backtest --capital 500 --commission 3
+          rm -rf backtest/results_momentum
+          python -m backtest.run_momentum --capital 500 --commission 3
 
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add -f backtest/results
+          git add -f backtest/results_momentum
           git diff --cached --quiet && exit 0
           git commit -m "Update swing backtest results"
           git pull --rebase origin "${GITHUB_REF_NAME}"

@@ -137,14 +137,14 @@ class Backtester:
             for symbol, setup, si in pending_entries:
                 j = self.col[symbol]
                 open_px = self.O[i, j]
-                atr = self.atr[si, j]
-                if np.isnan(open_px) or np.isnan(atr) or atr <= 0:
+                if np.isnan(open_px):
                     continue
                 if len(self.positions) >= cfg.max_positions:
                     break
                 entry = self._buy_price(open_px)
-                stop_mult = {"A": st.A_STOP_ATR, "B": st.B_STOP_ATR, "C": st.C_STOP_ATR}[setup]
-                stop = entry - stop_mult * atr
+                stop = self._initial_stop(setup, si, j, entry)
+                if stop is None or not stop < entry:
+                    continue
                 rps = entry - stop
                 equity = self._equity(i - 1)
                 regime = self.regime[si]
@@ -160,7 +160,7 @@ class Backtester:
                     continue
                 shares = value / entry
                 self.cash -= value + cfg.commission
-                target = entry + st.A_TARGET_R * rps if setup == "A" else None
+                target = self._target(setup, entry, rps)
                 pos = Position(symbol, setup, date, entry, shares, stop, rps, target,
                                cost=value + cfg.commission, commissions=cfg.commission)
                 pos.fills.append((date, "BUY", shares, entry, setup))
@@ -236,6 +236,16 @@ class Backtester:
         eq = pd.Series(dict(equity_curve), name="equity")
         trades = pd.DataFrame(self.trades)
         return eq, trades, {"skipped_small": skipped_small}
+
+    def _initial_stop(self, setup, si, j, entry):
+        atr = self.atr[si, j]
+        if np.isnan(atr) or atr <= 0:
+            return None
+        stop_mult = {"A": st.A_STOP_ATR, "B": st.B_STOP_ATR, "C": st.C_STOP_ATR}[setup]
+        return entry - stop_mult * atr
+
+    def _target(self, setup, entry, rps):
+        return entry + st.A_TARGET_R * rps if setup == "A" else None
 
     def _exit_signal(self, pos, i, j, c):
         if pos.setup == "A":
