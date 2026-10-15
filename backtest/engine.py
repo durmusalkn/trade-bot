@@ -178,23 +178,7 @@ class Backtester:
 
             # 3) Seans içi: stop ve kâr al
             for pos in list(self.positions):
-                j = self.col[pos.symbol]
-                o, h, l = self.O[i, j], self.H[i, j], self.L[i, j]
-                if np.isnan(l):
-                    continue
-                if l <= pos.stop:
-                    fill = pos.stop if pos.entry_date == date else min(o, pos.stop)
-                    self._close(pos, fill, date, "stop")
-                    continue
-                if pos.target is not None and not pos.partial_done and h >= pos.target \
-                        and not (self.no_same_day_target and pos.entry_date == date):
-                    fill = pos.target if pos.entry_date == date else max(o, pos.target)
-                    if self.target_full_exit:
-                        self._close(pos, fill, date, "take_profit")
-                        continue
-                    self._sell(pos, pos.shares / 2, fill, date, "target_2R")
-                    pos.partial_done = True
-                    pos.stop = max(pos.stop, pos.entry_price)
+                self._manage_intraday(pos, i, date)
 
             # 4) Kapanış: gün sayacı ve çıkış sinyalleri
             for pos in self.positions:
@@ -249,6 +233,26 @@ class Backtester:
         eq = pd.Series(dict(equity_curve), name="equity")
         trades = pd.DataFrame(self.trades)
         return eq, trades, {"skipped_small": skipped_small}
+
+    def _manage_intraday(self, pos, i, date):
+        """Seans içi bekleyen emirler: stop ve kâr al."""
+        j = self.col[pos.symbol]
+        o, h, l = self.O[i, j], self.H[i, j], self.L[i, j]
+        if np.isnan(l):
+            return
+        if l <= pos.stop:
+            fill = pos.stop if pos.entry_date == date else min(o, pos.stop)
+            self._close(pos, fill, date, "stop")
+            return
+        if pos.target is not None and not pos.partial_done and h >= pos.target \
+                and not (self.no_same_day_target and pos.entry_date == date):
+            fill = pos.target if pos.entry_date == date else max(o, pos.target)
+            if self.target_full_exit:
+                self._close(pos, fill, date, "take_profit")
+                return
+            self._sell(pos, pos.shares / 2, fill, date, "target_2R")
+            pos.partial_done = True
+            pos.stop = max(pos.stop, pos.entry_price)
 
     def _entry_fill(self, setup, si, i, j):
         """Giriş fiyatı (kayma öncesi) ya da dolmadıysa None. Varsayılan: açılıştan piyasa emri."""

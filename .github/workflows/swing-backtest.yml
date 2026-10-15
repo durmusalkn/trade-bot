@@ -48,15 +48,15 @@ jobs:
 
       - name: Run backtest
         run: |
-          # ICT / SMC testi: geniş Nasdaq evreni, toplam $3 komisyon (alım $1.5 + satım $1.5)
-          rm -rf backtest/results_ict
-          python -m backtest.run_ict --capital 500 --commission 1.5 --mc-runs 30
+          # Video stratejisi (EMA 8/21/50 + bayrak kırılımı): geniş Nasdaq evreni, emir başına $1.5
+          rm -rf backtest/results_flag
+          python -m backtest.run_flag --capital 500 --commission 1.5 --mc-runs 30
 
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add -f backtest/results_ict
+          git add -f backtest/results_flag
           git diff --cached --quiet && exit 0
           git commit -m "Update swing backtest results"
           git pull --rebase origin "${GITHUB_REF_NAME}"
