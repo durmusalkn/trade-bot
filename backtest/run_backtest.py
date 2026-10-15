@@ -190,10 +190,10 @@ def main():
         for key, eq in equity_curves.items():
             if not key.startswith(period) or "referans" in key or "sermaye" in key:
                 continue
-            ax.plot(eq.index, eq.values, lw=1.4, label=key.split(" | ", 1)[1])
+            ax.plot(eq.index, eq.values, lw=1.4, label=key.split(" | ", 1)[1].replace("$", r"\$"))
         ax.axhline(args.capital, color="grey", lw=0.8, ls="--")
         ax.set_yscale("log")
-        ax.set_title(f"${args.capital:g} başlangıç, ${args.commission:g}/emir komisyon ({period} başlangıçlı)")
+        ax.set_title(f"\\${args.capital:g} başlangıç, \\${args.commission:g}/emir komisyon ({period} başlangıçlı)")
         ax.set_ylabel("Özsermaye ($, log)")
         ax.legend(fontsize=8)
         ax.grid(alpha=0.3)
