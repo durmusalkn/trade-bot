@@ -102,8 +102,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--synthetic", action="store_true")
     parser.add_argument("--capital", type=float, default=500.0)
-    parser.add_argument("--commission", type=float, default=3.0)
+    parser.add_argument("--commission", type=float, default=3.0, help="Emir başına komisyon ($)")
+    parser.add_argument("--out", default=RESULTS_DIR, help="Sonuç klasörü")
     args = parser.parse_args()
+    results_dir = args.out
 
     if args.synthetic:
         px, sectors, earnings = synthetic_data()
@@ -140,7 +142,7 @@ def main():
         variants.append((f"A+B+C | 2 pozisyon x %50 | ${args.commission:g} komisyon | ${capital:,} sermaye",
                          dict(setups=("A", "B", "C"), commission=args.commission, initial_capital=capital)))
 
-    os.makedirs(RESULTS_DIR, exist_ok=True)
+    os.makedirs(results_dir, exist_ok=True)
     summary = {
         "assumptions": {
             "initial_capital": args.capital,
@@ -172,7 +174,7 @@ def main():
             equity_curves[key] = eq
             slug = (f"{period}_{'+'.join(cfg.setups)}_{cfg.sizing}{cfg.max_positions}_c{cfg.commission:g}"
                     f"_k{cfg.initial_capital:g}").replace("+", "")
-            trades.to_csv(os.path.join(RESULTS_DIR, f"trades_{slug}.csv"), index=False)
+            trades.to_csv(os.path.join(results_dir, f"trades_{slug}.csv"), index=False)
             print(f"{key}: ${m.get('final')} | işlem={m.get('trades')} | isabet=%{m.get('win_rate_pct')} | "
                   f"maxDD=%{m.get('max_drawdown_pct')}")
 
@@ -181,9 +183,9 @@ def main():
         summary["runs"][key] = metrics(bh, pd.DataFrame(), args.capital)
         equity_curves[key] = bh
 
-    with open(os.path.join(RESULTS_DIR, "summary.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(results_dir, "summary.json"), "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2, default=str)
-    pd.DataFrame(equity_curves).to_csv(os.path.join(RESULTS_DIR, "equity_curves.csv"))
+    pd.DataFrame(equity_curves).to_csv(os.path.join(results_dir, "equity_curves.csv"))
 
     for period in PERIODS:
         fig, ax = plt.subplots(figsize=(11, 6))
@@ -198,7 +200,7 @@ def main():
         ax.legend(fontsize=8)
         ax.grid(alpha=0.3)
         fig.tight_layout()
-        fig.savefig(os.path.join(RESULTS_DIR, f"equity_{period}.png"), dpi=110)
+        fig.savefig(os.path.join(results_dir, f"equity_{period}.png"), dpi=110)
         plt.close(fig)
 
 

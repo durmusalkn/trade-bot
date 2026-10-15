@@ -36,7 +36,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--synthetic", action="store_true")
     parser.add_argument("--capital", type=float, default=500.0)
-    parser.add_argument("--commission", type=float, default=3.0)
+    parser.add_argument("--commission", type=float, default=3.0, help="Emir başına komisyon ($)")
+    parser.add_argument("--out", default=None, help="Sonuç klasörü (varsayılan: ayarlara göre otomatik)")
     parser.add_argument("--stop-pct", type=float, default=None,
                         help="Sabit yüzde stop (örn. 0.03). Verilmezse sinyal mumunun dibi kullanılır.")
     parser.add_argument("--take-profit", type=float, default=None,
@@ -44,6 +45,8 @@ def main():
     args = parser.parse_args()
     results_dir = (RESULTS_DIR + (f"_stop{100 * args.stop_pct:g}" if args.stop_pct else "")
                    + (f"_tp{100 * args.take_profit:g}" if args.take_profit else ""))
+    if args.out:
+        results_dir = args.out
     exit_modes = ("bracket",) if args.take_profit else ("trend", "fast")
 
     if args.synthetic:
