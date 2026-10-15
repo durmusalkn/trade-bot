@@ -47,7 +47,9 @@ jobs:
           key: swing-backtest-data-${{ steps.date.outputs.today }}
 
       - name: Run backtest
-        run: python -m backtest.run_backtest --capital 500 --commission 3
+        run: |
+          rm -rf backtest/results
+          python -m backtest.run_backtest --capital 500 --commission 3
 
       - name: Commit results
         run: |

@@ -131,6 +131,14 @@ def main():
     variants.append((f"A+B+C | plan: %1 risk, 6 pozisyon | ${args.commission:g} komisyon",
                      dict(setups=("A", "B", "C"), commission=args.commission, sizing="risk",
                           max_positions=6)))
+    # Küçük hesap için en düşük komisyon yükü: tek pozisyon, tüm sermaye
+    variants.append((f"A+B+C | 1 pozisyon x %100 | ${args.commission:g} komisyon",
+                     dict(setups=("A", "B", "C"), commission=args.commission, max_positions=1,
+                          position_fraction=1.0)))
+    # Komisyonun etkisi sermaye büyüdükçe azalır: aynı kurallar, farklı başlangıç sermayesi
+    for capital in (2_000, 5_000, 10_000, 25_000):
+        variants.append((f"A+B+C | 2 pozisyon x %50 | ${args.commission:g} komisyon | ${capital:,} sermaye",
+                         dict(setups=("A", "B", "C"), commission=args.commission, initial_capital=capital)))
 
     os.makedirs(RESULTS_DIR, exist_ok=True)
     summary = {
@@ -154,15 +162,16 @@ def main():
 
     for period, start in PERIODS.items():
         for label, overrides in variants:
-            cfg = Config(start=start, initial_capital=args.capital, **overrides)
+            cfg = Config(start=start, **{"initial_capital": args.capital, **overrides})
             eq, trades, extra = Backtester(stocks, ind, signals, regime, sectors, cfg).run()
             key = f"{period} | {label}"
-            m = metrics(eq, trades, args.capital)
+            m = metrics(eq, trades, cfg.initial_capital)
             m.update(extra)
             m["config"] = {k: v for k, v in asdict(cfg).items() if k != "end"}
             summary["runs"][key] = m
             equity_curves[key] = eq
-            slug = f"{period}_{'+'.join(cfg.setups)}_{cfg.sizing}_c{cfg.commission:g}".replace("+", "")
+            slug = (f"{period}_{'+'.join(cfg.setups)}_{cfg.sizing}{cfg.max_positions}_c{cfg.commission:g}"
+                    f"_k{cfg.initial_capital:g}").replace("+", "")
             trades.to_csv(os.path.join(RESULTS_DIR, f"trades_{slug}.csv"), index=False)
             print(f"{key}: ${m.get('final')} | işlem={m.get('trades')} | isabet=%{m.get('win_rate_pct')} | "
                   f"maxDD=%{m.get('max_drawdown_pct')}")
@@ -179,7 +188,7 @@ def main():
     for period in PERIODS:
         fig, ax = plt.subplots(figsize=(11, 6))
         for key, eq in equity_curves.items():
-            if not key.startswith(period) or "referans" in key:
+            if not key.startswith(period) or "referans" in key or "sermaye" in key:
                 continue
             ax.plot(eq.index, eq.values, lw=1.4, label=key.split(" | ", 1)[1])
         ax.axhline(args.capital, color="grey", lw=0.8, ls="--")
