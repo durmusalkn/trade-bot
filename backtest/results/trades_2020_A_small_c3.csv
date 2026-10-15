@@ -1,0 +1,59 @@
+symbol,setup,sector,entry_date,exit_date,days_held,entry_price,exit_price,invested,pnl,return_pct,r_multiple,commissions,partial,exit_reason
+AMD,A,Information Technology,2020-01-03,2020-01-10,5,48.054,49.2354,253.0,0.15,0.06,0.01,6.0,False,no_progress_day5
+LITE,A,Information Technology,2020-01-03,2020-01-10,5,81.3206,80.4897,247.0,-8.49,-3.44,-0.93,6.0,False,no_progress_day5
+APO,A,Financials,2020-01-10,2020-01-17,5,50.025,49.3853,242.83,-9.07,-3.73,-1.26,6.0,False,no_progress_day5
+VRTX,A,Health Care,2020-01-17,2020-01-24,4,236.6282,229.9005,233.76,-12.56,-5.37,-1.95,6.0,False,stop
+AAPL,A,Information Technology,2020-01-10,2020-01-28,11,77.6888,78.1109,248.83,-4.66,-1.87,-0.79,6.0,False,close_below_ema10
+PHM,A,Consumer Discretionary,2020-01-29,2020-01-29,0,47.0235,45.5598,236.55,-13.27,-5.61,-1.85,6.0,False,stop
+AAPL,A,Information Technology,2020-01-30,2020-01-31,1,80.1751,77.8828,230.89,-12.52,-5.42,-1.95,6.0,False,stop
+GNRC,A,Industrials,2020-01-27,2020-02-03,5,104.8124,104.1979,221.2,-7.28,-3.29,-1.04,6.0,False,close_below_ema10
+TSLA,A,Consumer Discretionary,2020-02-04,2020-02-04,0,58.8934,55.5718,213.15,-17.85,-8.38,-1.52,6.0,False,stop
+TSLA,A,Consumer Discretionary,2020-02-05,2020-02-05,0,54.9114,50.4777,195.3,-21.53,-11.02,-1.39,6.0,False,stop
+DECK,A,Consumer Discretionary,2020-02-03,2020-02-10,5,32.026,31.8774,219.15,-7.0,-3.2,-0.79,6.0,False,no_progress_day5
+DVA,A,Health Care,2020-02-12,2020-02-13,1,89.6948,86.6067,198.04,-12.72,-6.42,-1.95,6.0,False,stop
+LITE,A,Information Technology,2020-02-06,2020-02-18,7,87.4437,84.4578,173.77,-11.83,-6.81,-1.34,6.0,False,close_below_ema10
+GNRC,A,Industrials,2020-02-14,2020-02-18,1,116.4382,111.4246,191.03,-14.1,-7.38,-1.76,6.0,False,stop
+LDOS,A,Industrials,2020-02-19,2020-02-19,0,124.062,119.7228,176.93,-12.08,-6.83,-2.01,6.0,False,stop
+DXCM,A,Health Care,2020-02-18,2020-02-27,7,71.1355,68.3508,170.34,-12.55,-7.37,-1.43,6.0,False,close_below_ema10
+CVNA,A,Consumer Discretionary,2020-02-20,2020-02-27,5,21.3006,17.6712,164.85,-33.58,-20.37,-3.07,6.0,False,no_progress_day5
+MRNA,A,Health Care,2020-02-27,2020-02-27,0,35.8979,32.842,75.27,-12.15,-16.15,-1.99,6.0,False,stop
+REGN,A,Health Care,2020-02-27,2020-02-27,0,468.7943,447.0512,71.12,-9.16,-12.88,-2.93,6.0,False,stop
+TT,A,Industrials,2020-03-05,2020-03-06,1,114.2571,108.3088,69.61,-9.47,-13.6,-2.76,6.0,False,stop
+REGN,A,Health Care,2020-03-05,2020-03-12,5,481.1805,444.1378,69.94,-11.15,-15.95,-2.89,6.0,False,close_below_ema10
+TSCO,A,Consumer Discretionary,2020-05-28,2020-06-04,5,24.1421,24.5377,64.78,-4.99,-7.7,-1.69,6.0,False,no_progress_day5
+TYL,A,Information Technology,2020-05-29,2020-06-05,5,372.5362,367.3962,63.81,-6.84,-10.72,-2.22,6.0,False,no_progress_day5
+CRWD,A,Information Technology,2020-06-04,2020-06-11,5,23.5693,23.7006,63.01,-5.67,-8.99,-1.11,6.0,False,no_progress_day5
+EBAY,A,Consumer Discretionary,2020-06-05,2020-06-12,5,49.2646,48.3658,61.35,-7.06,-11.52,-2.81,6.0,False,no_progress_day5
+VEEV,A,Health Care,2020-06-11,2020-06-18,5,224.5222,229.3253,59.65,-4.79,-8.03,-1.29,6.0,False,no_progress_day5
+TER,A,Information Technology,2020-06-22,2020-06-29,5,82.9815,81.7391,56.79,-6.81,-11.98,-2.13,6.0,False,no_progress_day5
+XYZ,A,Financials,2020-07-02,2020-07-13,6,118.059,118.0,55.63,-5.57,-10.01,-1.61,9.0,True,stop
+TSCO,A,Consumer Discretionary,2020-06-22,2020-07-14,15,25.3607,27.1024,57.45,-4.87,-8.47,-2.13,9.0,True,time_stop
+DGX,A,Health Care,2020-07-14,2020-07-28,10,121.1806,124.1379,103.27,-3.44,-3.33,-0.79,9.0,True,close_below_ema10
+APD,A,Materials,2020-07-15,2020-07-31,12,282.8914,285.4772,97.27,-5.14,-5.28,-1.48,6.0,False,close_below_ema10
+PYPL,A,Financials,2020-07-31,2020-08-11,7,193.1465,191.904,92.13,-6.57,-7.13,-1.47,6.0,False,close_below_ema10
+AMD,A,Information Technology,2020-07-30,2020-08-12,9,75.4077,78.3908,99.84,-0.24,-0.24,-0.04,9.0,True,close_below_ema10
+UPS,A,Industrials,2020-08-11,2020-08-18,5,160.7403,160.3098,98.31,-6.26,-6.36,-1.6,6.0,False,no_progress_day5
+PWR,A,Industrials,2020-08-12,2020-08-19,5,50.5252,50.2449,86.84,-6.47,-7.45,-1.69,6.0,False,no_progress_day5
+TGT,A,Consumer Staples,2020-08-20,2020-08-27,5,155.0075,152.5837,89.22,-7.35,-8.24,-2.38,6.0,False,no_progress_day5
+SNPS,A,Information Technology,2020-08-21,2020-08-28,5,213.7168,217.0514,83.22,-4.75,-5.71,-1.52,6.0,False,no_progress_day5
+TSLA,A,Consumer Discretionary,2020-08-28,2020-09-02,3,153.0845,142.0759,78.47,-11.43,-14.56,-2.12,6.0,False,stop
+META,A,Communication Services,2020-08-27,2020-09-03,5,300.3101,295.842,81.87,-7.17,-8.76,-1.94,6.0,False,no_progress_day5
+NVDA,A,Information Technology,2020-09-03,2020-09-03,0,13.8357,13.1564,73.87,-9.48,-12.83,-2.75,6.0,False,stop
+VEEV,A,Health Care,2020-09-03,2020-09-04,1,287.7238,273.0111,67.87,-9.32,-13.73,-2.84,6.0,False,stop
+CAT,A,Industrials,2020-09-10,2020-09-16,4,152.086,149.925,64.47,-6.87,-10.66,-2.95,6.0,False,close_below_ema10
+FDX,A,Industrials,2020-09-17,2020-09-21,2,195.6094,185.9617,61.03,-8.86,-14.52,-3.13,6.0,False,stop
+MOS,A,Materials,2020-09-18,2020-09-21,1,19.3797,18.2248,55.03,-9.1,-16.54,-2.96,6.0,False,stop
+NKE,A,Consumer Discretionary,2020-09-24,2020-10-01,5,126.5032,127.6661,27.53,-5.77,-20.98,-5.63,6.0,False,no_progress_day5
+RVTY,A,Health Care,2020-10-01,2020-10-02,1,127.5638,123.0347,25.27,-6.79,-26.87,-8.71,6.0,False,stop
+LEN,A,Consumer Discretionary,2020-10-01,2020-10-07,4,79.8657,79.1859,26.08,-6.2,-23.76,-4.99,6.0,False,close_below_ema10
+BE,A,Industrials,2020-10-07,2020-10-14,5,20.1301,21.2694,22.16,-4.92,-22.18,-2.1,6.0,False,no_progress_day5
+TWLO,A,Information Technology,2020-10-05,2020-10-21,12,290.145,313.833,23.73,-6.74,-28.4,-4.74,9.0,True,close_below_ema10
+QCOM,A,Information Technology,2020-10-15,2020-10-22,5,127.3637,129.4452,38.51,-5.42,-14.07,-3.56,6.0,False,no_progress_day5
+PYPL,A,Financials,2020-10-22,2020-10-23,1,212.0059,201.3545,32.52,-7.48,-23.01,-5.09,6.0,False,stop
+PNR,A,Industrials,2020-10-21,2020-10-27,4,51.6358,49.6026,29.17,-7.03,-24.1,-6.91,6.0,False,stop
+ALGN,A,Health Care,2020-10-26,2020-10-29,3,462.9614,432.8286,25.61,-7.47,-29.17,-5.11,6.0,False,stop
+DHR,A,Health Care,2020-10-28,2020-10-29,1,210.2114,203.7842,14.09,-6.34,-44.98,-18.99,6.0,False,stop
+PWR,A,Industrials,2020-11-03,2020-11-04,1,66.9835,63.63,11.49,-6.42,-55.94,-15.27,6.0,False,stop
+MPWR,A,Information Technology,2020-11-05,2020-11-09,2,342.4211,324.054,15.19,-6.65,-43.79,-10.26,6.0,False,stop
+IR,A,Industrials,2020-11-04,2020-11-25,15,38.7093,45.3073,10.75,-8.0,-74.41,-23.1,9.0,True,time_stop
+FCX,A,Materials,2020-11-10,2020-12-02,15,19.7999,23.4882,10.81,-7.76,-71.79,-15.04,9.0,True,time_stop

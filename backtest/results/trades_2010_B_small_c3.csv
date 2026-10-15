@@ -1,0 +1,94 @@
+symbol,setup,sector,entry_date,exit_date,days_held,entry_price,exit_price,invested,pnl,return_pct,r_multiple,commissions,partial,exit_reason
+JBL,B,Information Technology,2010-01-12,2010-01-15,3,16.8884,17.7111,253.0,6.18,2.44,0.33,6.0,False,mean_reverted
+MRVL,B,Information Technology,2010-01-13,2010-01-20,4,20.5403,20.1399,247.0,-10.76,-4.35,-0.64,6.0,False,mean_reverted
+ARE,B,Real Estate,2010-01-19,2010-01-20,1,62.9114,64.038,248.89,-1.6,-0.64,-0.11,6.0,False,mean_reverted
+AMP,B,Financials,2010-01-25,2010-01-28,3,40.3001,41.1594,126.46,-3.37,-2.66,-0.49,6.0,False,mean_reverted
+CTSH,B,Information Technology,2010-01-25,2010-01-28,3,22.7114,22.9035,125.29,-4.97,-3.96,-0.61,6.0,False,mean_reverted
+DAL,B,Industrials,2010-01-29,2010-02-03,3,12.8064,12.9035,124.37,-5.08,-4.08,-0.33,6.0,False,mean_reverted
+OKE,B,Energy,2010-01-29,2010-02-03,3,19.0736,18.8139,123.25,-7.64,-6.2,-1.21,6.0,False,mean_reverted
+DAL,B,Industrials,2010-02-05,2010-02-10,3,11.4157,12.2639,121.19,2.78,2.3,0.16,6.0,False,mean_reverted
+OKE,B,Energy,2010-02-05,2010-02-11,4,18.132,17.9213,120.56,-7.37,-6.11,-1.09,6.0,False,mean_reverted
+STX,B,Information Technology,2010-03-11,2010-03-17,4,18.8094,19.2004,237.1,-1.13,-0.48,-0.04,6.0,False,mean_reverted
+ROK,B,Industrials,2010-03-15,2010-03-22,5,55.4977,55.0425,231.1,-7.87,-3.41,-0.71,6.0,False,mean_reverted
+LYV,B,Communication Services,2010-03-22,2010-03-23,1,12.9665,13.6232,226.59,5.32,2.35,0.27,6.0,False,mean_reverted
+UAL,B,Industrials,2010-03-22,2010-03-24,2,18.4892,19.3503,232.59,4.69,2.02,0.18,6.0,False,mean_reverted
+MTB,B,Financials,2010-03-26,2010-04-06,6,82.8314,81.7191,237.6,-9.15,-3.85,-0.76,6.0,False,mean_reverted
+KDP,B,Consumer Staples,2010-03-30,2010-04-07,5,35.7779,35.5022,231.6,-7.76,-3.35,-0.62,6.0,False,mean_reverted
+PSA,B,Real Estate,2010-04-19,2010-04-21,2,91.2956,93.3033,229.15,-1.03,-0.45,-0.11,6.0,False,mean_reverted
+HAS,B,Consumer Discretionary,2010-04-28,2010-05-04,4,39.4797,40.1599,228.63,-2.11,-0.92,-0.2,6.0,False,mean_reverted
+LULU,B,Consumer Discretionary,2010-04-29,2010-05-04,3,19.965,20.1899,222.63,-3.53,-1.58,-0.15,6.0,False,mean_reverted
+HST,B,Real Estate,2010-05-10,2010-05-11,1,15.6078,15.6722,114.41,-5.54,-4.84,-0.45,6.0,False,mean_reverted
+CMI,B,Industrials,2010-05-10,2010-05-11,1,69.7549,70.7346,112.11,-4.47,-3.98,-0.33,6.0,False,mean_reverted
+CBRE,B,Real Estate,2010-05-19,2010-05-26,5,15.0875,15.3223,111.9,-4.31,-3.85,-0.29,6.0,False,mean_reverted
+HST,B,Real Estate,2010-05-19,2010-05-28,7,14.2471,14.8126,111.34,-1.7,-1.53,-0.12,6.0,False,mean_reverted
+UHS,B,Health Care,2010-06-21,2010-06-25,4,41.5908,40.2199,110.4,-9.54,-8.64,-1.21,6.0,False,mean_reverted
+REGN,B,Health Care,2010-06-22,2010-06-30,6,25.8529,22.4866,108.79,-19.78,-18.18,-1.44,6.0,False,stop
+UAL,B,Industrials,2010-08-06,2010-08-10,2,22.1111,23.0385,103.07,-1.8,-1.75,-0.15,6.0,False,mean_reverted
+LVS,B,Consumer Discretionary,2010-09-22,2010-09-23,1,31.7959,33.0135,102.62,-2.18,-2.13,-0.29,6.0,False,mean_reverted
+TDG,B,Industrials,2010-09-24,2010-09-29,3,61.7309,61.5392,101.27,-6.31,-6.23,-1.36,6.0,False,mean_reverted
+CASY,B,Consumer Staples,2010-09-24,2010-10-01,5,42.7614,41.0073,102.08,-10.06,-9.86,-2.51,6.0,False,stop
+INTU,B,Information Technology,2010-09-30,2010-10-04,2,44.5022,44.9175,99.46,-5.1,-5.13,-1.04,6.0,False,mean_reverted
+DE,B,Industrials,2010-10-04,2010-10-06,2,68.3342,71.0644,96.71,-2.26,-2.33,-0.38,6.0,False,mean_reverted
+FFIV,B,Information Technology,2010-10-12,2010-10-13,1,91.6658,96.5917,96.15,-0.99,-1.03,-0.08,6.0,False,mean_reverted
+VZ,B,Communication Services,2010-10-14,2010-10-19,3,32.3762,32.5537,95.9,-5.49,-5.73,-1.46,6.0,False,mean_reverted
+WYNN,B,Consumer Discretionary,2010-10-20,2010-10-21,1,98.9394,102.9485,94.53,-2.29,-2.42,-0.29,6.0,False,mean_reverted
+COO,B,Health Care,2010-10-27,2010-11-03,5,12.3612,12.6162,184.9,-2.25,-1.22,-0.27,6.0,False,mean_reverted
+AAPL,B,Information Technology,2010-11-01,2010-11-03,2,10.799,11.1148,178.9,-0.86,-0.48,-0.1,6.0,False,mean_reverted
+SWKS,B,Information Technology,2010-11-16,2010-11-19,3,22.7714,23.8081,177.35,1.94,1.09,0.14,6.0,False,mean_reverted
+SPGI,B,Financials,2010-11-15,2010-11-22,5,34.7856,32.8175,183.35,-16.2,-8.84,-1.6,6.0,False,stop
+F,B,Consumer Discretionary,2010-11-24,2010-11-29,2,15.958,16.1119,176.22,-4.33,-2.46,-0.3,6.0,False,mean_reverted
+MCO,B,Financials,2010-11-24,2010-11-30,3,26.6533,26.4568,170.22,-7.23,-4.25,-0.63,6.0,False,mean_reverted
+LVS,B,Consumer Discretionary,2010-12-08,2010-12-15,5,47.8639,42.4394,170.44,-24.98,-14.65,-1.32,6.0,False,stop
+RCL,B,Consumer Discretionary,2010-12-14,2010-12-20,4,42.3612,42.9085,164.38,-3.91,-2.38,-0.37,6.0,False,mean_reverted
+FFIV,B,Information Technology,2010-12-16,2010-12-20,2,131.0255,136.6816,145.52,0.15,0.1,0.01,6.0,False,mean_reverted
+PH,B,Industrials,2010-12-20,2010-12-22,2,85.0725,85.867,156.07,-4.57,-2.93,-0.67,6.0,False,mean_reverted
+LVS,B,Consumer Discretionary,2010-12-29,2011-01-03,3,44.8224,47.2364,153.78,2.12,1.38,0.13,6.0,False,mean_reverted
+FFIV,B,Information Technology,2010-12-29,2011-01-04,4,133.6968,135.1224,147.78,-4.46,-3.02,-0.39,6.0,False,mean_reverted
+DECK,B,Consumer Discretionary,2011-01-03,2011-01-06,3,13.42,13.425,151.43,-5.95,-3.93,-0.49,6.0,False,mean_reverted
+TER,B,Information Technology,2011-01-04,2011-01-10,4,13.8369,13.5532,147.8,-8.97,-6.07,-0.92,6.0,False,mean_reverted
+F,B,Consumer Discretionary,2011-01-20,2011-01-27,5,17.7789,18.5107,145.16,-0.15,-0.1,-0.02,6.0,False,mean_reverted
+AIG,B,Financials,2011-01-20,2011-01-31,7,45.1726,40.3998,139.16,-20.39,-14.65,-1.0,6.0,False,time_stop
+SKYD,B,Communication Services,2011-01-28,2011-02-03,4,20.2501,19.97,138.76,-7.88,-5.68,-1.06,6.0,False,mean_reverted
+CIEN,B,Information Technology,2011-02-01,2011-02-03,2,22.2311,23.2983,125.03,-0.14,-0.11,-0.01,6.0,False,mean_reverted
+J,B,Industrials,2011-02-16,2011-02-17,1,42.2223,42.6431,130.88,-4.73,-3.61,-0.57,6.0,False,mean_reverted
+CIEN,B,Information Technology,2011-02-23,2011-02-28,3,26.2931,27.7861,128.52,1.13,0.88,0.09,6.0,False,mean_reverted
+LULU,B,Consumer Discretionary,2011-02-23,2011-03-01,4,39.0645,38.7556,122.52,-6.95,-5.67,-0.71,6.0,False,mean_reverted
+JBL,B,Information Technology,2011-03-10,2011-03-16,4,20.06,20.1999,125.61,-5.15,-4.1,-0.43,6.0,False,mean_reverted
+SWKS,B,Information Technology,2011-03-10,2011-03-21,7,30.9255,30.4947,119.61,-7.62,-6.37,-0.54,6.0,False,time_stop
+COO,B,Health Care,2011-03-16,2011-03-22,4,16.5283,16.7866,62.94,-5.06,-8.04,-1.27,6.0,False,mean_reverted
+BKNG,B,Consumer Discretionary,2011-03-21,2011-03-22,1,18.1291,18.3108,60.23,-5.43,-9.01,-1.41,6.0,False,mean_reverted
+DVN,B,Energy,2011-04-06,2011-04-11,3,91.4457,91.2344,107.98,-6.24,-5.78,-1.11,6.0,False,mean_reverted
+WY,B,Real Estate,2011-04-11,2011-04-12,1,23.7119,22.0958,101.74,-12.73,-12.51,-1.9,6.0,False,stop
+MU,B,Information Technology,2011-04-06,2011-04-15,7,11.0755,10.5947,113.98,-10.82,-9.49,-1.03,6.0,False,time_stop
+TER,B,Information Technology,2011-04-13,2011-04-18,3,16.9685,16.8616,51.63,-6.31,-12.21,-1.41,6.0,False,mean_reverted
+CBRE,B,Real Estate,2011-04-28,2011-05-09,7,26.6533,26.7766,95.93,-5.57,-5.81,-0.76,6.0,False,mean_reverted
+BX,B,Financials,2011-05-03,2011-05-11,6,18.1641,17.9694,89.93,-6.93,-7.71,-1.07,6.0,False,mean_reverted
+LYB,B,Materials,2011-05-09,2011-05-11,2,41.1005,42.4788,90.01,-3.08,-3.42,-0.38,6.0,False,mean_reverted
+SKYD,B,Communication Services,2011-05-17,2011-05-19,2,25.4627,27.1864,88.14,-0.24,-0.27,-0.04,6.0,False,mean_reverted
+WMB,B,Energy,2011-05-17,2011-05-19,2,24.1257,25.0386,82.14,-3.01,-3.66,-0.54,6.0,False,mean_reverted
+VRTX,B,Health Care,2011-05-19,2011-05-24,3,55.9179,55.7821,86.52,-6.2,-7.17,-0.83,6.0,False,mean_reverted
+COO,B,Health Care,2011-05-25,2011-05-27,2,17.954,18.6207,43.21,-4.51,-10.43,-2.28,6.0,False,mean_reverted
+UNH,B,Health Care,2011-05-25,2011-05-31,3,47.7239,48.6357,42.5,-5.25,-12.34,-2.28,6.0,False,mean_reverted
+VRTX,B,Health Care,2011-05-31,2011-06-03,3,54.3572,53.6232,71.43,-6.92,-9.69,-1.17,6.0,False,mean_reverted
+LULU,B,Consumer Discretionary,2011-05-27,2011-06-07,6,45.7229,41.5557,79.66,-12.99,-16.3,-1.87,6.0,False,stop
+NRG,B,Utilities,2011-06-03,2011-06-09,4,23.7619,24.1179,37.43,-5.48,-14.65,-3.27,6.0,False,mean_reverted
+TMUS,B,Communication Services,2011-06-08,2011-06-15,5,33.5568,32.6837,35.09,-6.84,-19.48,-2.63,6.0,False,mean_reverted
+VRTX,B,Health Care,2011-06-09,2011-06-15,4,50.2751,45.9475,33.65,-8.64,-25.67,-3.29,6.0,False,stop
+MCO,B,Financials,2011-06-17,2011-06-17,0,38.2991,35.7815,29.76,-7.76,-26.07,-4.44,6.0,False,stop
+NRG,B,Utilities,2011-06-16,2011-06-21,3,23.1316,23.6382,30.55,-5.4,-17.66,-3.87,6.0,False,mean_reverted
+CI,B,Health Care,2011-06-27,2011-06-29,2,48.6443,51.2444,27.27,-4.7,-17.25,-3.24,6.0,False,mean_reverted
+NRG,B,Utilities,2011-06-27,2011-06-29,2,22.8114,24.1479,26.49,-4.62,-17.46,-3.67,6.0,False,mean_reverted
+CI,B,Health Care,2011-07-12,2011-07-14,2,50.1451,51.0944,46.87,-5.17,-11.03,-2.1,6.0,False,mean_reverted
+WAT,B,Health Care,2011-07-12,2011-07-20,6,94.8974,96.1219,40.87,-5.51,-13.49,-3.14,6.0,False,mean_reverted
+REGN,B,Health Care,2011-07-14,2011-07-20,4,57.0985,59.1904,41.7,-4.58,-10.99,-1.26,6.0,False,mean_reverted
+ULTA,B,Consumer Discretionary,2011-07-28,2011-08-02,3,62.101,62.7186,21.12,-5.82,-27.56,-3.74,6.0,False,mean_reverted
+WYNN,B,Consumer Discretionary,2011-07-28,2011-08-02,3,159.2496,147.8168,20.37,-7.25,-35.58,-5.85,6.0,False,stop
+HUM,B,Health Care,2012-01-25,2012-01-26,1,89.975,84.8199,17.12,-6.81,-39.78,-8.49,6.0,False,stop
+OKE,B,Energy,2012-01-25,2012-01-27,2,38.0421,38.2841,17.85,-5.91,-33.08,-10.32,6.0,False,mean_reverted
+HD,B,Consumer Discretionary,2012-02-01,2012-02-06,3,44.7123,45.0275,26.35,-5.84,-22.15,-5.74,6.0,False,mean_reverted
+LEN,B,Consumer Discretionary,2012-02-01,2012-02-06,3,20.7041,21.9487,20.35,-4.96,-24.37,-2.89,6.0,False,mean_reverted
+AMGN,B,Health Care,2012-02-10,2012-02-14,2,66.9335,67.8061,20.95,-5.77,-27.52,-6.35,6.0,False,mean_reverted
+J,B,Industrials,2012-02-16,2012-02-22,3,37.0583,37.5752,18.07,-5.79,-32.05,-6.67,6.0,False,mean_reverted
+LEN,B,Consumer Discretionary,2012-02-22,2012-02-28,4,21.4945,21.787,15.17,-5.83,-38.46,-5.27,6.0,False,mean_reverted
+DHI,B,Consumer Discretionary,2012-02-22,2012-02-28,4,13.937,14.1429,9.17,-5.91,-64.43,-11.57,6.0,False,mean_reverted
+AKAM,B,Information Technology,2012-03-01,2012-03-09,6,36.2181,36.062,9.3,-6.03,-64.81,-13.3,6.0,False,mean_reverted

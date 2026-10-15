@@ -1,0 +1,94 @@
+symbol,setup,sector,entry_date,exit_date,days_held,entry_price,exit_price,invested,pnl,return_pct,r_multiple,commissions,partial,exit_reason
+LEN,C,Consumer Discretionary,2010-01-08,2010-01-22,9,14.6662,14.5659,253.0,-7.71,-3.05,-0.5,6.0,False,close_below_ema10
+EBAY,C,Consumer Discretionary,2010-01-22,2010-01-29,5,10.1061,9.8646,249.15,-11.88,-4.77,-1.05,6.0,False,close_below_ema10
+ISRG,C,Health Care,2010-01-25,2010-01-29,4,37.8678,36.3486,124.22,-10.86,-8.75,-2.26,6.0,False,stop
+EMR,C,Industrials,2010-02-03,2010-02-05,2,46.2731,44.5575,120.39,-10.35,-8.6,-2.41,6.0,False,stop
+CMI,C,Industrials,2010-02-03,2010-02-18,10,51.1356,56.0919,119.95,5.34,4.45,0.76,6.0,False,time_stop
+RMD,C,Health Care,2010-02-08,2010-02-23,10,27.6038,28.8756,116.67,-0.76,-0.65,-0.18,6.0,False,time_stop
+HRL,C,Consumer Staples,2010-02-19,2010-03-05,10,10.4202,10.4948,119.53,-5.17,-4.32,-1.91,6.0,False,time_stop
+IRM,C,Real Estate,2010-02-26,2010-03-12,10,24.1526,23.8513,117.84,-7.43,-6.31,-1.71,6.0,False,time_stop
+ILMN,C,Health Care,2010-04-30,2010-05-03,1,41.6745,39.7855,222.58,-15.95,-7.17,-1.84,6.0,False,stop
+AKAM,C,Information Technology,2010-04-30,2010-05-05,3,39.6498,37.5712,228.58,-17.83,-7.8,-1.66,6.0,False,stop
+NTAP,C,Information Technology,2010-05-28,2010-06-14,10,37.6288,40.3598,107.35,1.57,1.47,0.23,6.0,False,time_stop
+BKNG,C,Consumer Discretionary,2010-08-05,2010-08-19,10,11.1852,11.8669,107.74,0.38,0.36,0.06,6.0,False,time_stop
+GOOGL,C,Communication Services,2010-10-18,2010-11-01,10,15.0363,15.401,107.84,-3.46,-3.21,-1.01,6.0,False,time_stop
+GOOG,C,Communication Services,2010-10-18,2010-11-01,10,14.9652,15.3281,107.11,-3.48,-3.24,-1.02,6.0,False,time_stop
+HIG,C,Financials,2010-11-04,2010-11-12,6,26.023,25.0575,209.21,-13.65,-6.53,-1.39,6.0,False,close_below_ema10
+RL,C,Consumer Discretionary,2010-11-11,2010-11-16,3,106.2731,102.311,203.21,-13.46,-6.63,-1.83,6.0,False,stop
+CRM,C,Information Technology,2010-11-22,2010-12-07,10,33.8419,37.2314,195.65,13.29,6.8,1.19,6.0,False,time_stop
+COO,C,Health Care,2010-12-09,2010-12-23,10,14.3172,14.2504,202.3,-6.93,-3.43,-1.12,6.0,False,close_below_ema10
+CIEN,C,Information Technology,2010-12-10,2010-12-27,10,18.3091,20.5497,196.3,17.65,8.99,1.88,6.0,False,time_stop
+GLW,C,Information Technology,2011-01-26,2011-02-09,10,21.3607,22.5587,207.66,5.48,2.64,0.82,6.0,False,time_stop
+ROK,C,Industrials,2011-01-27,2011-02-10,10,81.1506,84.7976,201.66,2.93,1.45,0.41,6.0,False,time_stop
+BKNG,C,Consumer Discretionary,2011-02-25,2011-03-01,2,18.6469,17.8176,211.86,-15.29,-7.22,-1.66,6.0,False,stop
+COO,C,Health Care,2011-03-07,2011-03-07,0,17.5738,16.9621,204.22,-13.0,-6.37,-1.88,6.0,False,stop
+JBL,C,Information Technology,2011-03-24,2011-04-01,6,21.0905,20.7196,100.36,-7.71,-7.68,-1.15,6.0,False,close_below_ema10
+INTC,C,Information Technology,2011-04-21,2011-05-06,10,21.4007,23.4483,193.86,12.26,6.32,2.07,6.0,False,time_stop
+MGM,C,Consumer Discretionary,2011-05-05,2011-05-19,10,14.1071,15.1524,187.86,7.7,4.1,0.78,6.0,False,time_stop
+SYY,C,Consumer Staples,2011-05-10,2011-05-24,10,31.2256,32.3838,202.31,1.39,0.69,0.22,6.0,False,time_stop
+CRM,C,Information Technology,2011-05-23,2011-06-02,7,36.0705,36.3818,199.37,-4.31,-2.16,-0.44,6.0,False,close_below_ema10
+MRVL,C,Information Technology,2011-05-31,2011-06-03,3,16.2481,15.4909,203.7,-15.35,-7.54,-1.66,6.0,False,stop
+ULTA,C,Consumer Discretionary,2011-06-09,2011-06-23,10,55.968,60.7096,98.85,2.12,2.15,0.35,6.0,False,time_stop
+KR,C,Consumer Staples,2011-06-17,2011-07-01,10,12.041,12.3688,98.49,-3.4,-3.45,-1.15,6.0,False,time_stop
+GOOG,C,Communication Services,2011-07-18,2011-08-01,10,14.7643,15.2158,194.07,-0.16,-0.08,-0.02,6.0,False,time_stop
+GOOGL,C,Communication Services,2011-07-18,2011-08-01,10,14.8345,15.2881,188.07,-0.34,-0.18,-0.05,6.0,False,time_stop
+CDNS,C,Information Technology,2011-08-01,2011-08-02,1,10.4152,9.9112,97.65,-10.58,-10.83,-2.33,6.0,False,stop
+EXPE,C,Consumer Discretionary,2011-08-01,2011-08-03,2,63.4117,60.2716,98.41,-10.72,-10.9,-2.29,6.0,False,stop
+FFIV,C,Information Technology,2012-01-20,2012-02-03,10,119.0595,121.8391,93.08,-3.9,-4.19,-0.74,6.0,False,time_stop
+SWKS,C,Information Technology,2012-01-23,2012-02-06,10,21.2006,23.4183,92.56,3.37,3.64,0.67,6.0,False,time_stop
+HCA,C,Health Care,2012-02-07,2012-02-13,4,28.4942,26.8823,176.9,-15.84,-8.95,-1.62,6.0,False,stop
+GILD,C,Health Care,2012-02-06,2012-02-17,9,27.1636,22.9885,182.9,-33.65,-18.4,-5.54,6.0,False,stop
+NTAP,C,Information Technology,2012-02-17,2012-03-05,10,42.8214,43.4583,161.06,-3.65,-2.27,-0.52,6.0,False,time_stop
+CRM,C,Information Technology,2012-02-27,2012-03-12,10,35.2001,36.7641,149.25,0.5,0.33,0.07,6.0,False,time_stop
+URI,C,Industrials,2012-04-19,2012-04-23,2,45.8729,43.1401,156.58,-15.15,-9.68,-1.67,6.0,False,stop
+ISRG,C,Health Care,2012-04-19,2012-04-23,2,65.2004,62.9374,150.58,-11.12,-7.39,-2.35,6.0,False,stop
+EQIX,C,Real Estate,2012-04-27,2012-05-02,3,169.0845,160.5778,143.45,-13.07,-9.11,-1.87,6.0,False,stop
+INCY,C,Health Care,2012-04-27,2012-05-11,10,21.5107,23.4783,137.45,6.3,4.58,0.72,6.0,False,time_stop
+CIEN,C,Information Technology,2012-06-01,2012-06-15,10,13.2966,15.0725,71.53,3.15,4.41,0.57,6.0,False,time_stop
+STZ,C,Consumer Staples,2012-07-02,2012-07-17,10,26.7534,29.0555,141.64,5.93,4.19,0.79,6.0,False,time_stop
+SWKS,C,Information Technology,2012-07-20,2012-07-24,2,28.5543,26.6478,144.6,-15.45,-10.69,-1.65,6.0,False,stop
+TXT,C,Industrials,2012-07-20,2012-07-24,2,26.5132,25.0275,138.6,-13.6,-9.81,-1.8,6.0,False,stop
+REGN,C,Health Care,2012-07-26,2012-08-09,10,130.2751,139.0205,130.08,2.53,1.95,0.34,6.0,False,time_stop
+EQIX,C,Real Estate,2012-07-27,2012-08-10,10,182.181,181.5492,124.08,-6.42,-5.17,-0.98,6.0,False,time_stop
+EL,C,Consumer Staples,2012-08-15,2012-08-29,10,59.4997,60.06,128.13,-4.82,-3.76,-0.85,6.0,False,time_stop
+CSCO,C,Information Technology,2012-08-17,2012-08-31,10,19.0395,19.0905,122.13,-5.68,-4.65,-1.16,6.0,False,close_below_ema10
+ULTA,C,Consumer Discretionary,2012-09-10,2012-09-13,3,101.5507,97.3813,122.88,-10.92,-8.89,-2.36,6.0,False,stop
+FAST,C,Industrials,2012-10-12,2012-10-19,5,11.4657,10.9755,111.42,-10.64,-9.55,-2.32,6.0,False,stop
+YUM,C,Consumer Discretionary,2012-10-11,2012-10-24,9,51.2549,50.593,117.42,-7.48,-6.37,-1.8,6.0,False,close_below_ema10
+TPR,C,Consumer Discretionary,2012-10-24,2012-10-26,2,58.7994,55.768,55.68,-8.72,-15.65,-3.24,6.0,False,stop
+GEN,C,Information Technology,2012-10-26,2012-11-08,7,18.3492,18.1809,54.49,-6.47,-11.88,-3.37,6.0,False,close_below_ema10
+EXPE,C,Consumer Discretionary,2012-10-31,2012-11-12,8,58.3392,57.881,52.78,-6.39,-12.11,-2.19,6.0,False,close_below_ema10
+ULTA,C,Consumer Discretionary,2012-12-03,2012-12-12,7,100.05,97.7111,50.29,-7.11,-14.13,-3.76,6.0,False,close_below_ema10
+JBL,C,Information Technology,2012-12-21,2012-12-28,4,19.5298,18.618,94.02,-10.25,-10.9,-2.44,6.0,False,stop
+MS,C,Financials,2013-01-22,2013-02-05,10,22.1411,23.1584,88.9,-2.05,-2.31,-0.6,6.0,False,time_stop
+EL,C,Consumer Staples,2013-02-06,2013-02-07,1,64.2821,62.1399,86.84,-8.79,-10.13,-3.19,6.0,False,stop
+VLO,C,Energy,2013-01-30,2013-02-13,10,40.4681,41.8346,82.9,-3.3,-3.98,-1.01,6.0,False,time_stop
+MAS,C,Industrials,2013-02-13,2013-02-20,4,17.6714,16.9393,81.82,-9.27,-11.32,-2.87,6.0,False,stop
+DLTR,C,Consumer Staples,2013-02-28,2013-03-13,9,45.2726,45.4173,77.19,-5.76,-7.47,-1.7,6.0,False,close_below_ema10
+BBY,C,Consumer Discretionary,2013-03-04,2013-03-18,10,17.0885,21.2094,71.19,10.44,14.67,2.23,6.0,False,time_stop
+MU,C,Information Technology,2013-03-25,2013-04-01,4,10.015,9.4601,73.53,-9.91,-13.47,-2.56,6.0,False,stop
+WSM,C,Consumer Discretionary,2013-03-21,2013-04-05,10,24.7124,24.9125,79.53,-5.38,-6.76,-1.84,6.0,False,time_stop
+GWW,C,Industrials,2013-04-17,2013-05-01,10,237.1585,246.1169,71.88,-3.4,-4.73,-1.38,6.0,False,time_stop
+ILMN,C,Health Care,2013-04-24,2013-05-08,10,60.3317,63.6452,65.88,-2.55,-3.86,-0.93,6.0,False,time_stop
+IVZ,C,Financials,2013-05-01,2013-05-15,10,31.7659,34.013,68.49,-1.37,-2.0,-0.63,6.0,False,time_stop
+CSCO,C,Information Technology,2013-05-17,2013-06-03,10,23.8619,24.2479,68.23,-4.94,-7.25,-2.15,6.0,False,time_stop
+HPQ,C,Information Technology,2013-05-24,2013-06-10,10,11.1682,11.1933,62.23,-5.87,-9.43,-2.17,6.0,False,time_stop
+CIEN,C,Information Technology,2013-06-07,2013-06-21,10,19.1296,19.8001,63.28,-3.89,-6.14,-1.18,6.0,False,time_stop
+ILMN,C,Health Care,2013-07-25,2013-08-02,6,78.9305,75.2292,54.88,-8.43,-15.37,-3.5,6.0,False,stop
+ALGN,C,Health Care,2013-07-22,2013-08-05,10,43.0815,43.4782,60.88,-5.47,-8.98,-2.08,6.0,False,time_stop
+BBY,C,Consumer Discretionary,2013-08-21,2013-09-05,10,34.6773,37.1814,28.46,-4.16,-14.62,-3.25,6.0,False,time_stop
+CRM,C,Information Technology,2013-09-03,2013-09-17,10,49.4847,49.8251,27.96,-5.83,-20.85,-5.55,6.0,False,time_stop
+CIEN,C,Information Technology,2013-09-05,2013-09-19,10,23.6018,26.007,26.58,-3.6,-13.53,-2.82,6.0,False,time_stop
+ADBE,C,Information Technology,2013-09-19,2013-10-03,10,52.076,51.5842,47.14,-6.42,-13.61,-5.28,6.0,False,time_stop
+GPN,C,Financials,2013-10-03,2013-10-07,2,28.2591,27.3757,43.93,-7.28,-16.57,-5.78,6.0,False,stop
+ALGN,C,Health Care,2013-10-21,2013-11-04,10,58.5292,57.1414,40.29,-6.88,-17.09,-3.19,6.0,False,time_stop
+CMG,C,Consumer Discretionary,2013-10-21,2013-11-04,10,10.1969,10.5847,34.29,-4.81,-14.03,-4.44,6.0,False,time_stop
+TRMB,C,Information Technology,2013-11-04,2013-11-07,3,32.3462,30.9655,28.44,-7.09,-24.91,-6.6,6.0,False,stop
+FSLR,C,Information Technology,2013-11-04,2013-11-18,10,60.6303,64.3978,34.44,-4.05,-11.75,-1.78,6.0,False,time_stop
+A,C,Health Care,2013-11-18,2013-12-03,10,38.968,37.8351,28.87,-6.75,-23.38,-8.18,6.0,False,close_below_ema10
+WSM,C,Consumer Discretionary,2013-11-22,2013-12-06,9,29.8999,29.4003,22.87,-6.33,-27.68,-9.98,6.0,False,close_below_ema10
+ADBE,C,Information Technology,2013-12-16,2013-12-16,0,60.6603,58.5824,22.33,-6.66,-29.83,-10.2,6.0,False,stop
+STZ,C,Consumer Staples,2014-01-09,2014-01-24,10,76.9885,76.6616,19.0,-6.07,-31.93,-11.91,6.0,False,close_below_ema10
+CAT,C,Industrials,2014-01-28,2014-02-11,10,91.4457,94.5727,9.48,-5.78,-60.93,-31.02,6.0,False,time_stop
+TRMB,C,Information Technology,2014-02-13,2014-02-28,10,36.1281,38.021,13.08,-5.47,-41.84,-12.55,6.0,False,time_stop
+VTRS,C,Health Care,2014-02-28,2014-03-10,6,56.048,53.4309,10.34,-6.34,-61.33,-18.69,6.0,False,stop

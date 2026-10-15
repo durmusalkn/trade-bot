@@ -1,0 +1,456 @@
+symbol,setup,sector,entry_date,exit_date,days_held,entry_price,exit_price,invested,pnl,return_pct,r_multiple,commissions,partial,exit_reason
+PNR,B,Industrials,2020-01-08,2020-01-10,2,45.4927,45.7671,250.0,1.51,0.6,0.19,0.0,False,mean_reverted
+URI,B,Industrials,2020-01-10,2020-01-14,2,163.3116,154.4467,249.89,-13.56,-5.43,-1.01,0.0,False,stop
+ZBRA,B,Information Technology,2020-01-10,2020-01-15,3,248.204,247.2663,250.75,-0.95,-0.38,-0.07,0.0,False,mean_reverted
+LITE,B,Information Technology,2020-01-16,2020-01-22,3,77.0085,78.5107,243.5,4.75,1.95,0.27,0.0,False,mean_reverted
+DXCM,B,Health Care,2020-01-21,2020-01-23,2,57.7038,58.978,243.42,5.37,2.21,0.28,0.0,False,mean_reverted
+APA,B,Energy,2020-01-22,2020-01-29,5,31.3056,28.3258,246.3,-23.44,-9.52,-1.0,0.0,False,stop
+BMY,B,Health Care,2020-01-27,2020-02-05,7,63.2916,64.8875,243.35,6.14,2.52,0.55,0.0,False,mean_reverted
+SWKS,B,Information Technology,2020-02-03,2020-02-05,2,113.1766,119.7601,230.33,13.4,5.82,0.76,0.0,False,mean_reverted
+BX,B,Financials,2020-02-19,2020-02-20,1,62.4412,62.7186,246.61,1.1,0.44,0.07,0.0,False,mean_reverted
+DECK,B,Consumer Discretionary,2020-02-24,2020-02-27,3,31.4774,29.5086,247.15,-15.46,-6.25,-1.02,0.0,False,stop
+NXPI,B,Information Technology,2020-02-24,2020-02-27,3,124.6123,114.6476,247.15,-19.76,-8.0,-1.01,0.0,False,stop
+JKHY,B,Financials,2020-05-28,2020-06-02,3,177.5687,182.2288,114.77,3.01,2.62,0.29,0.0,False,mean_reverted
+NEM,B,Materials,2020-06-01,2020-06-02,1,58.9795,60.8696,115.3,3.7,3.2,0.27,0.0,False,mean_reverted
+DXCM,B,Health Care,2020-06-05,2020-06-09,2,85.055,93.2034,116.45,11.16,9.58,0.66,0.0,False,mean_reverted
+TECH,B,Health Care,2020-06-05,2020-06-11,4,63.8844,65.01,116.84,2.06,1.76,0.19,0.0,False,mean_reverted
+EQT,B,Energy,2020-06-17,2020-06-25,6,14.1571,11.5132,119.75,-22.36,-18.68,-1.0,0.0,False,stop
+NDSN,B,Industrials,2020-06-24,2020-07-01,5,190.4152,190.7146,115.72,0.18,0.16,0.02,0.0,False,mean_reverted
+COHR,B,Information Technology,2020-07-02,2020-07-07,2,44.5623,45.6272,114.21,2.73,2.39,0.16,0.0,False,mean_reverted
+EFX,B,Industrials,2020-07-10,2020-07-16,4,161.2106,164.7376,229.78,5.03,2.19,0.3,0.0,False,mean_reverted
+DDOG,B,Information Technology,2020-07-14,2020-07-21,5,87.6438,92.7236,229.78,13.32,5.8,0.39,0.0,False,mean_reverted
+AAPL,B,Information Technology,2020-07-24,2020-07-30,4,91.033,94.1404,238.95,8.16,3.41,0.51,0.0,False,mean_reverted
+VRT,B,Industrials,2020-07-24,2020-07-30,4,13.5067,13.7731,238.95,4.71,1.97,0.21,0.0,False,mean_reverted
+CRWD,B,Information Technology,2020-08-07,2020-08-11,2,26.8134,23.632,245.38,-29.11,-11.86,-1.0,0.0,False,stop
+TSLA,B,Consumer Discretionary,2020-08-12,2020-08-13,1,98.049,107.3463,216.27,20.51,9.48,0.67,0.0,False,mean_reverted
+TWLO,B,Information Technology,2020-08-07,2020-08-18,7,245.9529,249.925,245.38,3.96,1.61,0.13,0.0,False,mean_reverted
+MTD,B,Health Care,2020-08-25,2020-08-26,1,955.7376,965.557,242.81,2.49,1.03,0.2,0.0,False,mean_reverted
+PCAR,B,Industrials,2020-08-21,2020-09-01,7,58.0557,57.2913,243.06,-3.2,-1.32,-0.28,0.0,False,time_stop
+BE,B,Industrials,2020-09-01,2020-09-02,1,15.7379,16.4318,241.98,10.67,4.41,0.19,0.0,False,mean_reverted
+TER,B,Information Technology,2020-08-28,2020-09-03,4,85.4827,86.6467,243.26,3.31,1.36,0.17,0.0,False,mean_reverted
+GNRC,B,Industrials,2020-09-04,2020-09-10,3,178.8694,184.3578,249.7,7.66,3.07,0.35,0.0,False,mean_reverted
+TGT,B,Consumer Staples,2020-09-04,2020-09-10,3,146.7633,147.5262,249.14,1.3,0.52,0.1,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2020-09-10,2020-09-17,5,36.1621,34.1829,254.18,-13.91,-5.47,-0.31,0.0,False,mean_reverted
+CMG,B,Consumer Discretionary,2020-09-15,2020-09-23,6,25.6848,24.9941,247.67,-6.66,-2.69,-0.33,0.0,False,mean_reverted
+FSLR,B,Information Technology,2020-09-18,2020-09-28,6,64.2121,64.2279,241.55,0.06,0.02,0.0,0.0,False,mean_reverted
+TSLA,B,Consumer Discretionary,2020-09-24,2020-09-29,3,121.3273,138.5973,119.88,17.06,14.23,0.57,0.0,False,mean_reverted
+EQT,B,Energy,2020-09-28,2020-10-06,6,13.977,13.8731,125.53,-0.93,-0.74,-0.05,0.0,False,mean_reverted
+SKYD,B,Communication Services,2020-10-01,2020-10-06,3,28.1741,28.7356,123.88,2.47,1.99,0.22,0.0,False,mean_reverted
+MGM,B,Consumer Discretionary,2020-10-07,2020-10-09,2,21.4307,21.8591,126.61,2.53,2.0,0.16,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2020-10-13,2020-10-14,1,42.1251,43.8051,254.49,10.15,3.99,0.25,0.0,False,mean_reverted
+URI,B,Industrials,2020-10-15,2020-10-19,2,186.6833,190.9145,259.56,5.88,2.27,0.23,0.0,False,mean_reverted
+NVDA,B,Information Technology,2020-10-20,2020-10-26,4,13.5903,13.4203,262.5,-3.28,-1.25,-0.14,0.0,False,mean_reverted
+DHI,B,Consumer Discretionary,2020-10-20,2020-10-26,4,76.008,69.8625,261.61,-21.15,-8.09,-1.01,0.0,False,stop
+DE,B,Industrials,2020-10-28,2020-11-03,4,225.1125,235.4922,125.14,5.77,4.61,0.79,0.0,False,mean_reverted
+BBY,B,Consumer Discretionary,2020-10-28,2020-11-03,4,111.5558,116.9415,125.61,6.06,4.83,0.68,0.0,False,mean_reverted
+ALGN,B,Health Care,2020-11-19,2020-11-24,3,443.7618,482.7685,256.2,22.52,8.79,0.87,0.0,False,mean_reverted
+DVA,B,Health Care,2020-12-02,2020-12-07,3,108.8644,109.2853,267.46,1.03,0.39,0.06,0.0,False,mean_reverted
+FSLR,B,Information Technology,2020-12-04,2020-12-09,3,89.995,91.1644,263.23,3.42,1.3,0.1,0.0,False,mean_reverted
+TWLO,B,Information Technology,2020-12-08,2020-12-09,1,311.1555,319.0704,266.16,6.77,2.54,0.22,0.0,False,mean_reverted
+FLEX,B,Information Technology,2020-12-10,2020-12-15,3,12.199,12.8421,273.08,14.4,5.27,0.7,0.0,False,mean_reverted
+MPWR,B,Information Technology,2020-12-11,2020-12-15,2,306.5132,322.2988,273.08,14.06,5.15,0.49,0.0,False,mean_reverted
+TPR,B,Consumer Discretionary,2020-12-15,2020-12-16,1,29.7849,29.965,287.3,1.74,0.6,0.07,0.0,False,mean_reverted
+ALGN,B,Health Care,2020-12-15,2020-12-16,1,512.0559,510.8244,283.66,-0.68,-0.24,-0.03,0.0,False,mean_reverted
+UBER,B,Industrials,2020-12-16,2020-12-22,4,51.2056,52.0839,287.83,4.94,1.72,0.16,0.0,False,mean_reverted
+AMAT,B,Information Technology,2020-12-18,2020-12-30,7,87.7038,85.3373,286.21,-7.72,-2.7,-0.42,0.0,False,time_stop
+FLEX,B,Information Technology,2020-12-30,2021-01-04,2,13.3676,13.7158,279.61,7.28,2.6,0.34,0.0,False,mean_reverted
+MRNA,B,Health Care,2020-12-23,2021-01-05,7,120.11,113.7631,286.93,-15.16,-5.28,-0.21,0.0,False,mean_reverted
+GM,B,Consumer Discretionary,2021-01-05,2021-01-06,1,40.08,41.899,280.67,12.74,4.54,0.62,0.0,False,mean_reverted
+TWLO,B,Information Technology,2021-01-04,2021-01-08,4,339.1695,362.1588,271.4,18.4,6.78,0.63,0.0,False,mean_reverted
+DIS,B,Communication Services,2021-01-15,2021-01-21,3,173.0365,173.1534,298.07,0.2,0.07,0.01,0.0,False,mean_reverted
+TRMB,B,Information Technology,2021-01-20,2021-01-21,1,70.2951,72.7636,297.4,10.44,3.51,0.46,0.0,False,mean_reverted
+RL,B,Consumer Discretionary,2021-01-21,2021-01-25,2,106.5532,107.4962,303.39,2.68,0.88,0.09,0.0,False,mean_reverted
+EXPE,B,Consumer Discretionary,2021-01-25,2021-01-27,2,135.7578,123.8532,306.07,-26.84,-8.77,-1.01,0.0,False,stop
+RF,B,Financials,2021-01-28,2021-01-29,1,17.3687,17.5412,279.23,2.77,0.99,0.13,0.0,False,mean_reverted
+CF,B,Materials,2021-01-22,2021-02-02,7,42.8114,43.6282,303.39,5.79,1.91,0.22,0.0,False,mean_reverted
+LRCX,B,Information Technology,2021-01-29,2021-02-03,3,50.5262,51.984,282.01,8.14,2.89,0.27,0.0,False,mean_reverted
+TSLA,B,Consumer Discretionary,2021-02-11,2021-02-22,6,270.9487,240.9371,299.66,-33.19,-11.08,-1.0,0.0,False,stop
+BE,B,Industrials,2021-02-17,2021-02-23,4,35.4377,26.6467,296.6,-73.58,-24.81,-1.09,0.0,False,stop
+ON,B,Information Technology,2021-02-26,2021-03-01,1,38.5092,41.979,238.02,21.45,9.01,0.78,0.0,False,mean_reverted
+TSLA,B,Consumer Discretionary,2021-02-23,2021-03-02,5,220.8204,239.307,254.53,21.31,8.37,0.62,0.0,False,mean_reverted
+WDC,B,Information Technology,2021-03-05,2021-03-09,2,51.1367,52.944,132.81,4.69,3.53,0.29,0.0,False,mean_reverted
+AMAT,B,Information Technology,2021-03-05,2021-03-10,3,111.6458,115.7421,133.83,4.91,3.67,0.28,0.0,False,mean_reverted
+ZBRA,B,Information Technology,2021-03-09,2021-03-12,3,468.8543,477.2612,266.43,4.78,1.79,0.2,0.0,False,mean_reverted
+LYV,B,Communication Services,2021-03-10,2021-03-12,2,88.074,88.2758,272.31,0.62,0.23,0.02,0.0,False,mean_reverted
+EOG,B,Energy,2021-03-17,2021-03-25,6,71.4157,71.0145,275.16,-1.55,-0.56,-0.05,0.0,False,mean_reverted
+FANG,B,Energy,2021-03-19,2021-03-29,6,75.5478,74.6626,270.31,-3.17,-1.17,-0.08,0.0,False,mean_reverted
+TPR,B,Consumer Discretionary,2021-03-25,2021-03-31,4,39.5898,40.8396,272.31,8.6,3.16,0.29,0.0,False,mean_reverted
+VLO,B,Energy,2021-04-12,2021-04-15,3,71.966,71.7641,277.1,-0.78,-0.28,-0.03,0.0,False,mean_reverted
+AMAT,B,Information Technology,2021-04-13,2021-04-22,7,136.6983,134.7026,273.89,-4.0,-1.46,-0.14,0.0,False,mean_reverted
+GM,B,Consumer Discretionary,2021-04-15,2021-04-26,7,59.4797,57.8311,274.15,-7.6,-2.77,-0.33,0.0,False,mean_reverted
+ZBRA,B,Information Technology,2021-04-23,2021-04-26,1,491.8658,498.1508,268.21,3.43,1.28,0.21,0.0,False,mean_reverted
+HIG,B,Financials,2021-05-11,2021-05-17,4,65.5327,66.027,272.62,2.06,0.75,0.12,0.0,False,mean_reverted
+WSM,B,Consumer Discretionary,2021-05-13,2021-05-19,4,84.1621,83.4183,268.15,-2.37,-0.88,-0.08,0.0,False,mean_reverted
+TPL,B,Energy,2021-05-19,2021-05-28,7,171.3523,163.6959,272.47,-12.17,-4.47,-0.34,0.0,False,time_stop
+STLD,B,Materials,2021-05-24,2021-05-28,4,61.5608,61.919,272.28,1.58,0.58,0.06,0.0,False,mean_reverted
+FCX,B,Materials,2021-06-10,2021-06-15,3,40.8404,36.7482,267.17,-26.77,-10.02,-1.0,0.0,False,stop
+COF,B,Financials,2021-06-11,2021-06-16,3,159.2796,161.3593,264.88,3.46,1.31,0.23,0.0,False,mean_reverted
+STX,B,Information Technology,2021-06-16,2021-06-18,2,93.7969,85.1981,255.52,-23.42,-9.17,-1.0,0.0,False,stop
+DVN,B,Energy,2021-06-21,2021-06-22,1,27.2136,28.3858,119.49,5.15,4.31,0.38,0.0,False,mean_reverted
+GEN,B,Information Technology,2021-06-16,2021-06-24,6,27.8739,27.3363,255.52,-4.93,-1.93,-0.36,0.0,False,mean_reverted
+WAT,B,Health Care,2021-06-28,2021-06-29,1,338.5192,341.9789,243.91,2.49,1.02,0.24,0.0,False,mean_reverted
+TRGP,B,Energy,2021-06-30,2021-07-02,2,43.922,44.5277,245.16,3.38,1.38,0.16,0.0,False,mean_reverted
+BX,B,Financials,2021-07-01,2021-07-08,4,97.1986,97.3913,245.16,0.49,0.2,0.04,0.0,False,mean_reverted
+NUE,B,Materials,2021-07-07,2021-07-08,1,93.3967,92.5637,247.28,-2.21,-0.89,-0.1,0.0,False,mean_reverted
+MRNA,B,Health Care,2021-07-08,2021-07-09,1,215.7678,231.849,245.99,18.33,7.45,0.56,0.0,False,mean_reverted
+TRGP,B,Energy,2021-07-08,2021-07-12,2,42.3912,44.3278,245.99,11.24,4.57,0.55,0.0,False,mean_reverted
+F,B,Consumer Discretionary,2021-07-16,2021-07-19,1,14.1271,13.0421,260.78,-20.03,-7.68,-1.01,0.0,False,stop
+ILMN,B,Health Care,2021-07-15,2021-07-20,3,448.5899,456.9504,260.78,4.86,1.86,0.31,0.0,False,mean_reverted
+WAT,B,Health Care,2021-07-20,2021-07-21,1,364.3021,371.724,253.19,5.16,2.04,0.52,0.0,False,mean_reverted
+GNRC,B,Industrials,2021-08-03,2021-08-09,4,403.3216,413.793,255.77,6.64,2.6,0.25,0.0,False,mean_reverted
+EXR,B,Real Estate,2021-08-11,2021-08-13,2,174.6373,175.1224,255.72,0.71,0.28,0.07,0.0,False,mean_reverted
+INVH,B,Real Estate,2021-08-09,2021-08-16,5,39.95,39.2504,259.09,-4.54,-1.75,-0.45,0.0,False,mean_reverted
+FTNT,B,Information Technology,2021-08-19,2021-08-23,2,57.5868,60.3478,257.18,12.33,4.79,0.66,0.0,False,mean_reverted
+BX,B,Financials,2021-08-19,2021-08-23,2,109.5548,113.5232,257.18,9.32,3.62,0.74,0.0,False,mean_reverted
+IT,B,Information Technology,2021-08-25,2021-08-26,1,301.1505,307.4462,265.92,5.56,2.09,0.41,0.0,False,mean_reverted
+CPT,B,Real Estate,2021-08-24,2021-08-27,3,144.7523,146.3868,268.0,3.03,1.13,0.28,0.0,False,mean_reverted
+ISRG,B,Health Care,2021-08-30,2021-08-31,1,347.2302,352.8668,272.3,4.42,1.62,0.36,0.0,False,mean_reverted
+PFE,B,Health Care,2021-08-30,2021-09-03,4,46.2231,46.8766,272.3,3.85,1.41,0.2,0.0,False,mean_reverted
+DECK,B,Consumer Discretionary,2021-09-02,2021-09-10,5,69.4364,68.1526,273.97,-5.07,-1.85,-0.32,0.0,False,mean_reverted
+MPWR,B,Information Technology,2021-09-10,2021-09-15,3,494.237,495.3822,274.09,0.64,0.23,0.04,0.0,False,mean_reverted
+CARR,B,Industrials,2021-09-08,2021-09-17,7,56.108,54.7426,273.71,-6.66,-2.43,-0.49,0.0,False,time_stop
+NVDA,B,Information Technology,2021-09-20,2021-09-23,3,21.1566,22.1289,134.01,6.16,4.6,0.67,0.0,False,mean_reverted
+EXR,B,Real Estate,2021-09-15,2021-09-24,7,183.9919,176.4617,271.46,-11.11,-4.09,-0.91,0.0,False,time_stop
+SNPS,B,Information Technology,2021-09-28,2021-10-04,4,307.5137,291.7324,134.74,-6.91,-5.13,-1.01,0.0,False,stop
+TECH,B,Health Care,2021-09-28,2021-10-07,7,125.8654,121.4218,134.2,-4.74,-3.53,-0.51,0.0,False,time_stop
+DASH,B,Consumer Discretionary,2021-10-05,2021-10-07,2,199.9299,209.2053,130.99,6.08,4.64,0.46,0.0,False,mean_reverted
+MRNA,B,Health Care,2021-10-07,2021-10-13,4,295.6077,314.7425,132.81,8.6,6.47,0.29,0.0,False,mean_reverted
+ALB,B,Materials,2021-10-12,2021-10-14,2,218.069,224.9375,133.88,4.22,3.15,0.34,0.0,False,mean_reverted
+OXY,B,Energy,2021-10-18,2021-10-19,1,32.9365,32.9435,272.03,0.06,0.02,0.0,0.0,False,mean_reverted
+CF,B,Materials,2021-10-18,2021-10-19,1,58.7894,61.0095,266.76,10.07,3.78,0.46,0.0,False,mean_reverted
+PANW,B,Information Technology,2021-10-26,2021-10-29,3,83.3316,83.0684,277.09,-0.88,-0.32,-0.05,0.0,False,mean_reverted
+CF,B,Materials,2021-10-26,2021-11-02,5,59.2296,57.0115,276.48,-10.35,-3.74,-0.46,0.0,False,mean_reverted
+MRSH,B,Financials,2021-11-01,2021-11-03,2,167.0835,161.0262,270.99,-9.82,-3.63,-1.01,0.0,False,stop
+COP,B,Energy,2021-11-03,2021-11-08,3,72.6863,75.6322,269.05,10.9,4.05,0.66,0.0,False,mean_reverted
+NFLX,B,Communication Services,2021-11-08,2021-11-12,4,65.0615,65.968,272.02,3.79,1.39,0.22,0.0,False,mean_reverted
+TSLA,B,Consumer Discretionary,2021-11-10,2021-11-17,5,336.9717,354.3261,272.02,14.01,5.15,0.39,0.0,False,mean_reverted
+COP,B,Energy,2021-11-12,2021-11-17,3,71.6258,72.0839,275.81,1.76,0.64,0.1,0.0,False,mean_reverted
+DASH,B,Consumer Discretionary,2021-11-22,2021-11-23,1,218.059,188.5712,273.66,-37.01,-13.52,-1.0,0.0,False,stop
+APA,B,Energy,2021-11-18,2021-11-24,4,27.5938,27.956,281.8,3.7,1.31,0.12,0.0,False,mean_reverted
+KKR,B,Financials,2021-11-24,2021-12-03,6,76.058,75.912,265.08,-0.51,-0.19,-0.03,0.0,False,mean_reverted
+DXCM,B,Health Care,2021-11-24,2021-12-03,6,147.5712,135.187,265.15,-22.25,-8.39,-1.01,0.0,False,stop
+TSLA,B,Consumer Discretionary,2021-12-06,2021-12-08,2,334.0036,350.7279,253.77,12.71,5.01,0.33,0.0,False,mean_reverted
+AMD,B,Information Technology,2021-12-14,2021-12-16,2,131.7358,146.9265,260.12,29.99,11.53,0.85,0.0,False,mean_reverted
+NVDA,B,Information Technology,2021-12-14,2021-12-16,2,27.7128,31.1364,260.12,32.13,12.35,0.81,0.0,False,mean_reverted
+ODFL,B,Industrials,2021-12-20,2021-12-23,3,167.8689,172.3938,291.19,7.85,2.7,0.35,0.0,False,mean_reverted
+DLTR,B,Consumer Staples,2021-12-20,2021-12-27,4,134.4472,137.0015,291.19,5.53,1.9,0.25,0.0,False,mean_reverted
+CDNS,B,Information Technology,2022-01-04,2022-01-07,3,182.2811,169.3274,297.88,-21.17,-7.11,-1.01,0.0,False,stop
+DDOG,B,Information Technology,2022-01-04,2022-01-10,4,163.5217,137.8728,297.88,-46.72,-15.69,-1.0,0.0,False,stop
+ON,B,Information Technology,2022-01-10,2022-01-13,3,63.0415,67.4862,134.66,9.49,7.05,0.63,0.0,False,mean_reverted
+P,B,Information Technology,2022-01-13,2022-01-18,2,29.3447,26.3777,269.3,-27.23,-10.11,-1.0,0.0,False,stop
+DLTR,B,Consumer Staples,2022-01-11,2022-01-21,7,135.6278,127.5262,133.08,-7.95,-5.97,-0.92,0.0,False,time_stop
+HPQ,B,Information Technology,2022-01-19,2022-01-21,2,37.7989,35.684,125.92,-7.05,-5.6,-1.01,0.0,False,stop
+F,B,Consumer Discretionary,2022-01-21,2022-02-01,7,21.2206,20.5997,124.14,-3.63,-2.93,-0.22,0.0,False,mean_reverted
+CHD,B,Consumer Staples,2022-02-11,2022-02-22,6,99.2196,98.2409,122.8,-1.21,-0.99,-0.18,0.0,False,mean_reverted
+EXC,B,Utilities,2022-02-11,2022-02-23,7,42.1411,41.6991,122.88,-1.29,-1.05,-0.17,0.0,False,time_stop
+DVN,B,Energy,2022-04-01,2022-04-04,1,59.3997,61.2993,122.25,3.91,3.2,0.26,0.0,False,mean_reverted
+DLTR,B,Consumer Staples,2022-04-05,2022-04-08,3,156.2481,158.4307,123.23,1.72,1.4,0.22,0.0,False,mean_reverted
+BRK-B,B,Financials,2022-04-05,2022-04-11,4,345.9429,352.8035,123.33,2.45,1.98,0.41,0.0,False,mean_reverted
+JBL,B,Information Technology,2023-01-30,2023-02-01,2,76.4382,77.8211,124.27,2.25,1.81,0.28,0.0,False,mean_reverted
+FLEX,B,Information Technology,2023-01-31,2023-02-02,2,17.4993,18.1974,124.42,4.96,3.99,0.52,0.0,False,mean_reverted
+AXON,B,Industrials,2023-02-09,2023-02-14,3,187.0935,189.5052,252.14,3.25,1.29,0.13,0.0,False,mean_reverted
+NVR,B,Consumer Discretionary,2023-02-09,2023-02-14,3,5071.9849,5158.0398,250.73,4.25,1.7,0.23,0.0,False,mean_reverted
+RCL,B,Consumer Discretionary,2023-02-22,2023-02-28,4,71.6358,71.1544,254.31,-1.71,-0.67,-0.08,0.0,False,mean_reverted
+FLEX,B,Information Technology,2023-02-21,2023-03-02,7,17.6803,16.9923,255.9,-9.96,-3.89,-0.51,0.0,False,time_stop
+OMC,B,Communication Services,2023-02-28,2023-03-02,2,91.0255,90.8945,253.01,-0.36,-0.14,-0.03,0.0,False,mean_reverted
+SYK,B,Health Care,2023-03-02,2023-03-03,1,258.109,264.9474,124.94,3.31,2.65,0.54,0.0,False,mean_reverted
+NVR,B,Consumer Discretionary,2023-03-24,2023-03-29,3,5344.9612,5447.275,125.77,2.41,1.91,0.32,0.0,False,mean_reverted
+SMCI,B,Information Technology,2023-03-29,2023-04-03,3,10.4602,10.6517,126.37,2.31,1.83,0.13,0.0,False,mean_reverted
+TER,B,Information Technology,2023-04-05,2023-04-12,4,102.151,103.3783,253.9,3.05,1.2,0.15,0.0,False,mean_reverted
+FICO,B,Information Technology,2023-04-06,2023-04-13,4,671.6356,686.7065,252.75,5.67,2.24,0.33,0.0,False,mean_reverted
+BKNG,B,Consumer Discretionary,2023-04-12,2023-04-14,2,103.5662,105.0055,256.8,3.57,1.39,0.27,0.0,False,mean_reverted
+WYNN,B,Consumer Discretionary,2023-04-13,2023-04-14,1,107.6738,109.8351,256.18,5.14,2.01,0.27,0.0,False,mean_reverted
+NVDA,B,Information Technology,2023-04-26,2023-04-27,1,27.0155,27.3493,255.56,3.16,1.24,0.16,0.0,False,mean_reverted
+AMD,B,Information Technology,2023-04-19,2023-04-28,7,88.5543,86.9765,262.61,-4.68,-1.78,-0.18,0.0,False,mean_reverted
+WYNN,B,Consumer Discretionary,2023-04-27,2023-05-01,2,111.4557,115.942,260.32,10.48,4.03,0.57,0.0,False,mean_reverted
+EIX,B,Utilities,2023-05-04,2023-05-08,2,72.3462,73.2833,267.09,3.46,1.3,0.28,0.0,False,mean_reverted
+CDNS,B,Information Technology,2023-05-05,2023-05-16,7,206.043,202.2088,267.09,-4.97,-1.86,-0.33,0.0,False,time_stop
+WST,B,Health Care,2023-05-10,2023-05-17,5,365.8428,345.481,267.52,-14.89,-5.57,-1.01,0.0,False,stop
+ACGL,B,Financials,2023-05-16,2023-05-19,3,74.8774,75.7321,262.44,3.0,1.14,0.21,0.0,False,mean_reverted
+CBOE,B,Financials,2023-05-18,2023-05-22,2,138.2591,138.3508,255.35,0.17,0.07,0.02,0.0,False,mean_reverted
+PHM,B,Consumer Discretionary,2023-05-23,2023-05-31,5,66.4532,66.4767,260.47,0.09,0.04,0.01,0.0,False,mean_reverted
+DHI,B,Consumer Discretionary,2023-05-23,2023-05-31,5,107.2436,106.9465,260.47,-0.72,-0.28,-0.05,0.0,False,mean_reverted
+DVA,B,Health Care,2023-05-31,2023-06-02,2,92.3962,95.8221,260.16,9.65,3.71,0.54,0.0,False,mean_reverted
+CHD,B,Consumer Staples,2023-05-31,2023-06-05,3,91.976,93.7431,260.16,5.0,1.92,0.56,0.0,False,mean_reverted
+NVDA,B,Information Technology,2023-06-08,2023-06-12,2,37.7429,39.1804,262.88,10.01,3.81,0.36,0.0,False,mean_reverted
+TTWO,B,Communication Services,2023-06-06,2023-06-13,5,136.9584,136.4817,267.48,-0.93,-0.35,-0.06,0.0,False,mean_reverted
+CMG,B,Consumer Discretionary,2023-06-20,2023-06-22,2,40.7396,41.3593,272.02,4.14,1.52,0.41,0.0,False,mean_reverted
+SMCI,B,Information Technology,2023-06-20,2023-06-28,6,22.7414,22.3158,272.02,-5.09,-1.87,-0.11,0.0,False,mean_reverted
+PLTR,B,Information Technology,2023-06-22,2023-06-28,4,14.3072,14.5227,269.6,4.06,1.51,0.08,0.0,False,mean_reverted
+PHM,B,Consumer Discretionary,2023-07-10,2023-07-11,1,75.2076,77.4613,273.58,8.2,3.0,0.58,0.0,False,mean_reverted
+AMAT,B,Information Technology,2023-07-10,2023-07-14,4,139.8499,144.4977,273.25,9.08,3.32,0.53,0.0,False,mean_reverted
+PANW,B,Information Technology,2023-07-13,2023-07-18,3,118.2041,124.9075,276.74,15.69,5.67,0.74,0.0,False,mean_reverted
+CCL,B,Consumer Discretionary,2023-07-14,2023-07-19,3,17.7489,18.4808,283.74,11.7,4.12,0.36,0.0,False,mean_reverted
+AMD,B,Information Technology,2023-07-21,2023-07-26,3,111.0255,111.854,293.03,2.19,0.75,0.07,0.0,False,mean_reverted
+TSLA,B,Consumer Discretionary,2023-07-21,2023-07-27,4,268.134,268.1758,295.91,0.05,0.02,0.0,0.0,False,mean_reverted
+TSLA,B,Consumer Discretionary,2023-07-28,2023-07-31,1,259.9899,267.3463,297.03,8.4,2.83,0.26,0.0,False,mean_reverted
+NOW,B,Information Technology,2023-07-28,2023-08-01,2,113.5648,115.5902,294.59,5.25,1.78,0.25,0.0,False,mean_reverted
+DELL,B,Information Technology,2023-07-31,2023-08-02,2,52.5663,53.0235,301.68,2.62,0.87,0.16,0.0,False,mean_reverted
+NXPI,B,Information Technology,2023-08-03,2023-08-08,3,213.1365,214.8925,305.17,2.51,0.82,0.12,0.0,False,mean_reverted
+NCLH,B,Consumer Discretionary,2023-08-03,2023-08-09,4,18.3892,18.4008,305.17,0.19,0.06,0.0,0.0,False,mean_reverted
+NVDA,B,Information Technology,2023-08-10,2023-08-15,3,42.1811,44.5377,306.53,17.13,5.59,0.61,0.0,False,mean_reverted
+SMCI,B,Information Technology,2023-08-10,2023-08-21,7,26.5553,24.4378,306.53,-24.44,-7.97,-0.37,0.0,False,time_stop
+COIN,B,Financials,2023-08-16,2023-08-24,6,82.5513,77.7211,157.16,-9.2,-5.85,-0.33,0.0,False,mean_reverted
+DECK,B,Consumer Discretionary,2023-08-25,2023-08-30,3,87.3753,87.8627,149.13,0.83,0.56,0.09,0.0,False,mean_reverted
+SHW,B,Materials,2023-08-28,2023-08-30,2,264.7023,270.7745,148.94,3.42,2.29,0.5,0.0,False,mean_reverted
+CEG,B,Utilities,2023-09-01,2023-09-05,1,105.6828,106.4967,300.39,2.31,0.77,0.17,0.0,False,mean_reverted
+FDX,B,Industrials,2023-09-06,2023-09-15,7,207.5574,208.2842,301.55,1.06,0.35,0.08,0.0,False,mean_reverted
+JBL,B,Information Technology,2023-09-11,2023-09-15,4,108.3341,108.006,149.53,-0.45,-0.3,-0.05,0.0,False,mean_reverted
+LLY,B,Health Care,2023-09-18,2023-09-21,3,578.289,548.3263,150.93,-7.82,-5.18,-1.01,0.0,False,stop
+FIX,B,Industrials,2023-09-19,2023-09-21,2,183.9819,173.7186,150.47,-8.39,-5.58,-1.01,0.0,False,stop
+APP,B,Communication Services,2023-09-22,2023-09-27,3,38.8394,38.9405,146.87,0.38,0.26,0.02,0.0,False,mean_reverted
+BX,B,Financials,2023-09-22,2023-09-27,3,111.6058,105.2245,146.5,-8.38,-5.72,-1.01,0.0,False,stop
+DLR,B,Real Estate,2023-09-28,2023-10-02,2,116.5582,120.2898,144.33,4.62,3.2,0.53,0.0,False,mean_reverted
+CPAY,B,Financials,2023-09-27,2023-10-03,4,262.7913,250.8442,145.11,-6.6,-4.55,-1.01,0.0,False,stop
+CASY,B,Consumer Staples,2023-10-02,2023-10-05,3,271.3956,270.9345,145.0,-0.25,-0.17,-0.04,0.0,False,mean_reverted
+APO,B,Financials,2023-10-04,2023-10-06,2,87.0035,88.0759,144.02,1.78,1.23,0.22,0.0,False,mean_reverted
+VST,B,Utilities,2023-10-05,2023-10-10,3,31.4057,31.904,144.72,2.3,1.59,0.23,0.0,False,mean_reverted
+CAT,B,Industrials,2023-10-06,2023-10-10,2,261.7008,272.5137,145.25,6.0,4.13,0.73,0.0,False,mean_reverted
+APP,B,Communication Services,2023-10-16,2023-10-18,2,38.7093,39.3403,146.84,2.39,1.63,0.17,0.0,False,mean_reverted
+ODFL,B,Industrials,2023-10-16,2023-10-18,2,204.9024,206.5067,146.66,1.15,0.78,0.11,0.0,False,mean_reverted
+VRSK,B,Industrials,2023-10-19,2023-10-24,3,238.3291,228.4052,147.72,-6.15,-4.16,-1.01,0.0,False,stop
+JBL,B,Information Technology,2023-10-20,2023-10-30,6,129.8149,120.0444,147.12,-11.07,-7.53,-1.01,0.0,False,stop
+TPL,B,Energy,2023-10-25,2023-11-01,5,200.6558,208.0293,144.67,5.32,3.67,0.48,0.0,False,mean_reverted
+FANG,B,Energy,2023-11-09,2023-11-13,2,156.7183,157.941,289.49,2.26,0.78,0.12,0.0,False,mean_reverted
+NRG,B,Utilities,2023-11-22,2023-11-28,3,45.3927,46.2069,290.62,5.21,1.79,0.27,0.0,False,mean_reverted
+TT,B,Industrials,2023-11-30,2023-12-01,1,221.4407,225.887,293.14,5.89,2.01,0.4,0.0,False,mean_reverted
+CEG,B,Utilities,2023-11-30,2023-12-06,4,120.6503,113.4708,293.23,-17.45,-5.95,-1.01,0.0,False,stop
+WRB,B,Financials,2023-12-08,2023-12-12,2,47.2903,48.569,284.82,7.7,2.7,0.64,0.0,False,mean_reverted
+DDOG,B,Information Technology,2023-12-07,2023-12-13,4,117.1385,114.6626,287.44,-6.08,-2.11,-0.27,0.0,False,mean_reverted
+WSM,B,Consumer Discretionary,2023-12-13,2023-12-14,1,95.1776,100.0699,288.26,14.82,5.14,0.86,0.0,False,mean_reverted
+AIZ,B,Financials,2023-12-15,2023-12-20,3,163.0515,166.2468,295.67,5.79,1.96,0.41,0.0,False,mean_reverted
+STX,B,Information Technology,2023-12-21,2023-12-22,1,83.5518,85.3773,298.56,6.52,2.18,0.41,0.0,False,mean_reverted
+ALL,B,Financials,2023-12-21,2023-12-26,2,135.7678,137.3313,295.52,3.4,1.15,0.25,0.0,False,mean_reverted
+DECK,B,Consumer Discretionary,2024-01-02,2024-01-04,2,110.8637,112.1023,303.53,3.39,1.12,0.22,0.0,False,mean_reverted
+VRT,B,Industrials,2024-01-02,2024-01-08,4,47.5037,46.7266,303.53,-4.97,-1.64,-0.19,0.0,False,mean_reverted
+WSM,B,Consumer Discretionary,2024-01-04,2024-01-09,3,97.1886,98.6756,299.04,4.58,1.53,0.24,0.0,False,mean_reverted
+FICO,B,Information Technology,2024-01-08,2024-01-09,1,1121.4805,1144.2675,304.09,6.18,2.03,0.4,0.0,False,mean_reverted
+LULU,B,Consumer Discretionary,2024-01-16,2024-01-19,3,478.289,477.5211,300.84,-0.48,-0.16,-0.03,0.0,False,mean_reverted
+COIN,B,Financials,2024-01-12,2024-01-24,7,137.2586,127.2164,308.12,-22.54,-7.32,-0.36,0.0,False,time_stop
+FICO,B,Information Technology,2024-01-29,2024-02-02,4,1200.6,1242.5784,296.6,10.37,3.5,0.55,0.0,False,mean_reverted
+INTC,B,Information Technology,2024-01-29,2024-02-07,7,43.7319,42.8686,296.08,-5.84,-1.97,-0.2,0.0,False,time_stop
+COIN,B,Financials,2024-02-06,2024-02-09,3,118.6693,142.0889,298.53,58.92,19.74,1.02,0.0,False,mean_reverted
+NFLX,B,Communication Services,2024-02-07,2024-02-12,3,55.8439,56.008,299.2,0.88,0.29,0.04,0.0,False,mean_reverted
+WDC,B,Information Technology,2024-02-09,2024-02-21,7,42.7273,40.7053,328.35,-15.54,-4.73,-0.73,0.0,False,time_stop
+KKR,B,Financials,2024-02-21,2024-02-23,2,92.4862,96.3518,320.99,13.42,4.18,0.73,0.0,False,mean_reverted
+FIX,B,Industrials,2024-03-12,2024-03-15,3,297.1785,301.7691,327.7,5.06,1.54,0.18,0.0,False,mean_reverted
+FLEX,B,Information Technology,2024-03-12,2024-03-15,3,29.0545,27.0455,327.48,-22.64,-6.91,-1.01,0.0,False,stop
+UBER,B,Industrials,2024-03-18,2024-03-20,2,77.0385,77.0515,318.91,0.05,0.02,0.0,0.0,False,mean_reverted
+PLTR,B,Information Technology,2024-03-18,2024-03-21,3,23.7819,25.2873,316.91,20.06,6.33,0.48,0.0,False,mean_reverted
+AMD,B,Information Technology,2024-03-22,2024-03-28,4,177.2986,179.3803,328.97,3.86,1.17,0.09,0.0,False,mean_reverted
+META,B,Communication Services,2024-04-01,2024-04-03,2,487.4436,498.6805,330.9,7.63,2.31,0.35,0.0,False,mean_reverted
+PLTR,B,Information Technology,2024-04-01,2024-04-08,5,22.9915,23.0685,330.27,1.11,0.33,0.03,0.0,False,mean_reverted
+IR,B,Industrials,2024-04-03,2024-04-08,3,92.5963,95.0125,332.76,8.68,2.61,0.66,0.0,False,mean_reverted
+TGT,B,Consumer Staples,2024-04-09,2024-04-11,2,170.085,172.7036,339.61,5.23,1.54,0.31,0.0,False,mean_reverted
+HIG,B,Financials,2024-04-10,2024-04-19,7,98.6193,97.6711,339.61,-3.27,-0.96,-0.25,0.0,False,time_stop
+WSM,B,Consumer Discretionary,2024-04-11,2024-04-22,7,148.9594,141.0844,343.41,-18.16,-5.29,-0.74,0.0,False,time_stop
+FIX,B,Industrials,2024-04-19,2024-04-24,3,292.6462,316.1119,165.0,13.23,8.02,0.95,0.0,False,mean_reverted
+SMCI,B,Information Technology,2024-04-22,2024-04-26,4,73.2286,79.882,165.49,15.04,9.09,0.32,0.0,False,mean_reverted
+WFC,B,Financials,2024-05-01,2024-05-03,2,59.6098,60.0,172.82,1.13,0.65,0.14,0.0,False,mean_reverted
+HOOD,B,Financials,2024-05-13,2024-05-15,2,16.6283,18.3408,343.51,35.38,10.3,0.69,0.0,False,mean_reverted
+COIN,B,Financials,2024-05-13,2024-05-16,3,204.102,214.8925,346.21,18.3,5.29,0.27,0.0,False,mean_reverted
+CMG,B,Consumer Discretionary,2024-05-17,2024-05-20,1,62.9361,64.3674,373.05,8.48,2.27,0.56,0.0,False,mean_reverted
+FIX,B,Industrials,2024-05-20,2024-05-22,2,319.0995,327.5362,377.29,9.98,2.64,0.27,0.0,False,mean_reverted
+UAL,B,Industrials,2024-05-22,2024-05-29,4,52.9064,49.2327,382.28,-26.55,-6.94,-1.01,0.0,False,stop
+WSM,B,Consumer Discretionary,2024-05-23,2024-05-31,5,140.3301,144.1029,380.52,10.23,2.69,0.25,0.0,False,mean_reverted
+CMG,B,Consumer Discretionary,2024-05-30,2024-06-03,2,61.6454,62.7462,357.49,6.38,1.79,0.44,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2024-05-31,2024-06-06,4,20.6183,21.5352,375.49,16.7,4.45,0.29,0.0,False,mean_reverted
+HWM,B,Industrials,2024-06-05,2024-06-06,1,82.4412,84.3778,373.69,8.78,2.35,0.45,0.0,False,mean_reverted
+RTX,B,Industrials,2024-06-13,2024-06-14,1,106.6233,103.4102,387.01,-11.66,-3.01,-1.02,0.0,False,stop
+GS,B,Financials,2024-06-12,2024-06-18,4,455.8278,449.3452,390.05,-5.55,-1.42,-0.34,0.0,False,mean_reverted
+HOOD,B,Financials,2024-06-20,2024-06-24,2,22.011,21.8391,381.45,-2.98,-0.78,-0.06,0.0,False,mean_reverted
+NVDA,B,Information Technology,2024-06-25,2024-06-27,2,121.2606,124.0379,379.96,8.7,2.29,0.2,0.0,False,mean_reverted
+AVGO,B,Information Technology,2024-06-25,2024-07-01,4,160.093,160.7396,375.02,1.51,0.4,0.04,0.0,False,mean_reverted
+NRG,B,Utilities,2024-07-01,2024-07-05,3,78.8694,79.8301,380.02,4.63,1.22,0.14,0.0,False,mean_reverted
+MRNA,B,Health Care,2024-06-27,2024-07-08,6,121.961,118.3508,383.27,-11.35,-2.96,-0.19,0.0,False,mean_reverted
+CASY,B,Consumer Staples,2024-07-05,2024-07-12,5,370.075,376.6016,377.94,6.67,1.76,0.31,0.0,False,mean_reverted
+VST,B,Utilities,2024-07-16,2024-07-18,2,86.3231,74.3037,384.68,-53.56,-13.92,-1.0,0.0,False,stop
+COST,B,Consumer Staples,2024-07-12,2024-07-23,7,850.315,848.4756,385.04,-0.83,-0.22,-0.05,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2024-07-25,2024-07-29,2,24.7544,26.7706,176.44,14.37,8.14,0.51,0.0,False,mean_reverted
+HPE,B,Information Technology,2024-07-19,2024-07-30,7,20.6703,19.5502,331.48,-17.96,-5.42,-0.79,0.0,False,time_stop
+NVDA,B,Information Technology,2024-07-31,2024-08-01,1,112.9565,117.4712,173.17,6.92,4.0,0.3,0.0,False,mean_reverted
+HOOD,B,Financials,2024-07-29,2024-08-02,4,21.5708,18.808,357.73,-45.82,-12.81,-1.0,0.0,False,stop
+CFG,B,Financials,2024-08-02,2024-08-05,1,39.8099,37.0823,174.24,-11.94,-6.85,-1.01,0.0,False,stop
+CASY,B,Consumer Staples,2024-08-05,2024-08-09,4,363.2315,373.9629,167.63,4.95,2.95,0.47,0.0,False,mean_reverted
+CBRE,B,Real Estate,2024-08-06,2024-08-09,3,106.033,109.0055,166.31,4.66,2.8,0.4,0.0,False,mean_reverted
+LMT,B,Industrials,2024-08-22,2024-08-27,3,554.4571,559.1703,335.44,2.85,0.85,0.21,0.0,False,mean_reverted
+PLTR,B,Information Technology,2024-08-27,2024-08-30,3,30.5653,31.0345,336.78,5.17,1.54,0.14,0.0,False,mean_reverted
+AXON,B,Industrials,2024-08-27,2024-09-03,4,360.6702,361.1693,336.87,0.47,0.14,0.02,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2024-08-30,2024-09-06,4,30.4752,26.5322,340.07,-44.0,-12.94,-1.0,0.0,False,stop
+TPL,B,Energy,2024-09-04,2024-09-13,7,271.8158,267.3996,330.92,-5.38,-1.62,-0.21,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2024-09-09,2024-09-13,4,27.4817,28.3438,157.12,4.93,3.14,0.23,0.0,False,mean_reverted
+VTR,B,Real Estate,2024-09-20,2024-09-24,2,62.3612,63.4083,317.46,5.33,1.68,0.37,0.0,False,mean_reverted
+TPL,B,Energy,2024-09-27,2024-10-02,3,293.9135,308.0992,320.13,15.45,4.83,0.59,0.0,False,mean_reverted
+PGR,B,Financials,2024-09-27,2024-10-02,3,251.1855,253.3832,318.7,2.79,0.87,0.2,0.0,False,mean_reverted
+CHRW,B,Industrials,2024-10-04,2024-10-09,3,106.9034,107.2064,329.24,0.93,0.28,0.05,0.0,False,mean_reverted
+VTR,B,Real Estate,2024-10-04,2024-10-10,4,62.1611,62.5787,327.08,2.2,0.67,0.15,0.0,False,mean_reverted
+ETR,B,Utilities,2024-10-09,2024-10-14,3,65.2826,65.2923,330.29,0.05,0.01,0.0,0.0,False,mean_reverted
+LMT,B,Industrials,2024-10-11,2024-10-14,1,600.8803,605.697,328.91,2.64,0.8,0.22,0.0,False,mean_reverted
+ERIE,B,Financials,2024-10-17,2024-10-17,0,516.7482,487.7545,332.15,-18.64,-5.61,-1.01,0.0,False,stop
+FICO,B,Information Technology,2024-10-21,2024-10-23,2,1965.6023,2019.1798,321.64,8.77,2.73,0.48,0.0,False,mean_reverted
+MMM,B,Industrials,2024-10-23,2024-10-25,2,131.2856,124.6189,322.01,-16.35,-5.08,-1.01,0.0,False,stop
+EBAY,B,Consumer Discretionary,2024-10-18,2024-10-29,7,65.4327,62.5587,322.83,-14.18,-4.39,-0.98,0.0,False,time_stop
+CIEN,B,Information Technology,2024-10-28,2024-10-30,2,63.4417,65.2474,313.29,8.92,2.85,0.41,0.0,False,mean_reverted
+AXON,B,Industrials,2024-10-31,2024-11-06,4,436.178,458.8005,316.41,16.41,5.19,1.15,0.0,False,mean_reverted
+NVDA,B,Information Technology,2024-11-01,2024-11-06,3,134.7673,142.8885,311.81,18.79,6.03,0.69,0.0,False,mean_reverted
+INCY,B,Health Care,2024-11-15,2024-11-19,2,77.1886,67.0764,334.01,-43.76,-13.1,-1.9,0.0,False,stop
+COHR,B,Information Technology,2024-11-15,2024-11-20,3,99.0195,101.8391,334.01,9.51,2.85,0.24,0.0,False,mean_reverted
+IBKR,B,Financials,2024-12-03,2024-12-09,4,46.8709,46.7166,316.89,-1.04,-0.33,-0.06,0.0,False,mean_reverted
+MTB,B,Financials,2024-12-03,2024-12-11,6,215.6678,203.9645,315.36,-17.11,-5.43,-1.01,0.0,False,stop
+CVNA,B,Consumer Discretionary,2024-12-10,2024-12-12,2,48.2941,49.8041,309.83,9.69,3.13,0.32,0.0,False,mean_reverted
+MTB,B,Financials,2024-12-12,2024-12-18,4,202.8814,191.2896,312.65,-17.86,-5.71,-1.01,0.0,False,stop
+TPL,B,Energy,2024-12-12,2024-12-23,7,400.2,379.9033,312.65,-15.86,-5.07,-0.28,0.0,False,time_stop
+CVNA,B,Consumer Discretionary,2024-12-19,2024-12-27,5,48.3742,43.8241,146.25,-13.76,-9.41,-0.88,0.0,False,mean_reverted
+BE,B,Industrials,2024-12-30,2025-01-03,3,22.3612,23.7381,288.91,17.79,6.16,0.3,0.0,False,mean_reverted
+AXON,B,Industrials,2025-01-02,2025-01-06,2,604.372,550.1592,143.97,-12.91,-8.97,-1.01,0.0,False,stop
+SNA,B,Industrials,2025-01-03,2025-01-10,4,335.0374,333.0034,148.44,-0.9,-0.61,-0.14,0.0,False,mean_reverted
+CCL,B,Consumer Discretionary,2025-01-07,2025-01-13,3,24.092,23.7181,291.25,-4.52,-1.55,-0.17,0.0,False,mean_reverted
+APO,B,Financials,2025-01-13,2025-01-15,2,153.7668,165.917,143.1,11.31,7.9,0.95,0.0,False,mean_reverted
+NFLX,B,Communication Services,2025-01-10,2025-01-16,4,86.6833,86.053,145.72,-1.06,-0.73,-0.13,0.0,False,mean_reverted
+BE,B,Industrials,2025-01-15,2025-01-17,2,23.2616,24.2379,145.53,6.11,4.2,0.22,0.0,False,mean_reverted
+LULU,B,Consumer Discretionary,2025-01-16,2025-01-23,4,377.8588,383.2583,145.93,2.09,1.43,0.17,0.0,False,mean_reverted
+TPL,B,Energy,2025-01-27,2025-01-27,0,444.1386,398.614,297.86,-30.53,-10.25,-1.0,0.0,False,stop
+MRVL,B,Information Technology,2025-01-28,2025-01-31,3,103.3517,112.3938,282.6,24.72,8.75,0.59,0.0,False,mean_reverted
+CIEN,B,Information Technology,2025-01-28,2025-01-31,3,79.0595,85.1874,278.47,21.58,7.75,0.51,0.0,False,mean_reverted
+COF,B,Financials,2025-02-05,2025-02-06,1,201.9209,205.4972,305.75,5.42,1.77,0.3,0.0,False,mean_reverted
+APO,B,Financials,2025-02-05,2025-02-14,7,161.2506,158.1909,305.75,-5.8,-1.9,-0.24,0.0,False,time_stop
+TSLA,B,Consumer Discretionary,2025-02-10,2025-02-14,4,356.3881,360.4397,310.54,3.53,1.14,0.08,0.0,False,mean_reverted
+LULU,B,Consumer Discretionary,2025-02-14,2025-02-18,1,393.7167,365.2416,307.32,-22.23,-7.23,-1.01,0.0,False,stop
+MRVL,B,Information Technology,2025-02-14,2025-02-19,2,103.0215,110.0949,307.32,21.1,6.87,0.5,0.0,False,mean_reverted
+META,B,Communication Services,2025-02-21,2025-02-25,2,696.9283,651.4149,306.76,-20.03,-6.53,-1.01,0.0,False,stop
+WMT,B,Consumer Staples,2025-02-21,2025-02-26,3,96.5783,97.6511,306.76,3.41,1.11,0.21,0.0,False,mean_reverted
+JBL,B,Information Technology,2025-02-26,2025-03-03,3,159.4397,149.3001,149.22,-9.49,-6.36,-1.01,0.0,False,stop
+IBM,B,Information Technology,2025-02-26,2025-03-05,5,258.2291,251.4542,148.77,-3.9,-2.62,-0.49,0.0,False,mean_reverted
+PLTR,B,Information Technology,2025-03-04,2025-03-06,2,80.2001,87.4612,145.69,13.19,9.05,0.38,0.0,False,mean_reverted
+ETR,B,Utilities,2025-03-07,2025-03-12,3,81.2006,83.2384,149.46,3.75,2.51,0.38,0.0,False,mean_reverted
+TPR,B,Consumer Discretionary,2025-03-07,2025-03-13,4,77.1285,69.106,149.17,-15.52,-10.4,-1.0,0.0,False,stop
+VRSN,B,Information Technology,2025-05-14,2025-05-16,2,275.5677,280.3598,146.23,2.54,1.74,0.29,0.0,False,mean_reverted
+PM,B,Consumer Staples,2025-05-14,2025-05-16,2,163.5217,169.2453,146.28,5.12,3.5,0.61,0.0,False,mean_reverted
+PLTR,B,Information Technology,2025-05-22,2025-05-28,3,122.011,124.1679,148.15,2.62,1.77,0.13,0.0,False,mean_reverted
+IDXX,B,Health Care,2025-05-22,2025-05-28,3,499.4896,514.6426,147.71,4.48,3.03,0.44,0.0,False,mean_reverted
+BA,B,Industrials,2025-05-28,2025-05-30,2,202.051,206.6666,149.92,3.42,2.28,0.35,0.0,False,mean_reverted
+VRSN,B,Information Technology,2025-05-29,2025-06-02,2,269.3146,270.8645,149.82,0.86,0.58,0.11,0.0,False,mean_reverted
+PODD,B,Health Care,2025-06-05,2025-06-10,3,319.7398,298.8048,150.99,-9.89,-6.55,-1.01,0.0,False,stop
+CME,B,Financials,2025-06-05,2025-06-10,3,278.0189,264.6003,150.93,-7.28,-4.83,-1.01,0.0,False,stop
+PM,B,Consumer Staples,2025-06-11,2025-06-12,1,179.1996,183.7281,146.24,3.7,2.53,0.57,0.0,False,mean_reverted
+NRG,B,Utilities,2025-06-11,2025-06-16,3,150.5852,153.3933,146.7,2.74,1.86,0.22,0.0,False,mean_reverted
+RL,B,Consumer Discretionary,2025-06-12,2025-06-17,3,265.7628,267.4862,147.26,0.95,0.65,0.09,0.0,False,mean_reverted
+CVNA,B,Consumer Discretionary,2025-06-16,2025-06-20,3,60.4412,62.5087,147.54,5.05,3.42,0.29,0.0,False,mean_reverted
+PM,B,Consumer Staples,2025-06-26,2025-07-01,3,180.9404,182.6486,149.81,1.41,0.94,0.22,0.0,False,mean_reverted
+MOS,B,Materials,2025-06-27,2025-07-01,2,35.1376,36.4118,149.75,5.43,3.63,0.55,0.0,False,mean_reverted
+STX,B,Information Technology,2025-07-10,2025-07-14,2,144.5722,148.4757,303.04,8.18,2.7,0.41,0.0,False,mean_reverted
+NRG,B,Utilities,2025-07-10,2025-07-15,3,150.4552,151.7841,300.36,2.65,0.88,0.11,0.0,False,mean_reverted
+FERG,B,Industrials,2025-07-16,2025-07-21,3,218.2691,222.8085,308.46,6.42,2.08,0.46,0.0,False,mean_reverted
+ECHO,B,Communication Services,2025-07-16,2025-07-24,6,29.5047,29.975,308.46,4.92,1.59,0.12,0.0,False,mean_reverted
+WYNN,B,Consumer Discretionary,2025-07-21,2025-07-24,3,107.2536,108.5957,306.99,3.84,1.25,0.2,0.0,False,mean_reverted
+HAS,B,Consumer Discretionary,2025-07-25,2025-07-29,2,75.8779,76.4118,316.05,2.22,0.7,0.11,0.0,False,mean_reverted
+JCI,B,Industrials,2025-07-30,2025-08-04,3,102.7313,106.9465,317.16,13.01,4.1,0.72,0.0,False,mean_reverted
+RCL,B,Consumer Discretionary,2025-08-01,2025-08-12,7,309.6147,305.5172,317.16,-4.2,-1.32,-0.16,0.0,False,time_stop
+STX,B,Information Technology,2025-08-07,2025-08-12,3,145.0525,152.1539,325.92,15.96,4.9,0.51,0.0,False,mean_reverted
+CSGP,B,Real Estate,2025-08-12,2025-08-12,0,92.8664,87.9631,329.03,-17.37,-5.28,-1.01,0.0,False,stop
+PTC,B,Information Technology,2025-08-12,2025-08-14,2,203.9219,208.1159,329.54,6.78,2.06,0.28,0.0,False,mean_reverted
+DLTR,B,Consumer Staples,2025-08-19,2025-08-21,2,112.2861,112.5337,323.58,0.71,0.22,0.04,0.0,False,mean_reverted
+NDAQ,B,Financials,2025-08-18,2025-08-25,5,94.7273,94.5727,324.25,-0.53,-0.16,-0.04,0.0,False,mean_reverted
+GNRC,B,Industrials,2025-08-21,2025-08-25,2,189.6848,194.3528,324.21,7.98,2.46,0.32,0.0,False,mean_reverted
+VRT,B,Industrials,2025-08-25,2025-08-27,2,126.5232,127.3663,328.33,2.19,0.67,0.06,0.0,False,mean_reverted
+RDDT,B,Communication Services,2025-08-25,2025-08-27,2,214.3771,220.8595,327.61,9.91,3.02,0.21,0.0,False,mean_reverted
+RDDT,B,Communication Services,2025-08-28,2025-08-29,1,212.9064,225.4272,334.37,19.66,5.88,0.4,0.0,False,mean_reverted
+EBAY,B,Consumer Discretionary,2025-08-28,2025-09-05,5,93.6568,93.1734,334.37,-1.73,-0.52,-0.08,0.0,False,mean_reverted
+GNRC,B,Industrials,2025-09-04,2025-09-08,2,175.5477,181.1294,337.96,10.75,3.18,0.43,0.0,False,mean_reverted
+AMD,B,Information Technology,2025-09-08,2025-09-11,3,151.8759,158.5407,348.72,15.3,4.39,0.4,0.0,False,mean_reverted
+RCL,B,Consumer Discretionary,2025-09-10,2025-09-12,2,346.9834,347.5661,348.72,0.59,0.17,0.02,0.0,False,mean_reverted
+DHI,B,Consumer Discretionary,2025-09-18,2025-09-25,5,169.6848,165.2073,356.66,-9.41,-2.64,-0.34,0.0,False,mean_reverted
+LITE,B,Information Technology,2025-09-25,2025-09-29,2,146.6933,164.9175,351.39,43.65,12.42,1.01,0.0,False,mean_reverted
+AVGO,B,Information Technology,2025-09-23,2025-10-02,7,340.4101,347.4362,350.93,7.24,2.06,0.22,0.0,False,mean_reverted
+ORCL,B,Information Technology,2025-09-29,2025-10-02,3,284.7423,291.6541,370.75,9.0,2.43,0.18,0.0,False,mean_reverted
+UAL,B,Industrials,2025-10-02,2025-10-07,3,93.6868,97.3513,377.89,14.78,3.91,0.43,0.0,False,mean_reverted
+RDDT,B,Communication Services,2025-10-02,2025-10-08,4,206.9534,206.1219,381.9,-1.53,-0.4,-0.02,0.0,False,mean_reverted
+APTV,B,Consumer Discretionary,2025-10-08,2025-10-10,2,86.123,81.3827,388.53,-21.38,-5.5,-1.01,0.0,False,stop
+STX,B,Information Technology,2025-10-08,2025-10-16,6,224.9824,224.0379,388.53,-1.63,-0.42,-0.03,0.0,False,mean_reverted
+WDC,B,Information Technology,2025-10-13,2025-10-16,3,122.3111,123.2084,367.14,2.69,0.73,0.06,0.0,False,mean_reverted
+ECHO,B,Communication Services,2025-10-17,2025-10-21,2,72.2461,74.043,378.37,9.41,2.49,0.23,0.0,False,mean_reverted
+HOOD,B,Financials,2025-10-17,2025-10-21,2,128.2241,135.2223,378.37,20.65,5.46,0.39,0.0,False,mean_reverted
+SKYD,B,Communication Services,2025-10-30,2025-11-10,7,15.7979,15.1224,393.4,-16.82,-4.28,-0.38,0.0,False,mean_reverted
+AVGO,B,Information Technology,2025-11-05,2025-11-11,4,351.0655,358.7905,381.47,8.39,2.2,0.23,0.0,False,mean_reverted
+STX,B,Information Technology,2025-11-14,2025-11-20,4,254.2771,273.0434,389.18,28.72,7.38,0.44,0.0,False,mean_reverted
+APH,B,Information Technology,2025-11-14,2025-11-20,4,65.2026,70.3098,389.18,30.48,7.83,0.96,0.0,False,mean_reverted
+P,B,Information Technology,2025-11-20,2025-11-21,1,85.983,76.4087,208.88,-23.26,-11.14,-1.0,0.0,False,stop
+LVS,B,Consumer Discretionary,2025-11-20,2025-11-24,2,64.6823,64.6077,209.39,-0.24,-0.12,-0.02,0.0,False,mean_reverted
+CAH,B,Health Care,2025-12-02,2025-12-10,6,208.104,197.2668,407.04,-21.2,-5.21,-1.01,0.0,False,stop
+REGN,B,Health Care,2025-12-04,2025-12-11,5,732.8162,725.717,398.83,-3.86,-0.97,-0.13,0.0,False,mean_reverted
+HCA,B,Health Care,2025-12-11,2025-12-12,1,471.1855,482.7685,394.51,9.7,2.46,0.38,0.0,False,mean_reverted
+BE,B,Industrials,2025-12-11,2025-12-22,7,100.05,93.8531,394.51,-24.44,-6.19,-0.21,0.0,False,mean_reverted
+INTC,B,Information Technology,2025-12-15,2025-12-22,5,38.3492,37.8711,389.36,-4.85,-1.25,-0.09,0.0,False,mean_reverted
+CHRW,B,Industrials,2025-12-31,2026-01-05,2,161.991,163.7981,384.71,4.29,1.12,0.22,0.0,False,mean_reverted
+IVZ,B,Financials,2025-12-31,2026-01-05,2,26.4832,26.9265,384.67,6.44,1.67,0.28,0.0,False,mean_reverted
+LLY,B,Health Care,2026-01-06,2026-01-08,2,1044.632,1113.1331,390.08,25.58,6.56,1.07,0.0,False,mean_reverted
+LVS,B,Consumer Discretionary,2026-01-07,2026-01-09,2,63.3216,60.0748,390.08,-20.0,-5.13,-1.01,0.0,False,stop
+CAH,B,Health Care,2026-01-12,2026-01-14,2,202.101,208.4257,392.86,12.29,3.13,0.67,0.0,False,mean_reverted
+BIIB,B,Health Care,2026-01-14,2026-01-16,2,177.8189,164.9881,399.01,-28.79,-7.22,-1.01,0.0,False,stop
+REGN,B,Health Care,2026-01-15,2026-01-22,4,755.2274,749.9649,389.46,-2.71,-0.7,-0.1,0.0,False,mean_reverted
+FOXA,B,Communication Services,2026-01-20,2026-01-22,2,71.6558,72.9635,378.89,6.91,1.82,0.36,0.0,False,mean_reverted
+CAH,B,Health Care,2026-01-23,2026-01-27,2,207.1435,210.4947,386.72,6.26,1.62,0.33,0.0,False,mean_reverted
+ULTA,B,Consumer Discretionary,2026-01-28,2026-02-02,3,650.2349,646.7165,389.84,-2.11,-0.54,-0.09,0.0,False,mean_reverted
+DG,B,Consumer Staples,2026-01-30,2026-02-04,3,140.1801,149.2653,384.11,24.89,6.48,0.86,0.0,False,mean_reverted
+NEM,B,Materials,2026-02-02,2026-02-09,5,111.1155,116.6017,393.24,19.42,4.94,0.41,0.0,False,mean_reverted
+LRCX,B,Information Technology,2026-02-05,2026-02-09,2,208.2341,228.8955,409.23,40.6,9.92,0.65,0.0,False,mean_reverted
+NDSN,B,Industrials,2026-02-24,2026-02-25,1,290.095,295.752,215.62,4.2,1.95,0.36,0.0,False,mean_reverted
+WDC,B,Information Technology,2026-02-25,2026-02-26,1,280.6402,286.0069,216.67,4.14,1.91,0.1,0.0,False,mean_reverted
+STX,B,Information Technology,2026-02-25,2026-02-26,1,409.4646,413.4832,214.73,2.11,0.98,0.06,0.0,False,mean_reverted
+VTRS,B,Health Care,2026-02-27,2026-03-03,2,15.1676,15.0425,436.47,-3.6,-0.82,-0.11,0.0,False,mean_reverted
+STX,B,Information Technology,2026-03-03,2026-03-10,5,361.4406,377.741,217.34,9.8,4.51,0.25,0.0,False,mean_reverted
+LRCX,B,Information Technology,2026-03-04,2026-03-11,5,221.8209,214.3428,216.76,-7.31,-3.37,-0.26,0.0,False,mean_reverted
+TRGP,B,Energy,2026-03-11,2026-03-12,1,233.7668,235.2123,217.96,1.35,0.62,0.09,0.0,False,mean_reverted
+XOM,B,Energy,2026-03-11,2026-03-12,1,148.064,152.1939,217.66,6.07,2.79,0.42,0.0,False,mean_reverted
+VTRS,B,Health Care,2026-03-12,2026-03-18,4,13.7769,13.6931,219.82,-1.34,-0.61,-0.07,0.0,False,mean_reverted
+WAB,B,Industrials,2026-03-13,2026-03-24,7,242.2411,239.1204,219.91,-2.83,-1.29,-0.2,0.0,False,mean_reverted
+TGT,B,Consumer Staples,2026-03-19,2026-03-24,3,114.7173,113.7631,218.47,-1.82,-0.83,-0.11,0.0,False,mean_reverted
+BG,B,Consumer Staples,2026-04-10,2026-04-17,5,123.3917,119.97,436.64,-12.11,-2.77,-0.3,0.0,False,mean_reverted
+XOM,B,Energy,2026-04-10,2026-04-17,5,154.117,144.7876,435.87,-26.39,-6.05,-0.67,0.0,False,mean_reverted
+TPL,B,Energy,2026-04-29,2026-04-30,1,436.288,431.9339,417.39,-4.17,-1.0,-0.09,0.0,False,mean_reverted
+MAR,B,Consumer Discretionary,2026-04-29,2026-05-01,2,357.5687,357.3212,414.81,-0.29,-0.07,-0.01,0.0,False,mean_reverted
+TER,B,Information Technology,2026-04-30,2026-05-06,4,327.1635,368.3258,413.21,51.99,12.58,0.73,0.0,False,mean_reverted
+BE,B,Industrials,2026-05-08,2026-05-12,2,271.3556,275.862,441.16,7.33,1.66,0.09,0.0,False,mean_reverted
+OXY,B,Energy,2026-05-07,2026-05-13,4,53.937,56.1919,441.16,18.44,4.18,0.42,0.0,False,mean_reverted
+MCHP,B,Information Technology,2026-05-14,2026-05-21,5,96.4382,92.9535,454.04,-16.41,-3.61,-0.35,0.0,False,mean_reverted
+MU,B,Information Technology,2026-05-19,2026-05-21,2,665.9128,735.9918,445.39,46.87,10.52,0.57,0.0,False,mean_reverted
+LITE,B,Information Technology,2026-05-21,2026-05-22,1,870.2349,964.6674,469.28,50.92,10.85,0.46,0.0,False,mean_reverted
+VRT,B,Industrials,2026-05-21,2026-05-26,2,322.4611,340.8895,468.69,26.79,5.71,0.39,0.0,False,mean_reverted
+GOOGL,B,Communication Services,2026-05-26,2026-05-27,1,384.7023,386.4767,507.05,2.34,0.46,0.07,0.0,False,mean_reverted
+DOW,B,Materials,2026-05-22,2026-06-02,6,36.1681,34.5377,495.42,-22.33,-4.51,-0.4,0.0,False,mean_reverted
+BE,B,Industrials,2026-06-02,2026-06-03,1,280.5302,296.6616,493.05,28.35,5.75,0.28,0.0,False,mean_reverted
+LYB,B,Materials,2026-05-27,2026-06-05,7,67.7939,65.7171,503.22,-15.42,-3.06,-0.29,0.0,False,time_stop
+MU,B,Information Technology,2026-06-08,2026-06-12,4,938.7392,971.3241,504.6,17.52,3.47,0.2,0.0,False,mean_reverted
+STX,B,Information Technology,2026-06-08,2026-06-12,4,883.1613,879.7499,484.52,-1.87,-0.39,-0.03,0.0,False,mean_reverted
+CSCO,B,Information Technology,2026-06-18,2026-06-23,2,118.6593,118.4807,497.0,-0.75,-0.15,-0.02,0.0,False,mean_reverted
+TWLO,B,Information Technology,2026-06-16,2026-06-25,6,200.16,185.807,512.42,-36.74,-7.17,-0.49,0.0,False,mean_reverted
+CASY,B,Consumer Staples,2026-06-23,2026-07-01,6,835.4275,793.1932,490.9,-24.82,-5.06,-0.53,0.0,False,mean_reverted
+BE,B,Industrials,2026-06-29,2026-07-01,2,272.5862,290.4847,238.5,15.66,6.57,0.23,0.0,False,mean_reverted
+IBKR,B,Financials,2026-07-01,2026-07-02,1,88.074,93.2034,489.1,28.48,5.82,0.63,0.0,False,mean_reverted
+NUE,B,Materials,2026-07-01,2026-07-07,3,220.3801,221.829,489.1,3.22,0.66,0.07,0.0,False,mean_reverted
+WDC,B,Information Technology,2026-07-06,2026-07-10,4,567.2835,563.718,503.75,-3.17,-0.63,-0.03,0.0,False,mean_reverted
+JBL,B,Information Technology,2026-07-07,2026-07-10,3,329.5947,330.0049,506.15,0.63,0.12,0.01,0.0,False,mean_reverted
+BEN,B,Financials,2026-07-14,2026-07-16,2,32.6663,33.3033,503.68,9.82,1.95,0.27,0.0,False,mean_reverted
+SNDK,B,Information Technology,2026-07-17,2026-07-22,3,1365.8876,1525.237,508.59,59.33,11.67,0.3,0.0,False,mean_reverted
+STX,B,Information Technology,2026-07-17,2026-07-22,3,721.3005,861.2792,508.59,98.7,19.41,0.73,0.0,False,mean_reverted
+TWLO,B,Information Technology,2026-07-22,2026-07-28,4,194.8374,193.2233,585.31,-4.85,-0.83,-0.06,0.0,False,mean_reverted
+CRWD,B,Information Technology,2026-07-22,2026-07-31,7,192.6563,187.1264,587.61,-16.87,-2.87,-0.21,0.0,False,mean_reverted
+PANW,B,Information Technology,2026-07-28,2026-07-31,3,317.6688,332.1738,283.03,12.92,4.57,0.37,0.0,False,mean_reverted
+ILMN,B,Health Care,2026-08-10,2026-08-13,3,186.7833,193.903,583.21,22.23,3.81,0.35,0.0,False,mean_reverted
+BAX,B,Health Care,2026-08-18,2026-08-20,2,26.093,25.887,588.62,-4.65,-0.79,-0.08,0.0,False,mean_reverted
+TRV,B,Financials,2026-08-13,2026-08-24,7,371.6457,365.6271,594.33,-9.62,-1.62,-0.28,0.0,False,time_stop
+NTAP,B,Information Technology,2026-08-20,2026-08-27,5,194.187,193.7531,584.47,-1.31,-0.22,-0.02,0.0,False,mean_reverted
+CRL,B,Health Care,2026-09-02,2026-09-03,1,285.6327,294.0629,586.54,17.31,2.95,0.35,0.0,False,mean_reverted
+ILMN,B,Health Care,2026-09-02,2026-09-04,2,208.7243,216.6316,583.16,22.09,3.79,0.36,0.0,False,mean_reverted
+EXPD,B,Industrials,2026-09-03,2026-09-08,2,187.2536,188.1859,601.52,2.99,0.5,0.1,0.0,False,mean_reverted
+DXCM,B,Health Care,2026-09-08,2026-09-15,5,86.6333,83.998,607.74,-18.49,-3.04,-0.42,0.0,False,mean_reverted
+VEEV,B,Health Care,2026-09-09,2026-09-15,4,266.3431,260.6696,600.36,-12.79,-2.13,-0.21,0.0,False,mean_reverted
+GEN,B,Information Technology,2026-09-21,2026-09-22,1,29.5448,27.2824,588.74,-45.08,-7.66,-1.01,0.0,False,stop
+BAX,B,Health Care,2026-09-18,2026-09-23,3,23.0615,23.5782,592.1,13.27,2.24,0.25,0.0,False,mean_reverted
+MPC,B,Energy,2026-09-23,2026-09-28,3,393.2465,395.802,576.19,3.74,0.65,0.07,0.0,False,mean_reverted
+VLO,B,Energy,2026-09-23,2026-09-28,3,380.6202,388.9154,573.58,12.5,2.18,0.23,0.0,False,mean_reverted
+HPQ,B,Information Technology,2026-09-30,2026-10-01,1,30.7053,31.5942,577.76,16.72,2.89,0.24,0.0,False,mean_reverted
+HOOD,B,Financials,2026-09-29,2026-10-06,5,118.8894,114.9525,584.32,-19.35,-3.31,-0.26,0.0,False,mean_reverted
+SOLV,B,Health Care,2026-10-01,2026-10-12,7,87.8639,86.9565,288.49,-2.98,-1.03,-0.19,0.0,False,mean_reverted
+AMD,B,Information Technology,2026-10-12,2026-10-14,3,600.23,570.5346,581.51,-28.77,-4.95,-0.5,0.0,False,end_of_test
+NVDA,B,Information Technology,2026-10-12,2026-10-14,3,228.8444,221.1894,581.51,-19.45,-3.35,-0.54,0.0,False,end_of_test
