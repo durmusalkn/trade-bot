@@ -99,6 +99,8 @@ class Backtester:
             "days_held": pos.days_held,
             "entry_price": round(pos.entry_price, 4),
             "exit_price": round(self._sell_price(price), 4),
+            "initial_stop": round(pos.entry_price - pos.risk_per_share, 4),
+            "stop_distance_pct": round(100 * pos.risk_per_share / pos.entry_price, 2),
             "invested": round(pos.cost, 2),
             "pnl": round(pnl, 2),
             "return_pct": round(100 * pnl / pos.cost, 2),
