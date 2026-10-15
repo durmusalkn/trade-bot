@@ -37,7 +37,10 @@ def main():
     parser.add_argument("--synthetic", action="store_true")
     parser.add_argument("--capital", type=float, default=500.0)
     parser.add_argument("--commission", type=float, default=3.0)
+    parser.add_argument("--stop-pct", type=float, default=None,
+                        help="Sabit yüzde stop (örn. 0.03). Verilmezse sinyal mumunun dibi kullanılır.")
     args = parser.parse_args()
+    results_dir = RESULTS_DIR + (f"_stop{100 * args.stop_pct:g}" if args.stop_pct else "")
 
     if args.synthetic:
         px, sectors, _ = synthetic_data()
@@ -74,7 +77,7 @@ def main():
                                                commission=args.commission, max_positions=1,
                                                position_fraction=1.0)))
 
-    os.makedirs(RESULTS_DIR, exist_ok=True)
+    os.makedirs(results_dir, exist_ok=True)
     summary = {
         "assumptions": {
             "initial_capital": args.capital,
@@ -85,6 +88,8 @@ def main():
                         "(survivorship + seçim yanlılığı: sonuçlar iyimser)",
             "missing_symbols": missing,
             "regime": "Yeni giriş için QQQ > 50 günlük ortalama",
+            "stop": (f"Sabit %{100 * args.stop_pct:g} (giriş fiyatının altı)" if args.stop_pct
+                     else "Sinyal mumunun dibi (M3: geri çekilmenin dibi), en fazla %20"),
             "signal_counts_since_2015": {k: int(v.loc["2015":].to_numpy().sum()) for k, v in signals.items()},
             "data_source": "synthetic" if args.synthetic else "Yahoo Finance (yfinance)",
         },
@@ -98,7 +103,8 @@ def main():
     for period, start in PERIODS.items():
         for label, exit_mode, regime, overrides in variants:
             cfg = Config(start=start, **{"initial_capital": args.capital, **overrides})
-            bt = mo.MomentumBacktester(stocks, ind, signals, stops, rvol, regime, sectors, cfg, exit_mode)
+            bt = mo.MomentumBacktester(stocks, ind, signals, stops, rvol, regime, sectors, cfg, exit_mode,
+                                       stop_pct=args.stop_pct)
             eq, trades, extra = bt.run()
             key = f"{period} | {label}"
             m = metrics(eq, trades, cfg.initial_capital)
@@ -109,7 +115,7 @@ def main():
             equity_curves[key] = eq
             slug = (f"{period}_{''.join(cfg.setups)}_{exit_mode}_{cfg.max_positions}pos_c{cfg.commission:g}"
                     f"{'_noregime' if regime is regime_all else ''}")
-            trades.to_csv(os.path.join(RESULTS_DIR, f"trades_{slug}.csv"), index=False)
+            trades.to_csv(os.path.join(results_dir, f"trades_{slug}.csv"), index=False)
             print(f"{key}: ${m.get('final')} | işlem={m.get('trades')} | isabet=%{m.get('win_rate_pct')} | "
                   f"maxDD=%{m.get('max_drawdown_pct')}")
 
@@ -118,9 +124,9 @@ def main():
         summary["runs"][key] = metrics(bh, pd.DataFrame(), args.capital)
         equity_curves[key] = bh
 
-    with open(os.path.join(RESULTS_DIR, "summary.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(results_dir, "summary.json"), "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2, default=str)
-    pd.DataFrame(equity_curves).to_csv(os.path.join(RESULTS_DIR, "equity_curves.csv"))
+    pd.DataFrame(equity_curves).to_csv(os.path.join(results_dir, "equity_curves.csv"))
 
     for period in PERIODS:
         fig, ax = plt.subplots(figsize=(11, 6))
@@ -132,13 +138,14 @@ def main():
             ax.plot(eq.index, eq.values, lw=1.3, label=key.split(" | ", 1)[1].replace("$", r"\$"))
         ax.axhline(args.capital, color="grey", lw=0.8, ls="--")
         ax.set_yscale("log")
+        stop_label = f", %{100 * args.stop_pct:g} stop" if args.stop_pct else ""
         ax.set_title(f"Nasdaq tech momentum: \\${args.capital:g} başlangıç, 1 pozisyon, "
-                     f"\\${args.commission:g}/emir ({period} başlangıçlı)")
+                     f"\\${args.commission:g}/emir{stop_label} ({period} başlangıçlı)")
         ax.set_ylabel("Özsermaye ($, log)")
         ax.legend(fontsize=7)
         ax.grid(alpha=0.3)
         fig.tight_layout()
-        fig.savefig(os.path.join(RESULTS_DIR, f"equity_{period}.png"), dpi=110)
+        fig.savefig(os.path.join(results_dir, f"equity_{period}.png"), dpi=110)
         plt.close(fig)
 
 

@@ -73,13 +73,17 @@ class MomentumBacktester(Backtester):
     'trend' = 10 günlük EMA altında kapanış (max 15 gün). İkisinde de en az 2 gün tutulur
     (stop hariç), kısmi satış yok (fazladan komisyon olmasın)."""
 
-    def __init__(self, px, ind, signals, stops, rank, regime, sectors, cfg, exit_mode="trend"):
+    def __init__(self, px, ind, signals, stops, rank, regime, sectors, cfg, exit_mode="trend", stop_pct=None):
         super().__init__(px, ind, signals, regime, sectors, cfg)
         self.stop_level = {k: stops[k].to_numpy() for k in cfg.setups}
         self.rank_key = rank.to_numpy()
         self.exit_mode = exit_mode
+        self.stop_pct = stop_pct
 
     def _initial_stop(self, setup, si, j, entry):
+        if self.stop_pct:
+            # Sabit yüzde stop: giriş fiyatının stop_pct altı
+            return entry * (1 - self.stop_pct)
         stop = self.stop_level[setup][si, j]
         if np.isnan(stop) or stop >= entry or (entry - stop) / entry > MAX_STOP_DISTANCE:
             return None
